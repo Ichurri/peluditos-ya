@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: peluditos-ya-server
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/peluditos_db
+    username: peluditos_user
+    password: peluditos_pass
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
