@@ -45,7 +45,7 @@ public class MascotaController {
     @PutMapping("/{id}")
     public ResponseEntity<Mascota> updateMascota(@PathVariable Long id, @RequestBody Mascota mascota) {
         Optional<Mascota> existingMascota = mascotaService.findMascotaById(id);
-        
+
         if (existingMascota.isPresent()) {
             mascota.setId(id);
             Mascota updatedMascota = mascotaService.saveMascota(mascota);
@@ -76,10 +76,10 @@ public class MascotaController {
         List<Mascota> mascotas = mascotaService.findByEstado(estado);
         return new ResponseEntity<>(mascotas, HttpStatus.OK);
     }
-    
+
     @GetMapping("/filtro")
     public ResponseEntity<List<Mascota>> getMascotasByEspecieAndEstado(
-            @RequestParam String especie, 
+            @RequestParam String especie,
             @RequestParam String estado) {
         List<Mascota> mascotas = mascotaService.findByEspecieAndEstado(especie, estado);
         return new ResponseEntity<>(mascotas, HttpStatus.OK);

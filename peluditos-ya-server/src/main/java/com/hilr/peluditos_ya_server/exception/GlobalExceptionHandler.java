@@ -19,7 +19,7 @@ public class GlobalExceptionHandler {
         response.put("timestamp", new Date());
         response.put("message", ex.getMessage());
         response.put("details", request.getDescription(false));
-        
+
         return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
     }
 
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
         response.put("timestamp", new Date());
         response.put("message", ex.getMessage());
         response.put("details", request.getDescription(false));
-        
+
         return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

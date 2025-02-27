@@ -41,7 +41,7 @@ public class MascotaService {
     public List<Mascota> findByEstado(String estado) {
         return mascotaRepository.findByEstado(estado);
     }
-    
+
     public List<Mascota> findByEspecieAndEstado(String especie, String estado) {
         return mascotaRepository.findByEspecieAndEstado(especie, estado);
     }

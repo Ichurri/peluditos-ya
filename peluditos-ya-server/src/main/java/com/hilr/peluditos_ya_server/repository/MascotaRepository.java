@@ -10,6 +10,8 @@ import java.util.List;
 public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     // Custom queries
     List<Mascota> findByEspecie(String especie);
+
     List<Mascota> findByEstado(String estado);
+
     List<Mascota> findByEspecieAndEstado(String especie, String estado);
 }

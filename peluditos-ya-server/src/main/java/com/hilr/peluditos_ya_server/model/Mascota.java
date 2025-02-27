@@ -6,26 +6,26 @@ import java.io.Serializable;
 @Entity
 @Table(name = "mascotas")
 public class Mascota implements Serializable {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(nullable = false)
     private String nombre;
-    
+
     @Column(nullable = false)
     private String especie;
-    
+
     private String raza;
-    
+
     private Integer edad;
-    
+
     @Column(length = 1000)
     private String descripcion;
-    
+
     private String estado;
-    
+
     // Getters and Setters
     public Long getId() {
         return id;

@@ -8,11 +8,11 @@ public class MascotaDTO {
     private Integer edad;
     private String descripcion;
     private String estado;
-    
+
     // Constructors
     public MascotaDTO() {
     }
-    
+
     // Getters and Setters
     public Long getId() {
         return id;
