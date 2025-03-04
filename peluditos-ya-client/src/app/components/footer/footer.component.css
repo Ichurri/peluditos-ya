@@ -1,0 +1,38 @@
+footer {
+    background: #FFD803;
+    color: #000;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.footer-left {
+    display: flex;
+    gap: 10px;
+}
+
+.footer-left img {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.footer-right {
+    text-align: right;
+    margin-right: 3%; 
+}
+
+.footer-right h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.footer-right p {
+    margin: 0;
+    font-size: 1rem;
+}
