@@ -1,1 +1,31 @@
-<p>home works!</p>
+<div class="carrusel-container" [ngStyle]="{'background-image': 'url(' + imagenes[indiceImagenActual] + ')'}">
+  <div class="carrusel-overlay"></div> 
+  <div class="carrusel-text">
+    <h1>
+      <span class="highlight-carrusel">Déjate adoptar,</span><br>
+      <span class="subtext-carrusel">por una patita</span>
+    </h1>
+  </div>
+</div>
+
+<div class="container">
+  <div class="left-block">
+    <h1>
+      <span class="highlight">Encuentra a tu nuevo</span><br>
+      <span class="subtext">mejor amigo</span>
+    </h1>
+  </div>
+  <div class="right-block">
+    <img src="https://tecolotito.elsiglodedurango.com.mx/cdn-cgi/image/format=auto,width=1024/i/2018/10/741528.jpeg" alt="Imagen estática" />
+  </div>
+</div>
+
+<div class="container">
+  <!-- Más contenido aquí -->
+</div>
+
+<div class="container">
+  <!-- Más contenido aquí -->
+</div>
+
+<app-footer></app-footer>

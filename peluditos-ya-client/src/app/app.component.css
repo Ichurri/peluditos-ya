@@ -1,9 +1,22 @@
-header {
-    background-color: #f8f9fa;
-    color: #343a40;
-    font-size: 24px;
-    font-weight: bold;
-    padding: 20px;
-    text-align: center;
-    border-bottom: 2px solid #dee2e6;
-}
+/* Header siempre visible */
+app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Para que esté sobre el contenido */
+    
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Ajustar el contenido para que no quede debajo del header */
+  router-outlet {
+    margin-top: 60px; /* Esto asegurará que el contenido no quede cubierto por el header */
+    flex: 1;
+    overflow: auto;
+  }
+
+
+  
+ 
+  

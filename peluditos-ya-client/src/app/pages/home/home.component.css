@@ -1,0 +1,97 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; 
+}
+
+/* Carrusel */
+.carrusel-container {
+  position: relative;
+  margin-top: 2rem;
+  height: 90vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  padding-left: 5rem;
+  transition: background-image 1s ease-in-out;
+}
+
+.carrusel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.carrusel-text {
+  position: relative;
+  color: white;
+  font-family: 'Playfair Display', serif;
+}
+
+.carrusel-text h1 {
+  margin: 0;
+  font-size: 5rem;
+  line-height: 1.1;
+}
+
+.highlight-carrusel {
+  font-size: 7rem;
+  color: white;
+}
+
+.subtext-carrusel {
+  font-size: 3.5rem;
+  color: black;
+}
+
+/* Bloques de contenido (left-block y right-block) */
+.container {
+  display: flex;
+  height: 50vh;
+  flex-shrink: 0; 
+}
+
+.left-block {
+  width: 50vw;
+  background-color: #444444; 
+  display: flex;
+  justify-content: flex-start; 
+  align-items: center;
+  padding-left: 2rem;
+}
+
+.right-block {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.left-block h1 {
+  text-align: left;
+  font-family: 'Playfair Display', serif;
+}
+
+.highlight {
+  font-size: 4rem; 
+  color: white;
+}
+
+.subtext {
+  font-size: 3rem; 
+  color: #FFD803; 
+}
+
+.right-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
