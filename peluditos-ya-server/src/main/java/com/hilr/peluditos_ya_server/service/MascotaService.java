@@ -2,7 +2,7 @@ package com.hilr.peluditos_ya_server.service;
 
 import com.hilr.peluditos_ya_server.model.Mascota;
 import com.hilr.peluditos_ya_server.repository.MascotaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class MascotaService {
 
     private final MascotaRepository mascotaRepository;
 
-    @Autowired
+    // @Autowired
     public MascotaService(MascotaRepository mascotaRepository) {
         this.mascotaRepository = mascotaRepository;
     }

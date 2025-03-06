@@ -1,9 +1,8 @@
-// src/main/java/com/hilr/peluditos_ya_server/controller/MascotaController.java
 package com.hilr.peluditos_ya_server.controller;
 
 import com.hilr.peluditos_ya_server.model.Mascota;
 import com.hilr.peluditos_ya_server.service.MascotaService;
-import org.springframework.beans.factory.annotation.Autowired;
+// import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +17,7 @@ public class MascotaController {
 
     private final MascotaService mascotaService;
 
-    @Autowired
+    // @Autowired
     public MascotaController(MascotaService mascotaService) {
         this.mascotaService = mascotaService;
     }
