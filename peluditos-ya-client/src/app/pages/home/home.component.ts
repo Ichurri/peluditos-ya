@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from '../../components/footer/footer.component';
 
+
 @Component({
   selector: 'app-home',
-  standalone: true,  // 🔹 Indica que es un componente independiente
-  imports: [CommonModule, FooterComponent],  // 🔹 Importa CommonModule para habilitar directivas como ngStyle
+  standalone: true, 
+  imports: [CommonModule, FooterComponent],  
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
