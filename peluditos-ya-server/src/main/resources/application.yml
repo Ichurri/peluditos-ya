@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5432/peluditosya
-    username: peluditos_user
-    password: peluditos_pass
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
