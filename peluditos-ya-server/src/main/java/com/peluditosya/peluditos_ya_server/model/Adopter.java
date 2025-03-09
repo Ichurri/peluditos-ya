@@ -8,5 +8,11 @@ import jakarta.persistence.DiscriminatorValue;
 public class Adopter extends AppUser {
     private String phone;
     
-    // Getters y Setters
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
