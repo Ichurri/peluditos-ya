@@ -1,10 +1,14 @@
 package com.peluditosya.peluditos_ya_server.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
+// import jakarta.persistence.DiscriminatorValue;
 
 @Entity
-@DiscriminatorValue("ADOPTER")
+// @DiscriminatorValue("ADOPTER")
+@Table(name = "adopters")
+@PrimaryKeyJoinColumn(name = "user_id")
 public class Adopter extends AppUser {
     private String phone;
     

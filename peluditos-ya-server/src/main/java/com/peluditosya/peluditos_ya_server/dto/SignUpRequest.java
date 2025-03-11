@@ -5,6 +5,7 @@ public class SignUpRequest {
     private String email;
     private String password;
     private String location;
+    private String phone;
 
     public String getName() {
         return name;
@@ -36,5 +37,13 @@ public class SignUpRequest {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public String getPhone() {
+        return phone;        
+    }
+    
+    public void setPhone(String phone){
+        this.phone = phone;
     }
 }

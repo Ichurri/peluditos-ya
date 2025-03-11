@@ -3,9 +3,9 @@ package com.peluditosya.peluditos_ya_server.model;
 import jakarta.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
-@Table(name = "app_user")
+@Inheritance(strategy = InheritanceType.JOINED)
+// @DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "users")
 public class AppUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
