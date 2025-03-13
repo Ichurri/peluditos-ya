@@ -18,7 +18,7 @@ export class RegisterComponent {
     this.registerForm = this.fb.group({
       name: ['', Validators.required], // ✅ Coincide con el HTML
       email: ['', [Validators.required, Validators.email]],
-      phone: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       location: ['', Validators.required], // ✅ Agregado para que coincida con tu DB
       acceptTerms: [false, Validators.requiredTrue]
@@ -34,14 +34,25 @@ export class RegisterComponent {
 
       console.log('Enviando datos:', formData);
 
+      // this.authService.register(formData).subscribe({
+      //   next: (response) => {
+      //     console.log('Registro exitoso:', response);
+      //     alert(response); // Muestra el mensaje de éxito
+      //   },
+      //   error: (error) => {
+      //     console.error('Error en el registro:', error);
+      //     alert('Error al registrar usuario');
+      //   }
+      // });
       this.authService.register(formData).subscribe({
         next: (response) => {
           console.log('Registro exitoso:', response);
-          alert(response); // Muestra el mensaje de éxito
+          alert(response);
+          // Redirigir a otra página aquí si es necesario
         },
         error: (error) => {
           console.error('Error en el registro:', error);
-          alert('Error al registrar usuario');
+          alert(error.error.text || 'Error al registrar usuario');  // <- Usar error.text
         }
       });
     } else {
