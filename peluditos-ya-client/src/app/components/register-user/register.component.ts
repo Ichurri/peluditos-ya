@@ -2,6 +2,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service'; // Importa el servicio
+import { Router } from '@angular/router'; // Para redirigir después del registro
 
 @Component({
   selector: 'app-register',
@@ -12,8 +14,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  
-  constructor(private fb: FormBuilder) {
+
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService, // Inyecta AuthService
+    private router: Router // Inyecta Router para redirigir después del registro
+  ) {
     this.registerForm = this.fb.group({
       fullName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -22,14 +28,24 @@ export class RegisterComponent {
       acceptTerms: [false, Validators.requiredTrue]
     });
   }
-  
+
   onSubmit() {
     if (this.registerForm.valid) {
       console.log('Form submitted:', this.registerForm.value);
-      // Here you would typically call your authentication service
+      // Llama al servicio de registro
+      this.authService.register(this.registerForm.value).subscribe({
+        next: (response) => {
+          console.log('Registro exitoso', response);
+          // Redirige a la página de inicio de sesión después del registro
+          this.router.navigate(['/login']);
+        },
+        error: (error) => {
+          console.error('Error al registrar usuario', error);
+        }
+      });
     } else {
-      // Mark all fields as touched to trigger validation display
-      Object.keys(this.registerForm.controls).forEach(key => {
+      // Marca todos los campos como tocados para mostrar los errores
+      Object.keys(this.registerForm.controls).forEach((key) => {
         const control = this.registerForm.get(key);
         control?.markAsTouched();
       });
@@ -37,13 +53,10 @@ export class RegisterComponent {
   }
 
   openTerms() {
-    // You can implement the logic to show terms and conditions here
-    // For example, open a modal, navigate to terms page, etc.
     console.log('Terms and conditions clicked');
   }
 
   navigateToLogin() {
-    // Logic to navigate to login page
     console.log('Navigate to login page');
   }
 }
