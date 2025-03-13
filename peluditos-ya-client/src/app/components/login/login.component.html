@@ -1,0 +1,33 @@
+<div class="register-container">
+    <h1>Iniciar Sesión</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()"> <!-- Corregido formGroup -->
+        <!-- Email -->
+        <div class="form-group">
+            <input type="email" formControlName="email" placeholder="Email"
+                [ngClass]="{ 'invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched }">
+            <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
+                Email válido requerido
+            </div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="form-group">
+            <input type="password" formControlName="password" placeholder="Contraseña"
+                [ngClass]="{ 'invalid': loginForm.get('password')?.invalid && loginForm.get('password')?.touched }">
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="error-message">
+                Contraseña requerida
+            </div>
+        </div>
+
+        <!-- Botón de login -->
+        <button type="submit" class="register-button" [disabled]="loginForm.invalid">
+            Ingresar
+        </button>
+    </form>
+
+    <!-- Enlace a registro -->
+    <button class="login-button" (click)="navigateToRegister()">
+        ¿No tienes cuenta? Regístrate
+    </button>
+</div>

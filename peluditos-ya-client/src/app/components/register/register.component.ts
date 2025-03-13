@@ -13,6 +13,7 @@ import { AuthService } from '../../services/auth.service'; // Importa el servici
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  router: any;
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group({
@@ -48,6 +49,7 @@ export class RegisterComponent {
         next: (response) => {
           console.log('Registro exitoso:', response);
           alert(response);
+          this.router.navigate(['/login']);
           // Redirigir a otra página aquí si es necesario
         },
         error: (error) => {
@@ -69,7 +71,7 @@ export class RegisterComponent {
   }
 
   navigateToLogin() {
-    // Logic to navigate to login page
-    console.log('Navigate to login page');
+    this.router.navigate(['/login']);
+
   }
 }

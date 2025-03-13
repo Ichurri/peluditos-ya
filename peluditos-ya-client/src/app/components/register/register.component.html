@@ -10,8 +10,7 @@
             registerForm.get('name')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('name')?.invalid &&
-          registerForm.get('name')?.touched
+          registerForm.get('name')?.invalid && registerForm.get('name')?.touched
         " class="error-message">
         Nombre y apellido es requerido
       </div>
