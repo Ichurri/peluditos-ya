@@ -3,7 +3,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service'; // Importa el servicio
-import { Router } from '@angular/router'; // Para redirigir después del registro
 
 @Component({
   selector: 'app-register',
@@ -15,37 +14,38 @@ import { Router } from '@angular/router'; // Para redirigir después del registr
 export class RegisterComponent {
   registerForm: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private authService: AuthService, // Inyecta AuthService
-    private router: Router // Inyecta Router para redirigir después del registro
-  ) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.registerForm = this.fb.group({
-      fullName: ['', Validators.required],
+      name: ['', Validators.required], // ✅ Coincide con el HTML
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
+      location: ['', Validators.required], // ✅ Agregado para que coincida con tu DB
       acceptTerms: [false, Validators.requiredTrue]
     });
   }
-
+  
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log('Form submitted:', this.registerForm.value);
-      // Llama al servicio de registro
-      this.authService.register(this.registerForm.value).subscribe({
+      const formData = {
+        ...this.registerForm.value,
+        acceptTerms: undefined // No lo enviamos al backend
+      };
+
+      console.log('Enviando datos:', formData);
+
+      this.authService.register(formData).subscribe({
         next: (response) => {
-          console.log('Registro exitoso', response);
-          // Redirige a la página de inicio de sesión después del registro
-          this.router.navigate(['/login']);
+          console.log('Registro exitoso:', response);
+          alert(response); // Muestra el mensaje de éxito
         },
         error: (error) => {
-          console.error('Error al registrar usuario', error);
+          console.error('Error en el registro:', error);
+          alert('Error al registrar usuario');
         }
       });
     } else {
-      // Marca todos los campos como tocados para mostrar los errores
-      Object.keys(this.registerForm.controls).forEach((key) => {
+      Object.keys(this.registerForm.controls).forEach(key => {
         const control = this.registerForm.get(key);
         control?.markAsTouched();
       });
@@ -53,10 +53,12 @@ export class RegisterComponent {
   }
 
   openTerms() {
+    // You can implement the logic to show terms and conditions here
     console.log('Terms and conditions clicked');
   }
 
   navigateToLogin() {
+    // Logic to navigate to login page
     console.log('Navigate to login page');
   }
 }

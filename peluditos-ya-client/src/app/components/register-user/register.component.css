@@ -2,9 +2,10 @@
 .register-container {
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 20vh;
   padding: 20px;
   background-color: white;
-  border-radius: 10px;
+  border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
 }

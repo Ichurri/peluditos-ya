@@ -13,35 +13,40 @@ import com.peluditosya.peluditos_ya_server.model.Adopter;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
+
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin(origins = "http://localhost:4200")  // Permitir solicitudes desde localhost:4200
 public class AuthController {
-
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody SignUpRequest request) {
-        // Crear usuario básico (sin encriptar contraseña)
-        // AppUser user = new AppUser();
+        // Verificar si el usuario ya existe
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body("El correo ya está en uso");
+        }
+
+        // Crear el usuario
         Adopter adopter = new Adopter();
         adopter.setName(request.getName());
         adopter.setEmail(request.getEmail());
-        adopter.setPassword(request.getPassword()); // Almacena en texto plano
+        adopter.setPassword(request.getPassword());
         adopter.setLocation(request.getLocation());
-        // adopter.setPhone("+591 12345678");
         adopter.setPhone(request.getPhone());
-        
+
+        // Guardar en la base de datos
         userRepository.save(adopter);
+
         return ResponseEntity.ok("Adoptante registrado");
     }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        // Buscar usuario por email y contraseña (texto plano)
-        AppUser user = userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        if (user != null) return ResponseEntity.ok("Login exitoso");
-        else return ResponseEntity.status(401).body("Credenciales inválidas");
-        
+        AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+        return user != null ? ResponseEntity.ok("Login exitoso") : ResponseEntity.status(401).body("Credenciales inválidas");
     }
 }

@@ -1,22 +1,23 @@
-<!-- components/register/register.component.html -->
 <div class="register-container">
   <h1>Registro Usuario</h1>
 
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <!-- Nombre y Apellido -->
     <div class="form-group">
-      <input type="text" formControlName="fullName" placeholder="Nombre y apellido" [ngClass]="{
+      <input type="text" formControlName="name" placeholder="Nombre y apellido" [ngClass]="{
           invalid:
-            registerForm.get('fullName')?.invalid &&
-            registerForm.get('fullName')?.touched
+            registerForm.get('name')?.invalid &&
+            registerForm.get('name')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('fullName')?.invalid &&
-          registerForm.get('fullName')?.touched
+          registerForm.get('name')?.invalid &&
+          registerForm.get('name')?.touched
         " class="error-message">
         Nombre y apellido es requerido
       </div>
     </div>
 
+    <!-- Correo Electrónico -->
     <div class="form-group">
       <input type="email" formControlName="email" placeholder="Email" [ngClass]="{
           invalid:
@@ -31,20 +32,7 @@
       </div>
     </div>
 
-    <div class="form-group">
-      <input type="tel" formControlName="phone" placeholder="Telefono de Contacto" [ngClass]="{
-          invalid:
-            registerForm.get('phone')?.invalid &&
-            registerForm.get('phone')?.touched
-        }" />
-      <div *ngIf="
-          registerForm.get('phone')?.invalid &&
-          registerForm.get('phone')?.touched
-        " class="error-message">
-        Telefono de contacto es requerido
-      </div>
-    </div>
-
+    <!-- Contraseña -->
     <div class="form-group">
       <input type="password" formControlName="password" placeholder="Contraseña" [ngClass]="{
           invalid:
@@ -55,23 +43,57 @@
           registerForm.get('password')?.invalid &&
           registerForm.get('password')?.touched
         " class="error-message">
-        Contraseña debe tener al menos 6 caracteres
+        La contraseña debe tener al menos 6 caracteres
       </div>
     </div>
 
+    <!-- Ubicación -->
+    <div class="form-group">
+      <input type="text" formControlName="location" placeholder="Ubicación" [ngClass]="{
+          invalid:
+            registerForm.get('location')?.invalid &&
+            registerForm.get('location')?.touched
+        }" />
+      <div *ngIf="
+          registerForm.get('location')?.invalid &&
+          registerForm.get('location')?.touched
+        " class="error-message">
+        La ubicación es requerida
+      </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="form-group">
+      <input type="tel" formControlName="phone" placeholder="Teléfono de contacto" [ngClass]="{
+          invalid:
+            registerForm.get('phone')?.invalid &&
+            registerForm.get('phone')?.touched
+        }" />
+      <div *ngIf="
+          registerForm.get('phone')?.invalid &&
+          registerForm.get('phone')?.touched
+        " class="error-message">
+        Teléfono de contacto es requerido
+      </div>
+    </div>
+
+    <!-- Aceptar términos y condiciones -->
     <div class="terms-section">
       <div class="checkbox-container">
         <input type="checkbox" id="terms" formControlName="acceptTerms" />
-        <label for="terms">I accept the
-          <span class="terms-link" (click)="openTerms()">terms and conditions</span></label>
+        <label for="terms">Acepto los
+          <span class="terms-link" (click)="openTerms()">términos y condiciones</span>
+        </label>
       </div>
     </div>
 
+    <!-- Botón de registro -->
     <button type="submit" class="register-button" [disabled]="registerForm.invalid">
       Registrarse
     </button>
   </form>
 
+  <!-- Botón para ir a inicio de sesión -->
   <button class="login-button" (click)="navigateToLogin()">
     Ya tengo una cuenta
   </button>
