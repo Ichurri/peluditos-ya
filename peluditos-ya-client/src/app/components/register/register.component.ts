@@ -2,7 +2,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service'; // Importa el servicio
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -13,9 +14,8 @@ import { AuthService } from '../../services/auth.service'; // Importa el servici
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  router: any;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
       name: ['', Validators.required], // ✅ Coincide con el HTML
       email: ['', [Validators.required, Validators.email]],
@@ -49,8 +49,6 @@ export class RegisterComponent {
         next: (response) => {
           console.log('Registro exitoso:', response);
           alert(response);
-          this.router.navigate(['/login']);
-          // Redirigir a otra página aquí si es necesario
         },
         error: (error) => {
           console.error('Error en el registro:', error);
@@ -66,12 +64,10 @@ export class RegisterComponent {
   }
 
   openTerms() {
-    // You can implement the logic to show terms and conditions here
     console.log('Terms and conditions clicked');
   }
 
   navigateToLogin() {
-    this.router.navigate(['/login']);
-
+    this.router.navigate(['/login']); 
   }
 }

@@ -9,5 +9,4 @@ public class PeluditosYaServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(PeluditosYaServerApplication.class, args);
 	}
-
 }

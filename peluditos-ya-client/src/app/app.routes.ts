@@ -14,6 +14,13 @@ export const routes: Routes = [
         component: RegisterComponent,
         title: 'Register'
     },
-    { path: 'login', component: LoginComponent },
-    { path: '**', redirectTo: '' }
+    {   
+        path: 'login', 
+        component: LoginComponent,
+        title: 'Login'
+    },
+    { 
+        path: '**', 
+        redirectTo: '' 
+    }
 ];
