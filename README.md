@@ -43,7 +43,17 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
    cd peluditos-ya
    ```
 
-2. **Configurar base de datos (Linux)**
+2. **Configurar base de datos (Windows)**
+   ```Terminal
+   net start postgresql-x64-{version de postgreSQL que tenga}
+   psql -U postgres
+    CREATE USER peluditos_user WITH PASSWORD 'password123';
+    CREATE DATABASE peluditosya_db owner peluditos_user;
+    GRANT ALL PRIVILEGES ON DATABASE peluditosya_db TO peluditos_user;
+    \c peluditosya_db peluditos_user
+    ```
+    
+3. **Configurar base de datos (Linux)**
    ```bash
    sudo -u postgres psql
     CREATE DATABASE peluditosya_db;
@@ -51,7 +61,7 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
     GRANT ALL PRIVILEGES ON DATABASE peluditosya_db TO peluditos_user;
     ```
 
-3. **Backend (Spring Boot)**
+4. **Backend (Spring Boot)**
    ```bash
     cd peluditos-ya-server
     # Configurar application.properties según tu entorno
@@ -59,7 +69,7 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
     mvn spring-boot:run
     ```
 
-4. **Frontend (Angular)**
+5. **Frontend (Angular)**
    ```bash
     cd peluditos-ya-client
     npm install
