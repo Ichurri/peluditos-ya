@@ -74,4 +74,45 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
     cd peluditos-ya-client
     npm install
     ng serve
-    ```
+
+## 🔧 Estructura del Proyecto
+### Backend(peluditos-ya-server)
+```bash
+src/
+├── main/
+│   ├── java/com/peluditosya/
+│   │   ├── config/          # Configuraciones de seguridad y beans
+│   │   ├── controller/      # REST Controllers (Auth, Animal, etc)
+│   │   ├── model/           # Entidades JPA (User, Animal, Shelter)
+│   │   ├── repository/      # Spring Data JPA Repositories
+│   │   └── service/         # Lógica de negocio
+│   └── resources/
+│       └── application.properties
+```
+
+### Frontend(peludito-ya-client)
+```bash
+src/app/
+├── components/
+│   ├── login/               # Componente de inicio de sesión
+│   └── register/            # Componente de registro
+├── services/                # AuthService, AnimalService
+└── app.routes.ts            # Configuración de rutas
+```
+
+## 🔑 Endpoints Clave del Backend
+
+| Método HTTP | Endpoint                          | Descripción                                                                 | Parámetros/Observaciones                          |
+|-------------|-----------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| **POST**    | `/api/auth/signup`                | Registro de nuevos usuarios (adoptantes o refugios)                        | Body: `{name, email, password, location, phone}` |
+| **POST**    | `/api/auth/login`                 | Autenticación básica                                                        | Body: `{email, password}`                         |
+| **GET**     | `/api/animals`                    | Obtener listado completo de animales disponibles                           | Opcional: Paginación                              |
+| **GET**     | `/api/animals/search`             | Búsqueda filtrada de animales                                              | Query Params: `?species=&age=&location=`          |
+| **POST**    | `/api/animals`                    | Crear nuevo registro de animal (solo refugios verificados)                 | Body: `{name, species, age, medicalHistory}`     |
+| **POST**    | `/api/adoptions/request`          | Enviar solicitud de adopción                                               | Body: `{animalId, adopterId, message}`           |
+| **GET**     | `/api/shelters/{id}/donation-qr`  | Obtener QR para donaciones a un refugio específico                         | Path Variable: ID del refugio                     |
+| **PUT**     | `/api/shelters/{id}/verify`       | Verificar refugio (solo administradores)                                   | Body: `{status: "APROBADO"/"RECHAZADO"}`         |
+
+
+## 📄 Licencia
+Distribuido bajo licencia MIT. Ver `LICENSE` para más detalles.
