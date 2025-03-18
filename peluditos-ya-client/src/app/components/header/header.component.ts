@@ -13,7 +13,7 @@ export class HeaderComponent {
   navigationItems = [
     { label: 'Inicio', route: '/inicio' },
     { label: 'Sobre Nosotros', route: '/sobre-nosotros' },
-    { label: 'En Adopción', route: '/adopcion' },
+    { label: 'En Adopción', route: '/en-adopcion' },
     { label: 'Casas Hogar', route: '/casas-hogar' },
     { label: 'Contacto', route: '/contacto' }
   ];
