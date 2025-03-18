@@ -1,0 +1,24 @@
+<div class="casas-hogar-container">
+    <!-- Banner -->
+    <div class="banner">
+        <h1><span class="black-text">Hogares </span> <span class="yellow-text">Registrados</span></h1>
+    </div>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+        <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar hogar..." />
+        <button>Buscar</button>
+    </div>
+
+    <!-- Lista de casas hogar -->
+    <div class="casas-grid">
+        <div *ngFor="let casa of getCasasFiltradas()" class="casa-card">
+            <img [src]="casa.imagen" [alt]="casa.nombre">
+            <h3>{{ casa.nombre }}</h3>
+            <p>{{ casa.descripcion }}</p>
+            <button>Ver más</button>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>
