@@ -1,6 +1,6 @@
 # 🐾 PeluditosYa - Plataforma de Adopción de Animales
-![alt text](elevator-pitch.jpg)
 ## Elevator Pitch
+![alt text](elevator-pitch.jpg)
 
 
 <!-- ![PeluditosYa Logo](https://via.placeholder.com/150x50.png?text=PeluditosYa) *(Reemplazar con logo real)* -->
