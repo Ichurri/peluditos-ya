@@ -1,11 +1,19 @@
 package com.peluditosya.peluditos_ya_server.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import com.peluditosya.peluditos_ya_server.model.AppUser;
+import org.springframework.data.jpa.repository.Query;
 
-@Repository  // 📌 Añade esta anotación para que Spring detecte el repositorio
+import com.peluditosya.peluditos_ya_server.model.AppUser;
+import com.peluditosya.peluditos_ya_server.model.Shelter;
+
+@Repository
 public interface UserRepository extends JpaRepository<AppUser, Long> {
     boolean existsByEmail(String email);
     AppUser findByEmailAndPassword(String email, String password);
+
+    @Query("SELECT s FROM Shelter s WHERE s.role = 'REFUGIO'")
+    List<Shelter> findAllShelters();
 }

@@ -1,0 +1,84 @@
+/* Banner */
+.banner {
+    position: relative;
+    background: url('https://t3.ftcdn.net/jpg/05/58/45/02/240_F_558450244_JVL848woVRCZmFXWQqD0imauEyfSgKnU.jpg') no-repeat center center;
+    background-size: cover;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.banner h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    background: rgba(173, 173, 173, 0.6); /* Fondo semitransparente */
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+/* Colores */
+.black-text {
+    color: black;
+}
+
+.yellow-text {
+    color: #FFD803;
+}
+
+/* Barra de búsqueda */
+.search-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+}
+
+.search-container input {
+    padding: 10px;
+    border: 2px solid #FFD803;
+    border-radius: 20px;
+}
+
+.search-container button {
+    background-color: #FFD803;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.search-container button:hover {
+    background-color: #e6c702;
+}
+
+/* Cards de casas hogar */
+.casas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.casa-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.casa-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.casa-card button {
+    background-color: #FFD803;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}

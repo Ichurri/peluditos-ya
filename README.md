@@ -1,4 +1,7 @@
 # 🐾 PeluditosYa - Plataforma de Adopción de Animales
+## Elevator Pitch
+![alt text](elevator-pitch.jpg)
+
 
 <!-- ![PeluditosYa Logo](https://via.placeholder.com/150x50.png?text=PeluditosYa) *(Reemplazar con logo real)* -->
 
@@ -43,7 +46,17 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
    cd peluditos-ya
    ```
 
-2. **Configurar base de datos (Linux)**
+2. **Configurar base de datos (Windows)**
+   ```Terminal
+   net start postgresql-x64-{version de postgreSQL que tenga}
+   psql -U postgres
+    CREATE USER peluditos_user WITH PASSWORD 'password123';
+    CREATE DATABASE peluditosya_db owner peluditos_user;
+    GRANT ALL PRIVILEGES ON DATABASE peluditosya_db TO peluditos_user;
+    \c peluditosya_db peluditos_user
+    ```
+    
+3. **Configurar base de datos (Linux)**
    ```bash
    sudo -u postgres psql
     CREATE DATABASE peluditosya_db;
@@ -51,7 +64,7 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
     GRANT ALL PRIVILEGES ON DATABASE peluditosya_db TO peluditos_user;
     ```
 
-3. **Backend (Spring Boot)**
+4. **Backend (Spring Boot)**
    ```bash
     cd peluditos-ya-server
     # Configurar application.properties según tu entorno
@@ -59,9 +72,50 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
     mvn spring-boot:run
     ```
 
-4. **Frontend (Angular)**
+5. **Frontend (Angular)**
    ```bash
     cd peluditos-ya-client
     npm install
     ng serve
-    ```
+
+## 🔧 Estructura del Proyecto
+### Backend(peluditos-ya-server)
+```bash
+src/
+├── main/
+│   ├── java/com/peluditosya/
+│   │   ├── config/          # Configuraciones de seguridad y beans
+│   │   ├── controller/      # REST Controllers (Auth, Animal, etc)
+│   │   ├── model/           # Entidades JPA (User, Animal, Shelter)
+│   │   ├── repository/      # Spring Data JPA Repositories
+│   │   └── service/         # Lógica de negocio
+│   └── resources/
+│       └── application.properties
+```
+
+### Frontend(peludito-ya-client)
+```bash
+src/app/
+├── components/
+│   ├── login/               # Componente de inicio de sesión
+│   └── register/            # Componente de registro
+├── services/                # AuthService, AnimalService
+└── app.routes.ts            # Configuración de rutas
+```
+
+## 🔑 Endpoints Clave del Backend
+
+| Método HTTP | Endpoint                          | Descripción                                                                 | Parámetros/Observaciones                          |
+|-------------|-----------------------------------|-----------------------------------------------------------------------------|---------------------------------------------------|
+| **POST**    | `/api/auth/signup`                | Registro de nuevos usuarios (adoptantes o refugios)                        | Body: `{name, email, password, location, phone}` |
+| **POST**    | `/api/auth/login`                 | Autenticación básica                                                        | Body: `{email, password}`                         |
+| **GET**     | `/api/animals`                    | Obtener listado completo de animales disponibles                           | Opcional: Paginación                              |
+| **GET**     | `/api/animals/search`             | Búsqueda filtrada de animales                                              | Query Params: `?species=&age=&location=`          |
+| **POST**    | `/api/animals`                    | Crear nuevo registro de animal (solo refugios verificados)                 | Body: `{name, species, age, medicalHistory}`     |
+| **POST**    | `/api/adoptions/request`          | Enviar solicitud de adopción                                               | Body: `{animalId, adopterId, message}`           |
+| **GET**     | `/api/shelters/{id}/donation-qr`  | Obtener QR para donaciones a un refugio específico                         | Path Variable: ID del refugio                     |
+| **PUT**     | `/api/shelters/{id}/verify`       | Verificar refugio (solo administradores)                                   | Body: `{status: "APROBADO"/"RECHAZADO"}`         |
+
+
+## 📄 Licencia
+Distribuido bajo licencia MIT. Ver `LICENSE` para más detalles.

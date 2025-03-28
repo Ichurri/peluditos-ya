@@ -1,0 +1,60 @@
+<!-- Texto sobre el carrusel -->
+<div class="carousel-overlay">
+    <h1><span class="black-text">Patitas<br></span> <span class="yellow-text">En Adopción</span></h1>
+</div>
+
+<!-- Contenedor del carrusel con efecto blur -->
+<div class="carousel-wrapper">
+    
+    <div class="carousel">
+        
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel1.jpg" alt="carousel1" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel2.jpg" alt="carousel2" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel3.jpg" alt="carousel3" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel4.jpg" alt="carousel4" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel5.jpg" alt="carousel5" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel6.jpg" alt="carousel6" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel7.jpg" alt="carousel7" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel8.jpg" alt="carousel8" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel9.jpg" alt="carousel9" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel10.jpg" alt="carousel10" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel11.jpg" alt="carousel11" />
+        <img src="https://patitasalrescateorg.netlify.app/img/carousel12.jpg" alt="carousel12" />
+    </div>
+    <img src="https://patitasalrescateorg.netlify.app/img/ellipse10.png" alt="eclipse" class="eclipseUno" />
+      <img src="https://patitasalrescateorg.netlify.app/img/ellipse10.png" alt="eclipseDos" class="eclipseDos" />
+</div>
+
+<!-- Barra de búsqueda -->
+<div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar mascota..." />
+    <select [(ngModel)]="filtroEdad">
+        <option value="">Edad</option>
+        <option value="cachorro">Cachorro</option>
+        <option value="adulto">Adulto</option>
+    </select>
+    <select [(ngModel)]="filtroSexo">
+        <option value="">Sexo</option>
+        <option value="macho">Macho</option>
+        <option value="hembra">Hembra</option>
+    </select>
+    <select [(ngModel)]="filtroTipo">
+        <option value="">Tipo</option>
+        <option value="perro">Perro</option>
+        <option value="gato">Gato</option>
+    </select>
+</div>
+
+<!-- Sección de mascotas en adopción -->
+<div class="adoption-container">
+    <div class="mascotas-grid">
+        <div *ngFor="let mascota of getMascotasFiltradas()" class="mascota-card">
+            <img [src]="mascota.imagen" alt="{{mascota.nombre}}">
+            <h2>{{mascota.nombre}}</h2>
+            <p>{{mascota.descripcion}}</p>
+            <button>Adoptar</button>
+        </div>
+    </div>
+</div>
+
+<app-footer></app-footer>

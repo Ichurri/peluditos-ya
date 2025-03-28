@@ -1,0 +1,130 @@
+/* Texto sobre el carrusel (posición fija y centrado) */
+.carousel-overlay {
+    position: relative; /* Ahora es absoluto para que se mantenga en el centro */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10; /* Asegura que el texto esté por encima de los elementos */
+    width: 100%;
+}
+
+.carousel-overlay h1 {
+    font-size: 4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 15px;
+}
+
+.black-text {
+    color: black;
+}
+
+.yellow-text {
+    color: #FFD803;
+}
+
+/* Contenedor del carrusel con efecto blur */
+.carousel-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.3); /* Fondo oscuro para mayor contraste */
+    backdrop-filter: blur(10px); /* Efecto desenfoque */
+    padding: 20px 0;
+}
+
+/* Carrusel con desplazamiento horizontal */
+.carousel {
+    display: flex;
+    top: -4vh;
+    gap: 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    position: relative;
+    z-index: 2; /* Para que las imágenes estén por debajo de los eclipses */
+}
+
+/* Oculta la barra de desplazamiento */
+.carousel::-webkit-scrollbar {
+    display: none;
+}
+
+/* Eclipse superior */
+.eclipseUno {
+    position: relative;
+    top: -77vh; /* Se posiciona en la parte superior */
+    left: 0;
+    width: 100%;
+    height: 200px; /* Ajusta la altura para cubrir parte del carrusel */
+    object-fit: cover;
+    z-index: 3; /* Encima del carrusel */ 
+}
+
+/* Eclipse inferior */
+.eclipseDos {
+    position: relative;
+    top: -32vh;
+    left: 0;
+    width: 100%;
+    height: 200px; /* Ajusta la altura para cubrir parte del carrusel */
+    object-fit: cover;
+    z-index: 3; /* Encima del carrusel */
+}
+
+/* Estilos de la barra de búsqueda */
+.search-container {
+    margin-top: -50vh;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    padding: 20px;
+    z-index: 10; /* Asegura que esté por encima de los elementos */
+}
+
+.search-container input,
+.search-container select {
+    padding: 10px;
+    border: 2px solid #FFD803;
+    border-radius: 20px;
+    z-index: 10; /* Asegura que esté por encima de los elementos */
+}
+
+/* Contenedor de las mascotas */
+.adoption-container {
+    padding: 20px;
+}
+
+.mascotas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    z-index: 11;
+}
+
+.mascota-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    z-index: 11;
+}
+
+.mascota-card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.mascota-card button {
+    background-color: #FFD803;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.mascota-card button:hover {
+    background-color: #e6c702;
+}
