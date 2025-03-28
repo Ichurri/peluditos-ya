@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/peluditos-ya.iml" filepath="$PROJECT_DIR$/.idea/peluditos-ya.iml" />
+      <module fileurl="file://$PROJECT_DIR$/peluditos-ya-server/peluditos-ya-server.iml" filepath="$PROJECT_DIR$/peluditos-ya-server/peluditos-ya-server.iml" />
+    </modules>
+  </component>
+</project>

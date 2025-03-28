@@ -2,12 +2,13 @@ package com.peluditosya.peluditos_ya_server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@EnableJpaRepositories("com.peluditosya.peluditos_ya_server.repository")  // 🔥 Agregamos esta línea
 public class PeluditosYaServerApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PeluditosYaServerApplication.class, args);
 	}
-
 }
