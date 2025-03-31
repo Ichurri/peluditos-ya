@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-casas-hogar',
   templateUrl: './casas-hogar.component.html',
-  imports: [CommonModule, FormsModule, FooterComponent],
+  imports: [CommonModule, FormsModule, FooterComponent, RouterModule],
   styleUrls: ['./casas-hogar.component.css']
 })
 export class CasasHogarComponent {
