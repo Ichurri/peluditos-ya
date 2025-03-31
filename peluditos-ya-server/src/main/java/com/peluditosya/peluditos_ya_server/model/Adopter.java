@@ -3,7 +3,6 @@ package com.peluditosya.peluditos_ya_server.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
-// import jakarta.persistence.DiscriminatorValue;
 
 @Entity
 @Table(name = "adopters")
