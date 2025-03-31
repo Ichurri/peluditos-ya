@@ -6,7 +6,6 @@ import jakarta.persistence.Table;
 // import jakarta.persistence.DiscriminatorValue;
 
 @Entity
-// @DiscriminatorValue("ADOPTER")
 @Table(name = "adopters")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Adopter extends AppUser {

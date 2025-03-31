@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-// @DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 @Table(name = "users")
 public class AppUser {
     @Id
@@ -22,27 +21,6 @@ public class AppUser {
     
     @Column(nullable = false)
     private String location;
-
-    // Nuevo campo para el rol (ADOPTANTE, REFUGIO, ADMIN)
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private UserRole role = UserRole.ADOPTANTE; // Valor por defecto
-
-    // Enum para los roles
-    public enum UserRole {
-        ADOPTANTE,
-        REFUGIO,
-        ADMIN
-    }
-
-    // Nuevos getters y setters
-    public UserRole getRole() {
-        return role;
-    }
-
-    public void setRole(UserRole role) {
-        this.role = role;
-    }
     
     public Long getId() {
         return id;

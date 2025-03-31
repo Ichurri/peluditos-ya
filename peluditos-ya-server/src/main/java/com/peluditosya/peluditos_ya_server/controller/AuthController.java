@@ -20,13 +20,15 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
+
     @Autowired
     private UserRepository userRepository;
 
     @PostMapping("/signup")
     public ResponseEntity<String> signup(@RequestBody SignUpRequest request) {
         // Verificar si el usuario ya existe
-        if (userRepository.existsByEmail(request.getEmail())) {
+        if (userRepository.existsByEmail(request.getEmail())) 
+        {
             return ResponseEntity.badRequest().body("El correo ya está en uso");
         }
 
