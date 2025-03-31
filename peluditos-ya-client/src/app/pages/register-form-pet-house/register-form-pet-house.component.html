@@ -1,1 +1,53 @@
-<p>register-form-pet-house works!</p>
+<div class="register-container">
+    <h1>Registro de Casa Hogar</h1>
+  
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+      <!-- Nombre Legal -->
+      <div class="form-group">
+        <input type="text" formControlName="legalName" placeholder="Nombre Legal" [ngClass]="{
+            invalid: registerForm.get('legalName')?.invalid && registerForm.get('legalName')?.touched
+          }" />
+        <div *ngIf="registerForm.get('legalName')?.invalid && registerForm.get('legalName')?.touched" class="error-message">
+          El nombre legal es requerido
+        </div>
+      </div>
+  
+      <!-- Dirección -->
+      <div class="form-group">
+        <input type="text" formControlName="address" placeholder="Dirección" [ngClass]="{
+            invalid: registerForm.get('address')?.invalid && registerForm.get('address')?.touched
+          }" />
+        <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched" class="error-message">
+          La dirección es requerida
+        </div>
+      </div>
+  
+      <!-- Documentos -->
+      <div class="form-group">
+        <label for="documents">Documentos: </label>
+        <input type="file" id="documents" (change)="onFileChange($event)" multiple class="file-input" />
+        <div *ngIf="selectedFiles.length > 0" class="file-list">
+          Archivos seleccionados: {{ selectedFiles.length }}
+        </div>
+      </div>
+  
+      <!-- Aceptar términos y condiciones -->
+      <div class="terms-section">
+        <div class="checkbox-container">
+          <input type="checkbox" formControlName="acceptTerms" id="terms" />
+          <label for="terms">Acepto los <span class="terms-link" (click)="openTerms()">términos y condiciones</span></label>
+        </div>
+        <div *ngIf="registerForm.get('acceptTerms')?.invalid && registerForm.get('acceptTerms')?.touched" class="error-message">
+          Debes aceptar los términos y condiciones
+        </div>
+      </div>
+  
+      <button type="submit" class="register-button" [disabled]="registerForm.invalid">
+        Registrar Casa Hogar
+      </button>
+    </form>
+  
+    <button class="login-button" (click)="navigateToLogin()">
+      Ya tengo una cuenta
+    </button>
+  </div>

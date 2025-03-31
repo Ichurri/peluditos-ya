@@ -14,7 +14,6 @@ public class ShelterDocument {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
     private String documentType; // IDENTIFICACION_LEGAL, COMPROBANTE_DOMICILIO
     private String filePath;
     
