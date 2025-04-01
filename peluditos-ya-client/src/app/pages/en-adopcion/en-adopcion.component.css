@@ -1,7 +1,7 @@
 /* Texto sobre el carrusel (posición fija y centrado) */
 .carousel-overlay {
-    position: relative; /* Ahora es absoluto para que se mantenga en el centro */
-    top: 50%;
+    position: fixed; /* Ahora es absoluto para que se mantenga en el centro */
+    top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
@@ -32,13 +32,12 @@
     overflow: hidden;
     background: rgba(0, 0, 0, 0.3); /* Fondo oscuro para mayor contraste */
     backdrop-filter: blur(10px); /* Efecto desenfoque */
-    padding: 20px 0;
 }
 
 /* Carrusel con desplazamiento horizontal */
 .carousel {
     display: flex;
-    top: -4vh;
+    top: -16vh;
     gap: 0;
     overflow-x: auto;
     scroll-behavior: smooth;
@@ -55,7 +54,7 @@
 /* Eclipse superior */
 .eclipseUno {
     position: relative;
-    top: -77vh; /* Se posiciona en la parte superior */
+    top: -85vh; /* Se posiciona en la parte superior */
     left: 0;
     width: 100%;
     height: 200px; /* Ajusta la altura para cubrir parte del carrusel */
@@ -66,7 +65,7 @@
 /* Eclipse inferior */
 .eclipseDos {
     position: relative;
-    top: -32vh;
+    top: -45vh;
     left: 0;
     width: 100%;
     height: 200px; /* Ajusta la altura para cubrir parte del carrusel */
@@ -76,7 +75,8 @@
 
 /* Estilos de la barra de búsqueda */
 .search-container {
-    margin-top: -50vh;
+    
+    margin-top: -55vh;
     display: flex;
     justify-content: center;
     gap: 10px;
