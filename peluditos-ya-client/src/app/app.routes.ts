@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './components/register-form-user/register.component';
+import { RegisterAdopterComponent } from './components/register-adopter/register-adopter.component';
 import { LoginComponent } from './components/login/login.component';
 import { AdoptionComponent } from './pages/adoption/adoption.component';
 import { ShelterComponent } from './pages/shelter/shelter.component';
@@ -12,9 +12,9 @@ export const routes: Routes = [
         title: 'Home'
     },
     {
-        path: 'register',
-        component: RegisterComponent,
-        title: 'Register'
+        path: 'register-adopter',
+        component: RegisterAdopterComponent,
+        title: 'Register Adopter'
     },
     {   
         path: 'login', 

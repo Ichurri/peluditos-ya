@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   selector: 'app-register',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './register-adopter.component.html',
+  styleUrls: ['./register-adopter.component.css']
 })
-export class RegisterComponent {
+export class RegisterAdopterComponent {
   registerForm: FormGroup;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
