@@ -36,6 +36,9 @@ export class LoginComponent {
         this.isSubmitting = false;
         alert(response.message);
         localStorage.setItem('isAdmin', response.admin.toString());
+
+        localStorage.setItem('userEmail', this.loginForm.value.email);
+
   
         if (response.admin) {
           this.router.navigate(['/admin-dashboard']);
