@@ -28,10 +28,11 @@ export class RegisterFormPetHouseComponent {
   isSubmitting: boolean = false;
 
   constructor(private fb: FormBuilder) {
+    const savedEmail = localStorage.getItem('userEmail') || '';
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      email: [savedEmail, [Validators.required, Validators.email]],
+      //password: ['', [Validators.required, Validators.minLength(6)]],
       ubicacion: ['', Validators.required],
       telefono: [
         '',
@@ -49,7 +50,7 @@ export class RegisterFormPetHouseComponent {
     const config = this.documentos[tipo as keyof typeof this.documentos];
 
     if (archivo) {
-      const maxSize = 5 * 1024 * 1024; // 5MB
+      const maxSize = 5 * 1024 * 1024;
 
       if (!config.allowedTypes.includes(archivo.type)) {
         this.errores[tipo] =
