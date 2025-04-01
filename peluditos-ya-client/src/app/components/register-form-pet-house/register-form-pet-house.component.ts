@@ -32,13 +32,7 @@ export class RegisterFormPetHouseComponent {
     this.registerForm = this.fb.group({
       nombre: ['', Validators.required],
       email: [savedEmail, [Validators.required, Validators.email]],
-      //password: ['', [Validators.required, Validators.minLength(6)]],
-
-    this.registerForm = this.fb.group({
-      nombre: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-
       ubicacion: ['', Validators.required],
       telefono: [
         '',
