@@ -5,7 +5,7 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-register-adopter',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './register-adopter.component.html',
