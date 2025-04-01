@@ -28,9 +28,9 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-  
+
     this.isSubmitting = true;
-  
+
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
         this.isSubmitting = false;
@@ -39,7 +39,7 @@ export class LoginComponent {
 
         localStorage.setItem('userEmail', this.loginForm.value.email);
 
-  
+
         if (response.admin) {
           this.router.navigate(['/admin-dashboard']);
         } else {

@@ -14,7 +14,8 @@
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
-    background: rgba(173, 173, 173, 0.6); /* Fondo semitransparente */
+    background: rgba(173, 173, 173, 0.6);
+    /* Fondo semitransparente */
     padding: 10px 20px;
     border-radius: 15px;
 }
@@ -101,7 +102,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.4) 100%);
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.4) 100%);
 }
 
 .casa-card:hover .casa-image {
@@ -163,7 +164,7 @@
         grid-template-columns: 1fr;
         padding: 20px;
     }
-    
+
     .casa-img-container {
         height: 180px;
     }
@@ -171,7 +172,7 @@
 
 /* Sección de Registro */
 .register-as {
-    background: #FFF8E1; 
+    background: #FFF8E1;
     padding: 60px 20px;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

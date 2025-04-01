@@ -13,8 +13,8 @@ export class HeaderComponent implements OnInit {
   navigationItems = [
     { label: 'Inicio', route: '/inicio' },
     { label: 'Sobre Nosotros', route: '/sobre-nosotros' },
-    { label: 'En Adopción', route: '/en-adopcion' },
-    { label: 'Casas Hogar', route: '/casas-hogar' },
+    { label: 'En Adopción', route: '/adoption' },
+    { label: 'Casas Hogar', route: '/shelter' },
     { label: 'Contacto', route: '/contacto' }
   ];
 

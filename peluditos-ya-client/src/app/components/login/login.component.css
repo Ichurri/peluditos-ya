@@ -100,7 +100,9 @@
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Botón de registro */
@@ -125,15 +127,16 @@
 /* Estilos responsivos */
 @media (max-width: 600px) {
   .login-container {
-      margin-top: 5vh;
-      padding: 20px;
+    margin-top: 5vh;
+    padding: 20px;
   }
-  
+
   .login-container h1 {
-      font-size: 24px;
+    font-size: 24px;
   }
-  
-  .register-button, .login-button {
-      padding: 12px;
+
+  .register-button,
+  .login-button {
+    padding: 12px;
   }
 }

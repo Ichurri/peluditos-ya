@@ -1,4 +1,3 @@
-// components/register/register.component.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -25,7 +24,7 @@ export class RegisterComponent {
       acceptTerms: [false, Validators.requiredTrue]
     });
   }
-  
+
   onSubmit() {
     if (this.registerForm.valid) {
       const formData = {
@@ -68,6 +67,6 @@ export class RegisterComponent {
   }
 
   navigateToLogin() {
-    this.router.navigate(['/login']); 
+    this.router.navigate(['/login']);
   }
 }

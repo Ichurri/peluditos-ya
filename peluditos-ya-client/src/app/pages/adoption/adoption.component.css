@@ -1,11 +1,13 @@
 /* Texto sobre el carrusel (posición fija y centrado) */
 .carousel-overlay {
-    position: relative; /* Ahora es absoluto para que se mantenga en el centro */
+    position: relative;
+    /* Ahora es absoluto para que se mantenga en el centro */
     top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
-    z-index: 10; /* Asegura que el texto esté por encima de los elementos */
+    z-index: 10;
+    /* Asegura que el texto esté por encima de los elementos */
     width: 100%;
 }
 
@@ -30,8 +32,10 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    background: rgba(0, 0, 0, 0.3); /* Fondo oscuro para mayor contraste */
-    backdrop-filter: blur(10px); /* Efecto desenfoque */
+    background: rgba(0, 0, 0, 0.3);
+    /* Fondo oscuro para mayor contraste */
+    backdrop-filter: blur(10px);
+    /* Efecto desenfoque */
 }
 
 /* Carrusel con desplazamiento horizontal */
@@ -43,7 +47,8 @@
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
     position: relative;
-    z-index: 2; /* Para que las imágenes estén por debajo de los eclipses */
+    z-index: 2;
+    /* Para que las imágenes estén por debajo de los eclipses */
 }
 
 /* Oculta la barra de desplazamiento */
@@ -54,12 +59,15 @@
 /* Eclipse superior */
 .eclipseUno {
     position: relative;
-    top: -85vh; /* Se posiciona en la parte superior */
+    top: -85vh;
+    /* Se posiciona en la parte superior */
     left: 0;
     width: 100%;
-    height: 200px; /* Ajusta la altura para cubrir parte del carrusel */
+    height: 200px;
+    /* Ajusta la altura para cubrir parte del carrusel */
     object-fit: cover;
-    z-index: 3; /* Encima del carrusel */ 
+    z-index: 3;
+    /* Encima del carrusel */
 }
 
 /* Eclipse inferior */
@@ -68,20 +76,23 @@
     top: -45vh;
     left: 0;
     width: 100%;
-    height: 200px; /* Ajusta la altura para cubrir parte del carrusel */
+    height: 200px;
+    /* Ajusta la altura para cubrir parte del carrusel */
     object-fit: cover;
-    z-index: 3; /* Encima del carrusel */
+    z-index: 3;
+    /* Encima del carrusel */
 }
 
 /* Estilos de la barra de búsqueda */
 .search-container {
-    
+
     margin-top: -55vh;
     display: flex;
     justify-content: center;
     gap: 10px;
     padding: 20px;
-    z-index: 10; /* Asegura que esté por encima de los elementos */
+    z-index: 10;
+    /* Asegura que esté por encima de los elementos */
 }
 
 .search-container input,
@@ -89,7 +100,8 @@
     padding: 10px;
     border: 2px solid #FFD803;
     border-radius: 20px;
-    z-index: 10; /* Asegura que esté por encima de los elementos */
+    z-index: 10;
+    /* Asegura que esté por encima de los elementos */
 }
 
 /* Contenedor de las mascotas (se mantiene igual) */
@@ -125,7 +137,8 @@
 /* Imagen de la mascota */
 .mascota-card img {
     width: 100%;
-    height: 200px; /* Altura fija para uniformidad */
+    height: 200px;
+    /* Altura fija para uniformidad */
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 12px;
@@ -174,7 +187,7 @@
     .mascotas-grid {
         grid-template-columns: 1fr;
     }
-    
+
     .mascotas-grid:has(> :only-child) {
         max-width: 280px;
     }

@@ -1,10 +1,9 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterComponent } from './components/register-form-user/register.component';
 import { LoginComponent } from './components/login/login.component';
-import { EnAdopcionComponent } from './pages/en-adopcion/en-adopcion.component';
-import { CasasHogarComponent } from './pages/casas-hogar/casas-hogar.component';
-import { RegisterFormPetHouseComponent } from './components/register-form-pet-house/register-form-pet-house.component';
+import { AdoptionComponent } from './pages/adoption/adoption.component';
+import { ShelterComponent } from './pages/shelter/shelter.component';
 
 export const routes: Routes = [
     {
@@ -23,19 +22,14 @@ export const routes: Routes = [
         title: 'Login'
     },
     {
-        path: 'en-adopcion',
-        component: EnAdopcionComponent,
-        title: 'En Adopcion'
+        path: 'adoption',
+        component: AdoptionComponent,
+        title: 'Adoption'
     },
     {
-        path: 'casas-hogar',
-        component: CasasHogarComponent,
-        title: 'Casas Hogar'
-    },
-    {
-        path: 'register-form-pet-house',
-        component: RegisterFormPetHouseComponent,
-        title: 'Register Form Pet House'
+        path: 'shelter',
+        component: ShelterComponent,
+        title: 'Shelter'
     },
     { 
         path: '**', 

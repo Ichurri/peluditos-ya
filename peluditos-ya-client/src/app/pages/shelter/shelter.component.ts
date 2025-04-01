@@ -5,12 +5,12 @@ import { FooterComponent } from '../../components/footer/footer.component';
 import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
-  selector: 'app-casas-hogar',
-  templateUrl: './casas-hogar.component.html',
+  selector: 'app-shelter',
+  templateUrl: './shelter.component.html',
   imports: [CommonModule, FormsModule, FooterComponent, RouterModule],
-  styleUrls: ['./casas-hogar.component.css']
+  styleUrls: ['./shelter.component.css']
 })
-export class CasasHogarComponent {
+export class ShelterComponent {
   searchTerm = '';
 
   casasHogar = [
@@ -21,7 +21,7 @@ export class CasasHogarComponent {
   ];
 
   getCasasFiltradas() {
-    return this.casasHogar.filter(casa => 
+    return this.casasHogar.filter(casa =>
       this.searchTerm === '' || casa.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
