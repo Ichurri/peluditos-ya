@@ -13,10 +13,15 @@
     <!-- Lista de casas hogar -->
     <div class="casas-grid">
         <div *ngFor="let casa of getCasasFiltradas()" class="casa-card">
-            <img [src]="casa.imagen" [alt]="casa.nombre">
-            <h3>{{ casa.nombre }}</h3>
-            <p>{{ casa.descripcion }}</p>
-            <button>Ver más</button>
+            <div class="casa-img-container">
+                <img [src]="casa.imagen" [alt]="casa.nombre" class="casa-image">
+                <div class="casa-overlay"></div>
+            </div>
+            <div class="casa-content">
+                <h3>{{ casa.nombre }}</h3>
+                <p class="casa-descripcion">{{ casa.descripcion }}</p>
+                <button class="casa-btn">Ver detalles</button>
+            </div>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 /* Texto sobre el carrusel (posición fija y centrado) */
 .carousel-overlay {
-    position: fixed; /* Ahora es absoluto para que se mantenga en el centro */
+    position: relative; /* Ahora es absoluto para que se mantenga en el centro */
     top: 42%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -92,39 +92,90 @@
     z-index: 10; /* Asegura que esté por encima de los elementos */
 }
 
-/* Contenedor de las mascotas */
+/* Contenedor de las mascotas (se mantiene igual) */
 .adoption-container {
     padding: 20px;
 }
 
+/* Grid de mascotas (se mantiene la estructura original) */
 .mascotas-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
-    z-index: 11;
 }
 
+/* Mejoras específicas para las tarjetas de mascotas */
 .mascota-card {
     background: white;
     border-radius: 10px;
     padding: 15px;
     text-align: center;
-    z-index: 11;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #f0f0f0;
 }
 
+/* Efecto hover para las tarjetas */
+.mascota-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+    border-color: #FFD803;
+}
+
+/* Imagen de la mascota */
 .mascota-card img {
     width: 100%;
-    border-radius: 10px;
+    height: 200px; /* Altura fija para uniformidad */
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
 }
 
+/* Nombre de la mascota */
+.mascota-card h2 {
+    margin: 0 0 8px 0;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+/* Descripción */
+.mascota-card p {
+    margin: 0 0 15px 0;
+    color: #666;
+    font-size: 0.9rem;
+    min-height: 40px;
+}
+
+/* Botón de adoptar */
 .mascota-card button {
     background-color: #FFD803;
+    color: #333;
     border: none;
-    padding: 10px 20px;
+    padding: 8px 20px;
     border-radius: 20px;
+    font-weight: 600;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .mascota-card button:hover {
     background-color: #e6c702;
+    transform: scale(1.05);
+}
+
+/* Estilo cuando solo hay una mascota */
+.mascotas-grid:has(> :only-child) {
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Responsive para móviles */
+@media (max-width: 600px) {
+    .mascotas-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mascotas-grid:has(> :only-child) {
+        max-width: 280px;
+    }
 }
