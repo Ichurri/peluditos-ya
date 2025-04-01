@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  isSubmitting: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -24,21 +25,40 @@ export class LoginComponent {
       password: ['', Validators.required]
     });
   }
+
   onSubmit() {
-    if (this.loginForm.valid) {
-      this.authService.login(this.loginForm.value).subscribe({
-        next: (response) => {
-          alert('¡Bienvenido!');
-          this.router.navigate(['/dashboard']); // Redirigir tras login
-        },
-        error: (error) => {
-          alert(error.error || 'Credenciales incorrectas');
+    if (this.loginForm.invalid) return;
+  
+    this.isSubmitting = true;
+  
+    this.authService.login(this.loginForm.value).subscribe({
+      next: (response) => {
+        this.isSubmitting = false;
+        alert(response.message);
+        localStorage.setItem('isAdmin', response.admin.toString());
+  
+        if (response.admin) {
+          this.router.navigate(['/admin-dashboard']);
+        } else {
+          this.router.navigate(['/dashboard']);
         }
-      });
-    }
+      },
+      error: (error) => {
+        this.isSubmitting = false;
+        alert(error.error.message || 'Credenciales incorrectas');
+      }
+    });
   }
 
   navigateToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  navigateToForgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
+  navigateToHome() {
+    this.router.navigate(['/']);
   }
 }
