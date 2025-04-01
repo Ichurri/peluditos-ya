@@ -21,6 +21,9 @@ public class AppUser {
     
     @Column(nullable = false)
     private String location;
+
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean admin;
     
     public Long getId() {
         return id;
@@ -60,5 +63,13 @@ public class AppUser {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 }

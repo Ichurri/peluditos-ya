@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   loginForm: FormGroup;
-  isSubmitting: boolean = false; // Añade esta variable
+  isSubmitting: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -28,18 +28,24 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-
-    this.isSubmitting = true; // Activar spinner
-
+  
+    this.isSubmitting = true;
+  
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        this.isSubmitting = false; // Desactivar spinner
-        alert('¡Bienvenido!');
-        this.router.navigate(['/dashboard']);
+        this.isSubmitting = false;
+        alert(response.message);
+        localStorage.setItem('isAdmin', response.admin.toString());
+  
+        if (response.admin) {
+          this.router.navigate(['/admin-dashboard']);
+        } else {
+          this.router.navigate(['/dashboard']);
+        }
       },
       error: (error) => {
-        this.isSubmitting = false; // Desactivar spinner en caso de error
-        alert(error.error || 'Credenciales incorrectas');
+        this.isSubmitting = false;
+        alert(error.error.message || 'Credenciales incorrectas');
       }
     });
   }

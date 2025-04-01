@@ -18,11 +18,10 @@ export class AuthService {
     );
   }
 
-  login(credentials: { email: string; password: string }): Observable<string> {
-    return this.http.post(
+  login(credentials: { email: string; password: string }): Observable<{ message: string; admin: boolean }> {
+    return this.http.post<{ message: string; admin: boolean }>(
       `${this.apiUrl}/login`,
-      credentials,
-      { responseType: 'text' }
+      credentials
     );
   }
 }
