@@ -1,4 +1,4 @@
-  import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -9,7 +9,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   navigationItems = [
     { label: 'Inicio', route: '/inicio' },
     { label: 'Sobre Nosotros', route: '/sobre-nosotros' },
@@ -17,4 +17,11 @@ export class HeaderComponent {
     { label: 'Casas Hogar', route: '/casas-hogar' },
     { label: 'Contacto', route: '/contacto' }
   ];
+
+  isAdmin: boolean = false;
+
+  ngOnInit() {
+    // Recuperamos el valor de isAdmin desde localStorage
+    this.isAdmin = localStorage.getItem('isAdmin') === 'true';
+  }
 }
