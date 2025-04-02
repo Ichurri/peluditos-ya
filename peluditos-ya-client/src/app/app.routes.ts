@@ -4,6 +4,7 @@ import { RegisterAdopterComponent } from './components/register-adopter/register
 import { LoginComponent } from './components/login/login.component';
 import { AdoptionComponent } from './pages/adoption/adoption.component';
 import { ShelterComponent } from './pages/shelter/shelter.component';
+import { RegisterShelterComponent } from './components/register-shelter/register-shelter.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,11 @@ export const routes: Routes = [
         path: 'shelter',
         component: ShelterComponent,
         title: 'Shelter'
+    },
+    {
+        path: 'register-shelter',
+        component: RegisterShelterComponent,
+        title: 'Register Shelter'       
     },
     { 
         path: '**', 

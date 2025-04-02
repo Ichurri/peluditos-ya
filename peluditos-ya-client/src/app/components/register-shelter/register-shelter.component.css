@@ -1,0 +1,106 @@
+/* components/register-shelter/register-shelter.component.css */
+.register-container {
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: -77vh;
+  padding: 20px;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  font-size: 28px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input.invalid {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.terms-section {
+  margin-bottom: 20px;
+}
+
+.checkbox-container {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox-container input[type="checkbox"] {
+  margin-right: 5px;
+  width: 18px;
+  height: 18px;
+}
+
+.terms-link {
+  color: #666;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.register-button {
+  width: 100%;
+  padding: 15px;
+  background-color: #333;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 20px;
+}
+
+.register-button:hover {
+  background-color: #555;
+}
+
+.register-button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.login-button {
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+  padding: 10px 20px;
+  background-color: transparent;
+  color: #333;
+  border: 2px solid #333;
+  border-radius: 25px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.login-button:hover {
+  background-color: #f5f5f5;
+}
