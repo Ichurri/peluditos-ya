@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.peluditosya.peluditos_ya_server.dto.AdopterLoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
+import com.peluditosya.peluditos_ya_server.dto.ShelterLoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.model.Adopter;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
@@ -22,9 +23,8 @@ public class AuthController {
 
     @PostMapping("/signup-adopter")
     public ResponseEntity<String> signup(@RequestBody AdopterSignUpRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity.badRequest().body("El correo ya está en uso");
-        }
+        if (userRepository.existsByEmail(request.getEmail())) return ResponseEntity.badRequest().body("El correo ya está en uso");
+        
 
         Adopter adopter = new Adopter();
         adopter.setName(request.getName());
@@ -40,15 +40,15 @@ public class AuthController {
     @PostMapping("/login-adopter")
     public ResponseEntity<String> login(@RequestBody AdopterLoginRequest request) {
         AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        return user != null ? ResponseEntity.ok("Login exitoso")
+        return user != null 
+                ? ResponseEntity.ok("Login exitoso")
                 : ResponseEntity.status(401).body("Credenciales inválidas");
     }
 
     @PostMapping("/signup-shelter")
     public ResponseEntity<String> signupShelter(@RequestBody ShelterSignUpRequest request) {
-        if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity.badRequest().body("El correo ya está en uso");
-        }
+        if (userRepository.existsByEmail(request.getEmail())) return ResponseEntity.badRequest().body("El correo ya está en uso");
+    
 
         Shelter shelter = new Shelter();
         shelter.setName(request.getName()); // Nombre del propietario
@@ -62,6 +62,16 @@ public class AuthController {
 
         userRepository.save(shelter);
         return ResponseEntity.ok("Refugio registrado");
+    }
+
+    @PostMapping("/login-shelter")
+    public ResponseEntity<String> loginShelter(@RequestBody ShelterLoginRequest request) {
+        AppUser user = userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+        if (user == null) return ResponseEntity.status(401).body("Credenciales inválidas");
+        
+        if (!(user instanceof Shelter)) return ResponseEntity.status(401).body("El usuario no es un refugio");
+        
+        return ResponseEntity.ok("Login exitoso");
     }
 
 }
