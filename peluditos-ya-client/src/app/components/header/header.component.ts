@@ -11,7 +11,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   navigationItems = [
-    { label: 'Inicio', route: '/inicio' },
+    { label: 'Inicio', route: '/register-adopter' },
     { label: 'Sobre Nosotros', route: '/sobre-nosotros' },
     { label: 'En Adopción', route: '/adoption' },
     { label: 'Casas Hogar', route: '/shelter' },
