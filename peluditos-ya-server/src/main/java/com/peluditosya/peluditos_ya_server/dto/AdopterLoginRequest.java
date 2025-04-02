@@ -1,6 +1,6 @@
 package com.peluditosya.peluditos_ya_server.dto;
 
-public class LoginRequest {
+public class AdopterLoginRequest {
     private String email;
     private String password;
 

@@ -4,10 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
-import com.peluditosya.peluditos_ya_server.dto.SignUpRequest;
+import com.peluditosya.peluditos_ya_server.dto.AdopterLoginRequest;
+import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
+import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.model.Adopter;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
+import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 
 @RestController
@@ -18,8 +20,8 @@ public class AuthController {
     @Autowired
     private UserRepository userRepository;
 
-    @PostMapping("/signup")
-    public ResponseEntity<String> signup(@RequestBody SignUpRequest request) {
+    @PostMapping("/signup-adopter")
+    public ResponseEntity<String> signup(@RequestBody AdopterSignUpRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             return ResponseEntity.badRequest().body("El correo ya está en uso");
         }
@@ -35,9 +37,31 @@ public class AuthController {
         return ResponseEntity.ok("Adoptante registrado");
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+    @PostMapping("/login-adopter")
+    public ResponseEntity<String> login(@RequestBody AdopterLoginRequest request) {
         AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        return user != null ? ResponseEntity.ok("Login exitoso") : ResponseEntity.status(401).body("Credenciales inválidas");
+        return user != null ? ResponseEntity.ok("Login exitoso")
+                : ResponseEntity.status(401).body("Credenciales inválidas");
     }
+
+    @PostMapping("/signup-shelter")
+    public ResponseEntity<String> signupShelter(@RequestBody ShelterSignUpRequest request) {
+        if (userRepository.existsByEmail(request.getEmail())) {
+            return ResponseEntity.badRequest().body("El correo ya está en uso");
+        }
+
+        Shelter shelter = new Shelter();
+        shelter.setName(request.getName()); // Nombre del propietario
+        shelter.setEmail(request.getEmail());
+        shelter.setPassword(request.getPassword());
+        shelter.setCity(request.getCity());
+        shelter.setPhone(request.getPhone());
+        shelter.setDocumentNumber(request.getDocumentNumber());
+        shelter.setShelterName(request.getShelterName());
+        shelter.setShelterAddress(request.getShelterAddress());
+
+        userRepository.save(shelter);
+        return ResponseEntity.ok("Refugio registrado");
+    }
+
 }
