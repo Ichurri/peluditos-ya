@@ -48,14 +48,14 @@
 
     <!-- Ubicación -->
     <div class="form-group">
-      <input type="text" formControlName="location" placeholder="Ubicación" [ngClass]="{
+      <input type="text" formControlName="city" placeholder="Ubicación" [ngClass]="{
           invalid:
-            registerForm.get('location')?.invalid &&
-            registerForm.get('location')?.touched
+            registerForm.get('city')?.invalid &&
+            registerForm.get('city')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('location')?.invalid &&
-          registerForm.get('location')?.touched
+          registerForm.get('city')?.invalid &&
+          registerForm.get('city')?.touched
         " class="error-message">
         La ubicación es requerida
       </div>

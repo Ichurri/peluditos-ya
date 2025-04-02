@@ -4,7 +4,7 @@ public class SignUpRequest {
     private String name;
     private String email;
     private String password;
-    private String location;
+    private String city;
     private String phone;
 
     public String getName() {
@@ -31,12 +31,12 @@ public class SignUpRequest {
         this.password = password;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getPhone() {

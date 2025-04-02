@@ -20,7 +20,7 @@ export class RegisterAdopterComponent {
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      location: ['', Validators.required], // ✅ Agregado para que coincida con tu DB
+      city: ['', Validators.required], // ✅ Agregado para que coincida con tu DB
       acceptTerms: [false, Validators.requiredTrue]
     });
   }

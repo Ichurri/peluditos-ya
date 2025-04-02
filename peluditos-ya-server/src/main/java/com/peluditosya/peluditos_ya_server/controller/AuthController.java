@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.SignUpRequest;
-import com.peluditosya.peluditos_ya_server.dto.LoginResponse;
 import com.peluditosya.peluditos_ya_server.model.Adopter;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
@@ -29,23 +28,16 @@ public class AuthController {
         adopter.setName(request.getName());
         adopter.setEmail(request.getEmail());
         adopter.setPassword(request.getPassword());
-        adopter.setLocation(request.getLocation());
+        adopter.setCity(request.getCity());
         adopter.setPhone(request.getPhone());
-        adopter.setAdmin(false); // Se registra como usuario normal por defecto
 
         userRepository.save(adopter);
         return ResponseEntity.ok("Adoptante registrado");
     }
 
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request) {
-        AppUser user = userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-
-        if (user != null) {
-            LoginResponse response = new LoginResponse("Login exitoso", user.isAdmin());
-            return ResponseEntity.ok(response);
-        }
-
-        return ResponseEntity.status(401).body(new LoginResponse("Credenciales inválidas", false));
+    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
+        AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+        return user != null ? ResponseEntity.ok("Login exitoso") : ResponseEntity.status(401).body("Credenciales inválidas");
     }
 }
