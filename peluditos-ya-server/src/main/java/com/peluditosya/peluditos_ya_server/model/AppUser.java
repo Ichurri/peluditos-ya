@@ -20,10 +20,7 @@ public class AppUser {
     private String password;
     
     @Column(nullable = false)
-    private String location;
-
-    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
-    private boolean admin;
+    private String city;
     
     public Long getId() {
         return id;
@@ -57,19 +54,11 @@ public class AppUser {
         this.password = password;
     }
 
-    public String getLocation() {
-        return location;
+    public String getCity() {
+        return city;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public boolean isAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(boolean admin) {
-        this.admin = admin;
+    public void setCity(String city) {
+        this.city = city;
     }
 }

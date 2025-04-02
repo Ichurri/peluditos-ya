@@ -12,7 +12,7 @@ export class AuthService {
 
   register(userData: any): Observable<string> {
     return this.http.post(
-      `${this.apiUrl}/signup`, 
+      `${this.apiUrl}/signup-adopter`, 
       userData,
       { responseType: 'text' }
     );
@@ -20,7 +20,7 @@ export class AuthService {
 
   login(credentials: { email: string; password: string }): Observable<{ message: string; admin: boolean }> {
     return this.http.post<{ message: string; admin: boolean }>(
-      `${this.apiUrl}/login`,
+      `${this.apiUrl}/login-adopter`,
       credentials
     );
   }

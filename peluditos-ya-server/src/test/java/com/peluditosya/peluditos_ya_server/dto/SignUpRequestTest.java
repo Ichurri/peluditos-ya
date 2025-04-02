@@ -27,7 +27,7 @@
 //         request.setName("Juan Pérez");
 //         request.setEmail("juan@example.com");
 //         request.setPassword("securePass123");
-//         request.setLocation("Bogotá");
+//         request.setCity("Bogotá");
 //         request.setPhone("1234567890");
 
 //         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(request);
@@ -40,7 +40,7 @@
 //         request.setName("Juan Pérez");
 //         request.setEmail("invalid-email");
 //         request.setPassword("securePass123");
-//         request.setLocation("Bogotá");
+//         request.setCity("Bogotá");
 //         request.setPhone("1234567890");
 
 //         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(request);
@@ -53,7 +53,7 @@
 //         request.setName("Juan Pérez");
 //         request.setEmail("juan@example.com");
 //         request.setPassword("123");
-//         request.setLocation("Bogotá");
+//         request.setCity("Bogotá");
 //         request.setPhone("1234567890");
 
 //         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(request);
@@ -66,7 +66,7 @@
 //         request.setName("");
 //         request.setEmail("");
 //         request.setPassword("");
-//         request.setLocation("");
+//         request.setCity("");
 //         request.setPhone("");
 
 //         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(request);
@@ -79,7 +79,7 @@
 //         request.setName("Juan Pérez");
 //         request.setEmail("juan@example.com");
 //         request.setPassword("securePass123");
-//         request.setLocation("Bogotá");
+//         request.setCity("Bogotá");
 //         request.setPhone("1234"); // Número demasiado corto
 
 //         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(request);

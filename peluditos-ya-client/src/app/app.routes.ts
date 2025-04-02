@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RegisterAdopterComponent } from './components/register-adopter/register-adopter.component';
-import { LoginComponent } from './components/login/login.component';
+import { LoginAdopterComponent } from './components/login-adopter/login-adopter.component';
 import { AdoptionComponent } from './pages/adoption/adoption.component';
 import { ShelterComponent } from './pages/shelter/shelter.component';
 import { RegisterShelterComponent } from './components/register-shelter/register-shelter.component';
@@ -18,9 +18,9 @@ export const routes: Routes = [
         title: 'Register Adopter'
     },
     {   
-        path: 'login', 
-        component: LoginComponent,
-        title: 'Login'
+        path: 'login-adopter', 
+        component: LoginAdopterComponent,
+        title: 'Login Adopter'
     },
     {
         path: 'adoption',
