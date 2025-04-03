@@ -68,19 +68,15 @@ public class AppUser {
         this.city = city;
     }
 
-<<<<<<< HEAD
-    public boolean getIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setIsAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
-=======
-    public Role getRole() {
+    // public boolean getIsAdmin() {
+    //     return role == Role.ADMIN;
+    // }
+    public Role getRole(){
         return role;
     }
-    public void setRole(Role role) {
+
+    public void setRole(Role role){
         this.role = role;
->>>>>>> c4371ff398529e03ca3d0b89fbcad084ef0bb887
     }
+    
 }

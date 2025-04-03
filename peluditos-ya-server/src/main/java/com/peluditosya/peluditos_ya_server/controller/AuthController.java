@@ -34,7 +34,7 @@ public class AuthController {
         adopter.setPassword(request.getPassword());
         adopter.setCity(request.getCity());
         adopter.setPhone(request.getPhone());
-        adopter.setIsAdmin(false);
+        // adopter.setIsAdmin(false);
 
         adopter.setRole(Role.ADOPTER);
 
