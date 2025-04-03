@@ -3,10 +3,10 @@ package com.peluditosya.peluditos_ya_server.repository;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
 import com.peluditosya.peluditos_ya_server.model.Role;
 import com.peluditosya.peluditos_ya_server.model.Shelter;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<AppUser, Long> {
