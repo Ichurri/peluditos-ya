@@ -1,4 +1,4 @@
-package com.peluditosya.peluditos_ya_server.dto;
+package com.peluditosya.peluditos_ya_server.model;
 
 public enum Role {
     ADOPTER,

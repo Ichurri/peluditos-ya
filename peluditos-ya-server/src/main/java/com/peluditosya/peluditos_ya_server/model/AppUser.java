@@ -1,6 +1,5 @@
 package com.peluditosya.peluditos_ya_server.model;
 
-import com.peluditosya.peluditos_ya_server.dto.Role;
 import jakarta.persistence.*;
 
 @Entity

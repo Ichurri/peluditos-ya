@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
-import com.peluditosya.peluditos_ya_server.dto.Role;
 import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.model.Adopter;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
+import com.peluditosya.peluditos_ya_server.model.Role;
 import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 
@@ -76,8 +76,7 @@ public class AuthController {
             return ResponseEntity.ok(Map.of(
                     "message", "Login exitoso",
                     "role", user.getRole(), // Enviar el rol exacto
-                    "admin", isAdmin
-            ));
+                    "admin", isAdmin));
         } catch (Exception e) {
             e.printStackTrace(); // Esto imprimirá el error en la consola de Spring Boot
             return ResponseEntity.status(500).body(Map.of("message", "Error en el servidor"));

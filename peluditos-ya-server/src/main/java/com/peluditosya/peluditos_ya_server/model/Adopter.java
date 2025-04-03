@@ -1,6 +1,5 @@
 package com.peluditosya.peluditos_ya_server.model;
 
-import com.peluditosya.peluditos_ya_server.dto.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
