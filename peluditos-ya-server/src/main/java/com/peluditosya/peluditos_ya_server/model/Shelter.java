@@ -3,7 +3,9 @@ package com.peluditosya.peluditos_ya_server.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "shelters")
 @PrimaryKeyJoinColumn(name = "user_id")
@@ -16,7 +18,7 @@ public class Shelter extends AppUser {
 
     public Shelter() {
         super();
-        this.setRole(Role.SHELTER); // Role not null
+        this.setRole(Role.SHELTER);
     }
 
     public String getDocumentNumber() {

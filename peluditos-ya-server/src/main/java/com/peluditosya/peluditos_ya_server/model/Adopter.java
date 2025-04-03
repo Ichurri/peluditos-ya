@@ -3,7 +3,9 @@ package com.peluditosya.peluditos_ya_server.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "adopters")
 @PrimaryKeyJoinColumn(name = "user_id")
@@ -12,7 +14,7 @@ public class Adopter extends AppUser {
 
     public Adopter() {
         super();
-        this.setRole(Role.ADOPTER); // Se asegura que el rol no sea null
+        this.setRole(Role.ADOPTER);
     }
 
     public String getPhone() {

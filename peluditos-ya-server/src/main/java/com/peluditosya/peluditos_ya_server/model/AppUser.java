@@ -1,7 +1,9 @@
 package com.peluditosya.peluditos_ya_server.model;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "users")
@@ -24,7 +26,7 @@ public class AppUser {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private Role role;
+    private Role role = Role.ADOPTER; // Valor por defecto para evitar null
 
     public AppUser() {
         this.role = Role.ADOPTER; // Valor por defecto para evitar null
