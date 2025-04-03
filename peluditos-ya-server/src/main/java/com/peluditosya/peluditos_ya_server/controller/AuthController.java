@@ -1,86 +1,41 @@
 package com.peluditosya.peluditos_ya_server.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
+import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
+import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
+import com.peluditosya.peluditos_ya_server.service.AuthService;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Map;
-
-import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
-import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
-import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
-import com.peluditosya.peluditos_ya_server.model.Adopter;
-import com.peluditosya.peluditos_ya_server.model.AppUser;
-import com.peluditosya.peluditos_ya_server.model.Role;
-import com.peluditosya.peluditos_ya_server.model.Shelter;
-import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 
 @RestController
 @RequestMapping("/api/auth")
 @CrossOrigin(origins = "http://localhost:4200")
 public class AuthController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final AuthService authService;
+    private final Logger logger = LoggerFactory.getLogger(AuthController.class);
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/signup-adopter")
-    public ResponseEntity<String> signup(@RequestBody AdopterSignUpRequest request) {
-        if (userRepository.existsByEmail(request.getEmail()))
-            return ResponseEntity.badRequest().body("El correo ya está en uso");
-
-        Adopter adopter = new Adopter();
-        adopter.setName(request.getName());
-        adopter.setEmail(request.getEmail());
-        adopter.setPassword(request.getPassword());
-        adopter.setCity(request.getCity());
-        adopter.setPhone(request.getPhone());
-
-        adopter.setRole(Role.ADOPTER); // Asegura que el rol no sea null
-
-        userRepository.save(adopter);
-        return ResponseEntity.ok("Adoptante registrado");
+    public ResponseEntity<String> signupAdopter(@RequestBody AdopterSignUpRequest request) {
+        String responseMessage = authService.signupAdopter(request);
+        return ResponseEntity.ok(responseMessage);
     }
 
     @PostMapping("/signup-shelter")
     public ResponseEntity<String> signupShelter(@RequestBody ShelterSignUpRequest request) {
-        if (userRepository.existsByEmail(request.getEmail()))
-            return ResponseEntity.badRequest().body("El correo ya está en uso");
-
-        Shelter shelter = new Shelter();
-        shelter.setName(request.getName());
-        shelter.setEmail(request.getEmail());
-        shelter.setPassword(request.getPassword());
-        shelter.setCity(request.getCity());
-        shelter.setPhone(request.getPhone());
-        shelter.setDocumentNumber(request.getDocumentNumber());
-        shelter.setShelterName(request.getShelterName());
-        shelter.setShelterAddress(request.getShelterAddress());
-
-        shelter.setRole(Role.SHELTER); // Asegura que el rol no sea null
-
-        userRepository.save(shelter);
-        return ResponseEntity.ok("Refugio registrado");
+        String responseMessage = authService.signupShelter(request);
+        return ResponseEntity.ok(responseMessage);
     }
 
     @PostMapping("/login-adopter")
-    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-        try {
-            AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-
-            if (user == null) {
-                return ResponseEntity.status(401).body(Map.of("message", "Credenciales inválidas"));
-            }
-
-            // Comprobar si el usuario es administrador
-            boolean isAdmin = user.getRole().equals(Role.ADMIN);
-
-            return ResponseEntity.ok(Map.of(
-                    "message", "Login exitoso",
-                    "role", user.getRole(), // Enviar el rol exacto
-                    "admin", isAdmin));
-        } catch (Exception e) {
-            e.printStackTrace(); // Esto imprimirá el error en la consola de Spring Boot
-            return ResponseEntity.status(500).body(Map.of("message", "Error en el servidor"));
-        }
+    public ResponseEntity<?> loginAdopter(@RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
-
 }
