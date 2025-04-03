@@ -19,8 +19,9 @@ export class AppComponent {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        console.log('Ruta actual:', event.url); 
-        this.showHeader = event.url !== '/login' && event.url !== '/register';
+        const url = event.urlAfterRedirects.split('?')[0].split('#')[0]; 
+        console.log('Ruta actual:', url);
+        this.showHeader = !(url === '/register-adopter' || url === '/login-adopter');
       });
   }
 }
