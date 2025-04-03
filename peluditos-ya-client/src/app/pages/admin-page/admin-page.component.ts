@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // <-- Añade esto
-import { FormsModule } from '@angular/forms';   // <-- Añade esto
+import { CommonModule } from '@angular/common'; 
+import { FormsModule } from '@angular/forms';   
 import { AuthShelterService } from '../../services';
 
 @Component({

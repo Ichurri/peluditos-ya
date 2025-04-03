@@ -10,11 +10,10 @@
         <button>Buscar</button>
     </div>
 
-    <!-- Lista de casas hogar -->
     <div class="casas-grid">
         <div *ngFor="let casa of getCasasFiltradas()" class="casa-card">
             <div class="casa-img-container">
-                <img [src]="casa.imagen" [alt]="casa.nombre" class="casa-image">
+                <img [src]="casa.imagen || 'https://img.freepik.com/vector-premium/cuidado-animales-hogar-emblema-refugio-animales-adopcion-o-pancarta-diseno-logotipo_125133-2655.jpg'" [alt]="casa.shelterName" />
                 <div class="casa-overlay"></div>
             </div>
             <div class="casa-content">

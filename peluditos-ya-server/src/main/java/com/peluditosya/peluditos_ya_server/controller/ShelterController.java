@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/shelters")
-@CrossOrigin(origins = "http://localhost:4200") // Mismo origen que tu frontend
+@CrossOrigin(origins = "http://localhost:4200") 
 public class ShelterController {
 
     @Autowired
