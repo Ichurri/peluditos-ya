@@ -1,5 +1,6 @@
 package com.peluditosya.peluditos_ya_server.model;
 
+import com.peluditosya.peluditos_ya_server.dto.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
@@ -8,11 +9,16 @@ import jakarta.persistence.Table;
 @Table(name = "shelters")
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Shelter extends AppUser {
-    
+
     private String documentNumber;
     private String shelterName;
     private String shelterAddress;
     private String phone;
+
+    public Shelter() {
+        super();
+        this.setRole(Role.SHELTER); // Se asegura que el rol no sea null
+    }
 
     public String getDocumentNumber() {
         return documentNumber;

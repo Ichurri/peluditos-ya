@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-
 import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.Role;
 import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
@@ -34,12 +33,32 @@ public class AuthController {
         adopter.setPassword(request.getPassword());
         adopter.setCity(request.getCity());
         adopter.setPhone(request.getPhone());
-        // adopter.setIsAdmin(false);
 
-        adopter.setRole(Role.ADOPTER);
+        adopter.setRole(Role.ADOPTER); // Asegura que el rol no sea null
 
         userRepository.save(adopter);
         return ResponseEntity.ok("Adoptante registrado");
+    }
+
+    @PostMapping("/signup-shelter")
+    public ResponseEntity<String> signupShelter(@RequestBody ShelterSignUpRequest request) {
+        if (userRepository.existsByEmail(request.getEmail()))
+            return ResponseEntity.badRequest().body("El correo ya está en uso");
+
+        Shelter shelter = new Shelter();
+        shelter.setName(request.getName());
+        shelter.setEmail(request.getEmail());
+        shelter.setPassword(request.getPassword());
+        shelter.setCity(request.getCity());
+        shelter.setPhone(request.getPhone());
+        shelter.setDocumentNumber(request.getDocumentNumber());
+        shelter.setShelterName(request.getShelterName());
+        shelter.setShelterAddress(request.getShelterAddress());
+
+        shelter.setRole(Role.SHELTER); // Asegura que el rol no sea null
+
+        userRepository.save(shelter);
+        return ResponseEntity.ok("Refugio registrado");
     }
 
     @PostMapping("/login-adopter")
@@ -61,39 +80,5 @@ public class AuthController {
             e.printStackTrace(); // Esto imprimirá el error en la consola de Spring Boot
             return ResponseEntity.status(500).body(Map.of("message", "Error en el servidor"));
         }
-    }
-
-
-    @PostMapping("/signup-shelter")
-    public ResponseEntity<String> signupShelter(@RequestBody ShelterSignUpRequest request) {
-        if (userRepository.existsByEmail(request.getEmail()))
-            return ResponseEntity.badRequest().body("El correo ya está en uso");
-
-        Shelter shelter = new Shelter();
-        shelter.setName(request.getName());
-        shelter.setEmail(request.getEmail());
-        shelter.setPassword(request.getPassword());
-        shelter.setCity(request.getCity());
-        shelter.setPhone(request.getPhone());
-        shelter.setDocumentNumber(request.getDocumentNumber());
-        shelter.setShelterName(request.getShelterName());
-        shelter.setShelterAddress(request.getShelterAddress());
-
-        shelter.setRole(Role.SHELTER);
-
-        userRepository.save(shelter);
-        return ResponseEntity.ok("Refugio registrado");
-    }
-
-    @PostMapping("/login-shelter")
-    public ResponseEntity<String> loginShelter(@RequestBody LoginRequest request) {
-        AppUser user = userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        if (user == null)
-            return ResponseEntity.status(401).body("Credenciales inválidas");
-
-        if (!(user instanceof Shelter))
-            return ResponseEntity.status(401).body("El usuario no es un refugio");
-
-        return ResponseEntity.ok("Login exitoso");
     }
 }
