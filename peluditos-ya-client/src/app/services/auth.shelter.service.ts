@@ -25,4 +25,12 @@ export class AuthShelterService {
       credentials
     );
   }
+
+  getShelters(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl);
+  }
+
+  deleteShelter(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
 }

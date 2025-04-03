@@ -21,7 +21,13 @@ export class HeaderComponent implements OnInit {
   isAdmin: boolean = false;
 
   ngOnInit() {
-    // Recuperamos el valor de isAdmin desde localStorage
+    this.checkAdminStatus();
+
+    // Escucha cambios en el almacenamiento local
+    window.addEventListener('storage', () => this.checkAdminStatus());
+  }
+
+  checkAdminStatus() {
     this.isAdmin = localStorage.getItem('isAdmin') === 'true';
   }
 }

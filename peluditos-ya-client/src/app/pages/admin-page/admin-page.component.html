@@ -1,0 +1,24 @@
+<div class="admin-container">
+    <div class="banner">
+      <h1>Administrar <span class="yellow-text">Casas Hogar</span></h1>
+    </div>
+  
+    <div class="search-container">
+      <!-- <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar hogar..." /> -->
+      <button>Buscar</button>
+    </div>
+  
+    <div class="casas-grid">
+      <div *ngFor="let casa of getCasasFiltradas(); let i = index" class="casa-card">
+        <div class="casa-img-container">
+          <img [src]="casa.imagen || 'https://via.placeholder.com/150'" [alt]="casa.shelterName" />
+        </div>
+        <div class="casa-content">
+          <h3>{{ casa.shelterName }}</h3>
+          <p>{{ casa.shelterAddress }}</p>
+          <p>Teléfono: {{ casa.phone }}</p>
+          <button class="eliminar-btn" (click)="eliminarCasa(casa.id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+</div>

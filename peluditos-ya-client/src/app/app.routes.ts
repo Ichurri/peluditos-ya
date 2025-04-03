@@ -5,6 +5,7 @@ import { LoginAdopterComponent } from './components/login-adopter/login-adopter.
 import { AdoptionComponent } from './pages/adoption/adoption.component';
 import { ShelterComponent } from './pages/shelter/shelter.component';
 import { RegisterShelterComponent } from './components/register-shelter/register-shelter.component';
+import { AdminSheltersComponent } from './pages/admin-page/admin-page.component';
 
 export const routes: Routes = [
     {
@@ -36,6 +37,11 @@ export const routes: Routes = [
         path: 'register-shelter',
         component: RegisterShelterComponent,
         title: 'Register Shelter'       
+    },
+    {
+        path: 'admin-dashboard',
+        component: AdminSheltersComponent,
+        title: 'View Admin'       
     },
     { 
         path: '**', 
