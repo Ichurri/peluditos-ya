@@ -1,5 +1,7 @@
 package com.peluditosya.peluditos_ya_server.model;
 
+import com.peluditosya.peluditos_ya_server.dto.Role;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -22,8 +24,9 @@ public class AppUser {
     @Column(nullable = false)
     private String city;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private boolean isAdmin;
+    private Role role;
     
     public Long getId() {
         return id;
@@ -65,11 +68,19 @@ public class AppUser {
         this.city = city;
     }
 
+<<<<<<< HEAD
     public boolean getIsAdmin() {
         return isAdmin;
     }
 
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+=======
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
+>>>>>>> c4371ff398529e03ca3d0b89fbcad084ef0bb887
     }
 }

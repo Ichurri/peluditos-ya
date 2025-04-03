@@ -35,16 +35,6 @@ export class RegisterAdopterComponent {
 
       console.log('Enviando datos:', formData);
 
-      // this.authService.register(formData).subscribe({
-      //   next: (response) => {
-      //     console.log('Registro exitoso:', response);
-      //     alert(response); // Muestra el mensaje de éxito
-      //   },
-      //   error: (error) => {
-      //     console.error('Error en el registro:', error);
-      //     alert('Error al registrar usuario');
-      //   }
-      // });
       this.authService.register(formData).subscribe({
         next: (response) => {
           console.log('Registro exitoso:', response);
