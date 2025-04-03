@@ -21,6 +21,9 @@ public class AppUser {
     
     @Column(nullable = false)
     private String city;
+
+    @Column(nullable = false)
+    private boolean isAdmin;
     
     public Long getId() {
         return id;
@@ -60,5 +63,13 @@ public class AppUser {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public boolean getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

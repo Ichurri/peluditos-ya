@@ -16,11 +16,12 @@ export class RegisterAdopterComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required], // ✅ Coincide con el HTML
+      name: ['', Validators.required], // Coincide con el HTML
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      city: ['', Validators.required], // ✅ Agregado para que coincida con tu DB
+      city: ['', Validators.required], // Agregado para que coincida con tu DB
+      isAdmin: ['', false],
       acceptTerms: [false, Validators.requiredTrue]
     });
   }

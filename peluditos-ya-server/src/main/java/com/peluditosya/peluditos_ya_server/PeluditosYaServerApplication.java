@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@EnableJpaRepositories("com.peluditosya.peluditos_ya_server.repository")  // 🔥 Agregamos esta línea
+@EnableJpaRepositories("com.peluditosya.peluditos_ya_server.repository")  //  Agregamos esta línea
 public class PeluditosYaServerApplication {
 
 	public static void main(String[] args) {

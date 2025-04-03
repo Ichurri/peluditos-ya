@@ -5,6 +5,7 @@ public class UserSignUpRequest {
     private String email;
     private String password;
     private String city;
+    private boolean isAdmin;
 
     public String getName() {
         return name;
@@ -29,5 +30,9 @@ public class UserSignUpRequest {
     }
     public void setCity(String city) {
         this.city = city;
+    }
+    public boolean getIsAdmin(){ return isAdmin; }
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }

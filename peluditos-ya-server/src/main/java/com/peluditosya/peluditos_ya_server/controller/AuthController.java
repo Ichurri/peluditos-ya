@@ -3,6 +3,8 @@ package com.peluditosya.peluditos_ya_server.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import java.util.Map;
+
 
 import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
@@ -31,18 +33,33 @@ public class AuthController {
         adopter.setPassword(request.getPassword());
         adopter.setCity(request.getCity());
         adopter.setPhone(request.getPhone());
+        adopter.setIsAdmin(false);
 
         userRepository.save(adopter);
         return ResponseEntity.ok("Adoptante registrado");
     }
 
     @PostMapping("/login-adopter")
-    public ResponseEntity<String> login(@RequestBody LoginRequest request) {
-        AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
-        return user != null
-                ? ResponseEntity.ok("Login exitoso")
-                : ResponseEntity.status(401).body("Credenciales inválidas");
+    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
+        try {
+            AppUser user = this.userRepository.findByEmailAndPassword(request.getEmail(), request.getPassword());
+
+            if (user == null) {
+                return ResponseEntity.status(401).body(Map.of("message", "Credenciales inválidas"));
+            }
+
+            boolean isAdmin = user instanceof Shelter;
+
+            return ResponseEntity.ok(Map.of(
+                    "message", "Login exitoso",
+                    "admin", isAdmin
+            ));
+        } catch (Exception e) {
+            e.printStackTrace(); // Esto imprimirá el error en la consola de Spring Boot
+            return ResponseEntity.status(500).body(Map.of("message", "Error en el servidor"));
+        }
     }
+
 
     @PostMapping("/signup-shelter")
     public ResponseEntity<String> signupShelter(@RequestBody ShelterSignUpRequest request) {

@@ -28,27 +28,24 @@ export class LoginAdopterComponent {
 
   onSubmit() {
     if (this.loginForm.invalid) return;
-
+  
     this.isSubmitting = true;
-
+    console.log('Formulario enviado:', this.loginForm.value);
+  
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
+        console.log('Respuesta del backend:', response);
         this.isSubmitting = false;
         alert(response.message);
         localStorage.setItem('isAdmin', response.admin.toString());
-
         localStorage.setItem('userEmail', this.loginForm.value.email);
-
-
-        if (response.admin) {
-          this.router.navigate(['/admin-dashboard']);
-        } else {
-          this.router.navigate(['/dashboard']);
-        }
+  
+        this.router.navigate([response.admin ? '/admin-dashboard' : '/dashboard']);
       },
       error: (error) => {
         this.isSubmitting = false;
-        alert(error.error.message || 'Credenciales incorrectas');
+        console.error('Error en login:', error);
+        alert(error.error?.message || 'Credenciales incorrectas');
       }
     });
   }

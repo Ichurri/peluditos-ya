@@ -18,7 +18,8 @@ export class AuthService {
     );
   }
 
-  login(credentials: { email: string; password: string }): Observable<{ message: string; admin: boolean }> {
+  login(credentials: { email: string; password: string }): Observable<any> {
+    console.log('Enviando login:', credentials); // Verifica qué se envía
     return this.http.post<{ message: string; admin: boolean }>(
       `${this.apiUrl}/login-adopter`,
       credentials
