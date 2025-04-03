@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
+import com.peluditosya.peluditos_ya_server.dto.Role;
 import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.model.Adopter;
@@ -32,6 +33,8 @@ public class AuthController {
         adopter.setCity(request.getCity());
         adopter.setPhone(request.getPhone());
 
+        adopter.setRole(Role.ADOPTER);
+
         userRepository.save(adopter);
         return ResponseEntity.ok("Adoptante registrado");
     }
@@ -58,6 +61,8 @@ public class AuthController {
         shelter.setDocumentNumber(request.getDocumentNumber());
         shelter.setShelterName(request.getShelterName());
         shelter.setShelterAddress(request.getShelterAddress());
+
+        shelter.setRole(Role.SHELTER);
 
         userRepository.save(shelter);
         return ResponseEntity.ok("Refugio registrado");

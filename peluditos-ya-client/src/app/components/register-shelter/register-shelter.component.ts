@@ -18,16 +18,7 @@ export class RegisterShelterComponent {
     this.registerForm = this.fb.group({
       nombrePropietario: ['', Validators.required],
       numeroDocumentoPropietario: ['', Validators.required],
-      nombreRefugio: ['', Validators.required],      // this.authService.registerShelter(formData).subscribe({
-        //   next: (response) => {
-        //     console.log('Registro de refugio exitoso:', response);
-        //     alert(response);
-        //   },
-        //   error: (error) => {
-        //     console.error('Error en el registro del refugio:', error);
-        //     alert(error.error.text || 'Error al registrar refugio');
-        //   }
-        // });
+      nombreRefugio: ['', Validators.required],      
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
       ubicacion: ['', Validators.required], // Ciudad
@@ -46,16 +37,16 @@ export class RegisterShelterComponent {
 
       console.log('Enviando datos del refugio:', formData);
 
-      // this.authService.registerShelter(formData).subscribe({
-      //   next: (response) => {
-      //     console.log('Registro de refugio exitoso:', response);
-      //     alert(response);
-      //   },
-      //   error: (error) => {
-      //     console.error('Error en el registro del refugio:', error);
-      //     alert(error.error.text || 'Error al registrar refugio');
-      //   }
-      // });
+      this.authService.register(formData).subscribe({
+        next: (response) => {
+          console.log('Registro de refugio exitoso:', response);
+          alert(response);
+        },
+        error: (error) => {
+          console.error('Error en el registro del refugio:', error);
+          alert(error.error.text || 'Error al registrar refugio');
+        }
+      });
     } else {
       Object.keys(this.registerForm.controls).forEach(key => {
         const control = this.registerForm.get(key);
