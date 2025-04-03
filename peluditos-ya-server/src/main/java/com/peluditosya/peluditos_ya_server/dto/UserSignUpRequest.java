@@ -1,5 +1,10 @@
 package com.peluditosya.peluditos_ya_server.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class UserSignUpRequest {
     private String name;
     private String email;

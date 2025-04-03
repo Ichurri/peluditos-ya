@@ -1,5 +1,10 @@
 package com.peluditosya.peluditos_ya_server.dto;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
 public class ShelterSignUpRequest extends UserSignUpRequest {
     private String phone;
     private String documentNumber;
