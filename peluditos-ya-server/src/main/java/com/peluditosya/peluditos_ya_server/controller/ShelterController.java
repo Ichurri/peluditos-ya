@@ -19,7 +19,7 @@ public class ShelterController {
 
     @GetMapping
     public List<Shelter> getAllShelters() {
-        return userRepository.findByRole(Role.SHELTER);
+        return userRepository.findSheltersByRole(Role.SHELTER);
     }
 
     @DeleteMapping("/{id}")

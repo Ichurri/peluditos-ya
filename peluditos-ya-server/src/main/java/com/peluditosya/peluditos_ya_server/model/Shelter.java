@@ -4,6 +4,7 @@ import com.peluditosya.peluditos_ya_server.dto.Role;
 import jakarta.persistence.Entity;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "shelters")

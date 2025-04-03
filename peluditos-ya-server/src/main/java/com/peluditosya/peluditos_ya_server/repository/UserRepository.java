@@ -16,7 +16,6 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
     // Método para verificar si un email ya está registrado
     boolean existsByEmail(String email);
 
-    // Método para obtener todos los refugios (Shelter) por rol
-    @Query("SELECT s FROM shelter ")
-    List<Shelter> findByRole(@Param("role") Role role);
+    @Query("SELECT s FROM Shelter s WHERE s.role = :role")
+    List<Shelter> findSheltersByRole(@Param("role") Role role);
 }
