@@ -1,5 +1,7 @@
 package com.peluditosya.peluditos_ya_server.model;
 
+import com.peluditosya.peluditos_ya_server.dto.Role;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +23,10 @@ public class AppUser {
     
     @Column(nullable = false)
     private String city;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Role role;
     
     public Long getId() {
         return id;
@@ -60,5 +66,12 @@ public class AppUser {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+    public void setRole(Role role) {
+        this.role = role;
     }
 }

@@ -54,7 +54,7 @@ export class LoginAdopterComponent {
   }
 
   navigateToRegister() {
-    this.router.navigate(['/register']);
+    this.router.navigate(['/register-adopter']);
   }
 
   navigateToForgotPassword() {
