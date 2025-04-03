@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthShelterService } from '../../services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,16 +14,17 @@ import { Router } from '@angular/router';
 export class RegisterShelterComponent {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private fb: FormBuilder, private authService: AuthShelterService, private router: Router) {
     this.registerForm = this.fb.group({
-      nombrePropietario: ['', Validators.required],
-      numeroDocumentoPropietario: ['', Validators.required],
-      nombreRefugio: ['', Validators.required],      
+      name: ['', Validators.required],
+      documentNumber: ['', Validators.required],
+      shelterName: ['', Validators.required],      
       email: ['', [Validators.required, Validators.email]],
-      telefono: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
-      ubicacion: ['', Validators.required], // Ciudad
-      direccionRefugio: ['', Validators.required],
-      contraseña: ['', [Validators.required, Validators.minLength(6)]],
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
+      city: ['', Validators.required], // Ciudad
+      shelterAddress: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      isAdmin: ['', false],
       acceptTerms: [false, Validators.requiredTrue]
     });
   }

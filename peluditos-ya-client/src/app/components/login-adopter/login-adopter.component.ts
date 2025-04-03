@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+import { AuthAdopterService } from '../../services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -17,7 +17,7 @@ export class LoginAdopterComponent {
 
   constructor(
     private fb: FormBuilder,
-    private authService: AuthService,
+    private authService: AuthAdopterService,
     private router: Router
   ) {
     this.loginForm = this.fb.group({
