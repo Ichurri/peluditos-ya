@@ -31,9 +31,9 @@
       </div>
     </div>
 
-    <!-- Contraseña -->
+    <!-- password -->
     <div class="form-group">
-      <input type="password" formControlName="password" placeholder="Contraseña" [ngClass]="{
+      <input type="password" formControlName="password" placeholder="password" [ngClass]="{
           invalid:
             registerForm.get('password')?.invalid &&
             registerForm.get('password')?.touched
@@ -42,7 +42,7 @@
           registerForm.get('password')?.invalid &&
           registerForm.get('password')?.touched
         " class="error-message">
-        La contraseña debe tener al menos 6 caracteres
+        La password debe tener al menos 6 caracteres
       </div>
     </div>
 

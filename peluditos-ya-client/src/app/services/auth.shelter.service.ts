@@ -5,14 +5,14 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {
+export class AuthShelterService {
   private apiUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
 
   register(userData: any): Observable<string> {
     return this.http.post(
-      `${this.apiUrl}/signup-adopter`, 
+      `${this.apiUrl}/signup-shelter`, 
       userData,
       { responseType: 'text' }
     );
@@ -21,7 +21,7 @@ export class AuthService {
   login(credentials: { email: string; password: string }): Observable<any> {
     console.log('Enviando login:', credentials); // Verifica qué se envía
     return this.http.post<{ message: string; admin: boolean }>(
-      `${this.apiUrl}/login-adopter`,
+      `${this.apiUrl}/login-shelter`,
       credentials
     );
   }

@@ -4,14 +4,14 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <!-- Nombre del Propietario -->
     <div class="form-group">
-      <input type="text" formControlName="nombrePropietario" placeholder="Nombre del propietario" [ngClass]="{
+      <input type="text" formControlName="name" placeholder="Nombre del propietario" [ngClass]="{
           invalid:
-            registerForm.get('nombrePropietario')?.invalid &&
-            registerForm.get('nombrePropietario')?.touched
+            registerForm.get('name')?.invalid &&
+            registerForm.get('name')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('nombrePropietario')?.invalid && 
-          registerForm.get('nombrePropietario')?.touched
+          registerForm.get('name')?.invalid && 
+          registerForm.get('name')?.touched
         " class="error-message">
         El nombre del propietario es requerido
       </div>
@@ -19,14 +19,14 @@
 
     <!-- Número de Documento del Propietario -->
     <div class="form-group">
-      <input type="text" formControlName="numeroDocumentoPropietario" placeholder="Número de documento" [ngClass]="{
+      <input type="text" formControlName="documentNumber" placeholder="Número de documento" [ngClass]="{
           invalid:
-            registerForm.get('numeroDocumentoPropietario')?.invalid &&
-            registerForm.get('numeroDocumentoPropietario')?.touched
+            registerForm.get('documentNumber')?.invalid &&
+            registerForm.get('documentNumber')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('numeroDocumentoPropietario')?.invalid &&
-          registerForm.get('numeroDocumentoPropietario')?.touched
+          registerForm.get('documentNumber')?.invalid &&
+          registerForm.get('documentNumber')?.touched
         " class="error-message">
         El número de documento es requerido
       </div>
@@ -34,14 +34,14 @@
 
     <!-- Nombre del Refugio -->
     <div class="form-group">
-      <input type="text" formControlName="nombreRefugio" placeholder="Nombre del refugio" [ngClass]="{
+      <input type="text" formControlName="shelterName" placeholder="Nombre del refugio" [ngClass]="{
           invalid:
-            registerForm.get('nombreRefugio')?.invalid &&
-            registerForm.get('nombreRefugio')?.touched
+            registerForm.get('shelterName')?.invalid &&
+            registerForm.get('shelterName')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('nombreRefugio')?.invalid &&
-          registerForm.get('nombreRefugio')?.touched
+          registerForm.get('shelterName')?.invalid &&
+          registerForm.get('shelterName')?.touched
         " class="error-message">
         El nombre del refugio es requerido
       </div>
@@ -64,14 +64,14 @@
 
     <!-- Teléfono -->
     <div class="form-group">
-      <input type="tel" formControlName="telefono" placeholder="Teléfono de contacto" [ngClass]="{
+      <input type="tel" formControlName="phone" placeholder="Teléfono de contacto" [ngClass]="{
           invalid:
-            registerForm.get('telefono')?.invalid &&
-            registerForm.get('telefono')?.touched
+            registerForm.get('phone')?.invalid &&
+            registerForm.get('phone')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('telefono')?.invalid &&
-          registerForm.get('telefono')?.touched
+          registerForm.get('phone')?.invalid &&
+          registerForm.get('phone')?.touched
         " class="error-message">
         Teléfono de contacto es requerido
       </div>
@@ -79,14 +79,14 @@
 
     <!-- Ubicación (Ciudad) -->
     <div class="form-group">
-      <input type="text" formControlName="ubicacion" placeholder="Ciudad" [ngClass]="{
+      <input type="text" formControlName="city" placeholder="Ciudad" [ngClass]="{
           invalid:
-            registerForm.get('ubicacion')?.invalid &&
-            registerForm.get('ubicacion')?.touched
+            registerForm.get('city')?.invalid &&
+            registerForm.get('city')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('ubicacion')?.invalid &&
-          registerForm.get('ubicacion')?.touched
+          registerForm.get('city')?.invalid &&
+          registerForm.get('city')?.touched
         " class="error-message">
         La ciudad es requerida
       </div>
@@ -94,31 +94,31 @@
 
     <!-- Dirección Refugio -->
     <div class="form-group">
-      <input type="text" formControlName="direccionRefugio" placeholder="Dirección del refugio" [ngClass]="{
+      <input type="text" formControlName="shelterAddress" placeholder="Dirección del refugio" [ngClass]="{
           invalid:
-            registerForm.get('direccionRefugio')?.invalid &&
-            registerForm.get('direccionRefugio')?.touched
+            registerForm.get('shelterAddress')?.invalid &&
+            registerForm.get('shelterAddress')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('direccionRefugio')?.invalid &&
-          registerForm.get('direccionRefugio')?.touched
+          registerForm.get('shelterAddress')?.invalid &&
+          registerForm.get('shelterAddress')?.touched
         " class="error-message">
         La dirección del refugio es requerida
       </div>
     </div>
 
-    <!-- Contraseña -->
+    <!-- password -->
     <div class="form-group">
-      <input type="password" formControlName="contraseña" placeholder="Contraseña" [ngClass]="{
+      <input type="password" formControlName="password" placeholder="password" [ngClass]="{
           invalid:
-            registerForm.get('contraseña')?.invalid &&
-            registerForm.get('contraseña')?.touched
+            registerForm.get('password')?.invalid &&
+            registerForm.get('password')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('contraseña')?.invalid &&
-          registerForm.get('contraseña')?.touched
+          registerForm.get('password')?.invalid &&
+          registerForm.get('password')?.touched
         " class="error-message">
-        La contraseña debe tener al menos 6 caracteres
+        La password debe tener al menos 6 caracteres
       </div>
     </div>
 
