@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class AuthShelterService {
   private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl2 = 'http://localhost:8080/api/shelters';
 
   constructor(private http: HttpClient) {}
 
@@ -27,10 +28,10 @@ export class AuthShelterService {
   }
 
   getShelters(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.http.get<any[]>(this.apiUrl2);
   }
 
   deleteShelter(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.apiUrl2}/${id}`);
   }
 }

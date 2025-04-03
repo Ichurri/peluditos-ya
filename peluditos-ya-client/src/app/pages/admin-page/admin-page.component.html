@@ -4,14 +4,14 @@
     </div>
   
     <div class="search-container">
-      <!-- <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar hogar..." /> -->
+      <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar hogar..." />
       <button>Buscar</button>
     </div>
   
     <div class="casas-grid">
       <div *ngFor="let casa of getCasasFiltradas(); let i = index" class="casa-card">
         <div class="casa-img-container">
-          <img [src]="casa.imagen || 'https://via.placeholder.com/150'" [alt]="casa.shelterName" />
+          <img [src]="casa.imagen || 'https://img.freepik.com/vector-premium/cuidado-animales-hogar-emblema-refugio-animales-adopcion-o-pancarta-diseno-logotipo_125133-2655.jpg'" [alt]="casa.shelterName" />
         </div>
         <div class="casa-content">
           <h3>{{ casa.shelterName }}</h3>
