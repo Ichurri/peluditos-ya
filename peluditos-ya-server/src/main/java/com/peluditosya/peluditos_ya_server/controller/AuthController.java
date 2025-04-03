@@ -70,10 +70,12 @@ public class AuthController {
                 return ResponseEntity.status(401).body(Map.of("message", "Credenciales inválidas"));
             }
 
-            boolean isAdmin = user instanceof Shelter;
+            // Comprobar si el usuario es administrador
+            boolean isAdmin = user.getRole().equals(Role.ADMIN);
 
             return ResponseEntity.ok(Map.of(
                     "message", "Login exitoso",
+                    "role", user.getRole(), // Enviar el rol exacto
                     "admin", isAdmin
             ));
         } catch (Exception e) {
@@ -81,4 +83,5 @@ public class AuthController {
             return ResponseEntity.status(500).body(Map.of("message", "Error en el servidor"));
         }
     }
+
 }

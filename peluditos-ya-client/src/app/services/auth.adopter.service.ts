@@ -1,11 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthAdopterService {
+  private isAdminSubject = new BehaviorSubject<boolean>(false); // Estado inicial: no es admin
+  isAdmin$ = this.isAdminSubject.asObservable(); // Observable para otros componentes
+
   private apiUrl = 'http://localhost:8080/api/auth';
 
   constructor(private http: HttpClient) {}
@@ -19,10 +23,19 @@ export class AuthAdopterService {
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    console.log('Enviando login:', credentials); // Verifica qué se envía
-    return this.http.post<{ message: string; admin: boolean }>(
+    return this.http.post<{ message: string; role: string; admin: boolean }>(
       `${this.apiUrl}/login-adopter`,
       credentials
+    ).pipe(
+      map(response => {
+        this.isAdminSubject.next(response.admin); // Actualiza el estado de isAdmin
+        console.log('isAdmin:', response.admin);
+        return response;
+      })
     );
+  }
+
+  logout() {
+    this.isAdminSubject.next(false); // Restablece isAdmin al cerrar sesión
   }
 }
