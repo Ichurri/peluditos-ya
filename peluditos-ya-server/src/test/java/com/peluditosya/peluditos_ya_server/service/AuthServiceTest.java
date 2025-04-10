@@ -1,14 +1,11 @@
 package com.peluditosya.peluditos_ya_server.service;
 
-import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
-import com.peluditosya.peluditos_ya_server.model.AppUser;
-import com.peluditosya.peluditos_ya_server.model.Role;
+import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
+import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-
-import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,45 +21,50 @@ public class AuthServiceTest {
     }
     
     @Test
-    public void testLoginSuccess() {
-        // Arrange: configuramos los datos de entrada y el comportamiento del repositorio
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail("test@example.com");
-        loginRequest.setPassword("password123");
+    public void testSignupShelterSuccess() {
+        // Arrange: Preparamos la solicitud con datos válidos
+        ShelterSignUpRequest request = new ShelterSignUpRequest();
+        request.setName("Shelter One");
+        request.setEmail("shelter@example.com");
+        request.setPassword("securePassword");
+        request.setCity("Ciudad");
+        request.setPhone("1234567890");
+        request.setDocumentNumber("DOC12345");
+        request.setShelterName("Refugio Central");
+        request.setShelterAddress("Calle Principal 123");
         
-        AppUser user = new AppUser();
-        user.setEmail("test@example.com");
-        user.setPassword("password123");
-        // Asumimos que se trata de un usuario ADMIN para comprobar la bandera 'admin'
-        user.setRole(Role.ADMIN);
+        // Simulamos que el email no existe aún
+        Mockito.when(userRepository.existsByEmail("shelter@example.com")).thenReturn(false);
         
-        Mockito.when(userRepository.findByEmailAndPassword("test@example.com", "password123"))
-               .thenReturn(user);
+        // Act: llamamos al método signupShelter
+        String response = authService.signupShelter(request);
         
-        // Act: llamamos al método de login
-        Map<String, Object> response = authService.login(loginRequest);
-        
-        // Assert: verificamos que la respuesta contenga los datos esperados
-        assertNotNull(response);
-        assertEquals("Login exitoso", response.get("message"));
-        assertEquals(Role.ADMIN, response.get("role"));
-        assertTrue((Boolean) response.get("admin"));
+        // Assert: Comprobamos que se registra el refugio correctamente
+        assertEquals("Refugio registrado", response);
+        // Verificamos que se haya llamado a save con algún objeto de tipo Shelter
+        Mockito.verify(userRepository).save(Mockito.any(Shelter.class));
     }
     
     @Test
-    public void testLoginFailure() {
-        // Arrange: definimos credenciales equivocadas
-        LoginRequest loginRequest = new LoginRequest();
-        loginRequest.setEmail("wrong@example.com");
-        loginRequest.setPassword("wrongpass");
+    public void testSignupShelterDuplicateEmail() {
+        // Arrange: Preparamos una solicitud con un email que ya existe
+        ShelterSignUpRequest request = new ShelterSignUpRequest();
+        request.setName("Shelter Duplicate");
+        request.setEmail("duplicate@example.com");
+        request.setPassword("securePassword");
+        request.setCity("Ciudad");
+        request.setPhone("0987654321");
+        request.setDocumentNumber("DOC54321");
+        request.setShelterName("Refugio Duplicado");
+        request.setShelterAddress("Calle Secundaria 456");
         
-        Mockito.when(userRepository.findByEmailAndPassword("wrong@example.com", "wrongpass"))
-               .thenReturn(null);
+        // Simulamos que el email ya se encuentra registrado
+        Mockito.when(userRepository.existsByEmail("duplicate@example.com")).thenReturn(true);
         
-        // Act & Assert: se debe lanzar la excepción de credenciales inválidas
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            authService.login(loginRequest);
+        // Act & Assert: Se debe lanzar la excepción correspondiente
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+            authService.signupShelter(request);
         });
-        assertEquals("Credenciales inválidas", exception.getMessage());
+        assertEquals("El correo ya está en uso", exception.getMessage());
     }
 }
