@@ -30,7 +30,6 @@ public class AuthService {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new IllegalArgumentException("El correo ya está en uso");
         }
-
         Adopter adopter = new Adopter();
         adopter.setName(request.getName());
         adopter.setEmail(request.getEmail());
