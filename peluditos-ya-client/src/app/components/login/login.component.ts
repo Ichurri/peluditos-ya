@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './login-adopter.component.html',
-  styleUrls: ['./login-adopter.component.css']
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class LoginAdopterComponent {
+export class LoginComponent {
   loginForm: FormGroup;
   isSubmitting: boolean = false;
 
