@@ -1,5 +1,6 @@
 package com.peluditosya.peluditos_ya_server.service;
 
+
 import com.peluditosya.peluditos_ya_server.model.Role;
 import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
@@ -13,10 +14,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+
 import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 @ExtendWith(MockitoExtension.class)
 class ShelterServiceTest {
@@ -58,5 +61,6 @@ class ShelterServiceTest {
 
         // Assert
         verify(userRepository, times(1)).deleteById(id);
+
     }
 }

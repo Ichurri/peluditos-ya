@@ -58,6 +58,6 @@ export class RegisterAdopterComponent {
   }
 
   navigateToLogin() {
-    this.router.navigate(['/login-adopter']);
+    this.router.navigate(['/login']);
   }
 }

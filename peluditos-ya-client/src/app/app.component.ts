@@ -21,7 +21,7 @@ export class AppComponent {
       .subscribe((event: NavigationEnd) => {
         const url = event.urlAfterRedirects.split('?')[0].split('#')[0]; 
         console.log('Ruta actual:', url);
-        this.showHeader = !(url === '/register-adopter' || url === '/login-adopter');
+        this.showHeader = !(url === '/register-adopter' || url === '/login');
       });
   }
 }
