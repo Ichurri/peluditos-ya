@@ -1,5 +1,4 @@
 package com.peluditosya.peluditos_ya_server.service;
-
 import com.peluditosya.peluditos_ya_server.dto.AdopterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
 import com.peluditosya.peluditos_ya_server.model.AppUser;

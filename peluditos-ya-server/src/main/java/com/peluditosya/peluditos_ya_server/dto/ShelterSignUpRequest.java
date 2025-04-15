@@ -3,10 +3,8 @@ package com.peluditosya.peluditos_ya_server.dto;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @NoArgsConstructor
 public class ShelterSignUpRequest extends UserSignUpRequest {
 
