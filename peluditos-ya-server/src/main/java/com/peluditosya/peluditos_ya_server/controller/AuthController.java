@@ -5,8 +5,6 @@ import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.service.AuthService;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController {
 
     private final AuthService authService;
-    private final Logger logger = LoggerFactory.getLogger(AuthController.class);
 
     public AuthController(AuthService authService) {
         this.authService = authService;
