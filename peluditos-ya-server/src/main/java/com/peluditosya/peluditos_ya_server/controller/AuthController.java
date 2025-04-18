@@ -31,7 +31,7 @@ public class AuthController {
         return ResponseEntity.ok(responseMessage);
     }
 
-    @PostMapping("/login-adopter")
+    @PostMapping("/login")
     public ResponseEntity<?> loginAdopter(@RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }

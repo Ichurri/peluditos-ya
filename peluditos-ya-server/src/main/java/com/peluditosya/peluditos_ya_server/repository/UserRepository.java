@@ -14,6 +14,8 @@ public interface UserRepository extends JpaRepository<AppUser, Long> {
     // Método para autenticación (login)
     AppUser findByEmailAndPassword(String email, String password);
 
+    AppUser findByEmail(String email);
+
     // Método para verificar si un email ya está registrado
     boolean existsByEmail(String email);
 
