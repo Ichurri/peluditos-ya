@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 @PrimaryKeyJoinColumn(name = "user_id")
 public class Shelter extends AppUser {
 
-    private String documentNumber;
+    private String documentPath; // Path to PDF file
     private String shelterName;
     private String shelterAddress;
     private String phone;
@@ -19,12 +19,12 @@ public class Shelter extends AppUser {
         this.setRole(Role.SHELTER);
     }
 
-    public String getDocumentNumber() {
-        return documentNumber;
+    public String getDocumentPath() {
+        return documentPath;
     }
 
-    public void setDocumentNumber(String documentNumber) {
-        this.documentNumber = documentNumber;
+    public void setDocumentPath(String documentPath) {
+        this.documentPath = documentPath;
     }
 
     public String getShelterName() {

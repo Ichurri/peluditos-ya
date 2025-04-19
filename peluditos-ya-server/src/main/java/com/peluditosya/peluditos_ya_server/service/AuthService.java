@@ -14,7 +14,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -60,9 +65,26 @@ public class AuthService {
         shelter.setPassword(passwordEncoder.encode(request.getPassword()));
         shelter.setCity(request.getCity());
         shelter.setPhone(request.getPhone());
-        shelter.setDocumentNumber(request.getDocumentNumber());
         shelter.setShelterName(request.getShelterName());
         shelter.setShelterAddress(request.getShelterAddress());
+
+        // Handle PDF upload
+        MultipartFile documentFile = request.getDocumentFile();
+        if (documentFile != null && !documentFile.isEmpty()) {
+            try {
+                String uploadDir = "uploads/shelter-documents";
+                Files.createDirectories(Paths.get(uploadDir));
+                String fileName = System.currentTimeMillis() + "_" + documentFile.getOriginalFilename();
+                Path filePath = Paths.get(uploadDir, fileName);
+                documentFile.transferTo(filePath.toFile());
+                shelter.setDocumentPath(filePath.toString());
+            } catch (IOException e) {
+                logger.error("Error al guardar el documento PDF", e);
+                throw new RuntimeException("No se pudo guardar el documento PDF");
+            }
+        } else {
+            shelter.setDocumentPath(null);
+        }
         // El constructor de Shelter ya asigna el rol SHELTER
 
         userRepository.save(shelter);
