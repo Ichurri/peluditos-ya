@@ -29,7 +29,8 @@ public class ShelterController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteShelter(@PathVariable Long id) {
+        logger.info("Deleting shelter with id: {}", id);
         shelterService.deleteShelter(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.noContent().build(); // 204 No Content
     }
 }
