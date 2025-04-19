@@ -72,7 +72,7 @@ public class AuthService {
         MultipartFile documentFile = request.getDocumentFile();
         if (documentFile != null && !documentFile.isEmpty()) {
             try {
-                String uploadDir = "uploads/shelter-documents";
+                String uploadDir = System.getProperty("user.dir") + "/uploads/shelter-documents";
                 Files.createDirectories(Paths.get(uploadDir));
                 String fileName = System.currentTimeMillis() + "_" + documentFile.getOriginalFilename();
                 Path filePath = Paths.get(uploadDir, fileName);
