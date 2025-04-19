@@ -1,16 +1,14 @@
 package com.peluditosya.peluditos_ya_server.dto;
 
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 @NoArgsConstructor
 public class ShelterSignUpRequest extends UserSignUpRequest {
 
     private String phone;
-
-    private String documentNumber;
-
+    private MultipartFile documentFile; // PDF file
     private String shelterName;
-
     private String shelterAddress;
 
     public String getPhone() {
@@ -21,12 +19,12 @@ public class ShelterSignUpRequest extends UserSignUpRequest {
         this.phone = phone;
     }
 
-    public String getDocumentNumber() {
-        return documentNumber;
+    public MultipartFile getDocumentFile() {
+        return documentFile;
     }
 
-    public void setDocumentNumber(String documentNumber) {
-        this.documentNumber = documentNumber;
+    public void setDocumentFile(MultipartFile documentFile) {
+        this.documentFile = documentFile;
     }
 
     public String getShelterName() {
