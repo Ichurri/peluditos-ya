@@ -16,45 +16,48 @@ export class RegisterShelterComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthShelterService, private router: Router) {
     this.registerForm = this.fb.group({
-      name: ['', Validators.required],
-      documentNumber: ['', Validators.required],
-      shelterName: ['', Validators.required],      
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
-      city: ['', Validators.required], // Ciudad
+      description: ['', [Validators.required, Validators.minLength(10)]],
+      documentNumber: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
       shelterAddress: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      name: ['', Validators.required], // Coincide con el HTML
+      phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
+      city: ['', Validators.required], // Agregado para que coincida con tu DB
       isAdmin: ['', false],
       acceptTerms: [false, Validators.requiredTrue]
     });
+    
   }
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const formData = {
-        ...this.registerForm.value,
-        acceptTerms: undefined // No lo enviamos al backend
+      const userId = 1;
+      console.log('User ID:', userId); // cambiar esto para poder obtener el user id desde el local storage
+  
+      const payload = {
+        userId,
+        description: this.registerForm.value.description
       };
 
-      console.log('Enviando datos del refugio:', formData);
-
-      this.authService.register(formData).subscribe({
+      console.log('Enviando datos:', payload);
+  
+      this.authService.submitShelterRequest(payload).subscribe({
         next: (response) => {
-          console.log('Registro de refugio exitoso:', response);
-          alert(response);
+          console.log('Solicitud enviada:', response);
+          alert('Tu solicitud fue enviada con éxito');
+          this.registerForm.reset();
         },
         error: (error) => {
-          console.error('Error en el registro del refugio:', error);
-          alert(error.error.text || 'Error al registrar refugio');
+          console.error('Error al enviar solicitud:', error);
+          alert('Error al enviar la solicitud');
         }
       });
     } else {
-      Object.keys(this.registerForm.controls).forEach(key => {
-        const control = this.registerForm.get(key);
-        control?.markAsTouched();
+      Object.values(this.registerForm.controls).forEach(control => {
+        control.markAsTouched();
       });
     }
   }
+  
 
   openTerms() {
     console.log('Terms and conditions clicked');

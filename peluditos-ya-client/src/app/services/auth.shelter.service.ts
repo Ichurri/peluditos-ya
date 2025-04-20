@@ -11,6 +11,15 @@ export class AuthShelterService {
 
   constructor(private http: HttpClient) {}
 
+  submitShelterRequest(requestData: any): Observable<string> {
+    return this.http.post(
+      'http://localhost:8080/api/shelter-requests',
+      requestData,
+      { responseType: 'text' }
+    );
+  }
+  
+
   register(userData: any): Observable<string> {
     return this.http.post(
       `${this.apiUrl}/signup-shelter`, 
