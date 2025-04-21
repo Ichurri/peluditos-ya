@@ -1,11 +1,9 @@
 package com.peluditosya.peluditos_ya_server.controller;
 
 import com.peluditosya.peluditos_ya_server.dto.ShelterRequestDto;
-import com.peluditosya.peluditos_ya_server.model.AppUser;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequestStatus;
 import com.peluditosya.peluditos_ya_server.service.ShelterRequestService;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

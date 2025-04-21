@@ -1,6 +1,5 @@
 package com.peluditosya.peluditos_ya_server.repository;
 
-import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequestStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
