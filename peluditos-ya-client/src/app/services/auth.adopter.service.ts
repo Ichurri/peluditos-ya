@@ -23,17 +23,21 @@ export class AuthAdopterService {
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    return this.http.post<{ message: string; role: string; admin: boolean }>(
+    return this.http.post<{ message: string; role: string; admin: boolean; userId: number }>(
       `${this.apiUrl}/login-adopter`,
       credentials
     ).pipe(
       map(response => {
-        this.isAdminSubject.next(response.admin); // Actualiza el estado de isAdmin
+        this.isAdminSubject.next(response.admin);
         console.log('isAdmin:', response.admin);
+  
+        localStorage.setItem('userId', response.userId.toString());
+  
         return response;
       })
     );
   }
+  
 
   logout() {
     this.isAdminSubject.next(false); // Restablece isAdmin al cerrar sesión

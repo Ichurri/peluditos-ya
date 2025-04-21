@@ -1,24 +1,47 @@
 <div class="admin-container">
-    <div class="banner">
-      <h1>Administrar <span class="yellow-text">Casas Hogar</span></h1>
+  <!-- BANNER -->
+  <div class="banner">
+    <h1>Administrar <span class="yellow-text">Casas Hogar</span></h1>
+  </div>
+
+  <!-- BUSCADOR -->
+  <div class="search-container">
+    <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar hogar..." />
+    <button>Buscar</button>
+  </div>
+
+  <!-- HOGARES APROBADOS -->
+  <h2>Hogares Aprobados</h2>
+  <div class="casas-grid">
+    <div *ngFor="let casa of getCasasFiltradas()" class="casa-card">
+      <div class="casa-img-container">
+        <img [src]="casa.imagen || 'https://img.freepik.com/vector-premium/cuidado-animales-hogar-emblema-refugio-animales-adopcion-o-pancarta-diseno-logotipo_125133-2655.jpg'" [alt]="casa.shelterName" />
+      </div>
+      <div class="casa-content">
+        <h3>{{ casa.shelterName }}</h3>
+        <p>{{ casa.shelterAddress }}</p>
+        <p>Teléfono: {{ casa.phone }}</p>
+        <button class="eliminar-btn" (click)="eliminarCasa(casa.id)">Eliminar</button>
+      </div>
     </div>
-  
-    <div class="search-container">
-      <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar hogar..." />
-      <button>Buscar</button>
-    </div>
-  
-    <div class="casas-grid">
-      <div *ngFor="let casa of getCasasFiltradas(); let i = index" class="casa-card">
-        <div class="casa-img-container">
-          <img [src]="casa.imagen || 'https://img.freepik.com/vector-premium/cuidado-animales-hogar-emblema-refugio-animales-adopcion-o-pancarta-diseno-logotipo_125133-2655.jpg'" [alt]="casa.shelterName" />
-        </div>
-        <div class="casa-content">
-          <h3>{{ casa.shelterName }}</h3>
-          <p>{{ casa.shelterAddress }}</p>
-          <p>Teléfono: {{ casa.phone }}</p>
-          <button class="eliminar-btn" (click)="eliminarCasa(casa.id)">Eliminar</button>
+  </div>
+
+  <!-- SOLICITUDES PENDIENTES -->
+  <h2>Solicitudes Pendientes</h2>
+  <div class="casas-grid">
+    <div *ngFor="let solicitud of pendingShelters" class="casa-card">
+      <div class="casa-img-container">
+        <img [src]="solicitud.imagen || 'https://cdn-icons-png.flaticon.com/512/616/616408.png'" [alt]="solicitud.shelterName" />
+      </div>
+      <div class="casa-content">
+        <h3>{{ solicitud.shelterName }}</h3>
+        <p>{{ solicitud.shelterAddress }}</p>
+        <p>Teléfono: {{ solicitud.phone }}</p>
+        <div class="botones-solicitud">
+          <button class="aceptar-btn" (click)="approveShelter(solicitud.id)">Aceptar</button>
+          <button class="rechazar-btn" (click)="rejectShelter(solicitud.id)">Rechazar</button>
         </div>
       </div>
     </div>
+  </div>
 </div>

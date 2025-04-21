@@ -83,3 +83,34 @@
     background-color: #d43f00;
   }
   
+  .aceptar-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-right: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .aceptar-btn:hover {
+    background-color: #3e8e41;
+  }
+  
+  .rechazar-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .rechazar-btn:hover {
+    background-color: #d32f2f;
+  }
+  
+  .botones-solicitud {
+    margin-top: 10px;
+  }
+  

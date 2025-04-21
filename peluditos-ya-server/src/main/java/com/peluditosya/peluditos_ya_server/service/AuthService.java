@@ -97,11 +97,15 @@ public class AuthService {
         if (user == null || !passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new BadCredentialsException("Credenciales inválidas");
         }
+
         boolean isAdmin = user.getRole().equals(Role.ADMIN);
+
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Login exitoso");
         response.put("role", user.getRole());
         response.put("admin", isAdmin);
+        response.put("userId", user.getId());
+
         logger.info("Login exitoso para: {}", user.getEmail());
         return response;
     }

@@ -1,5 +1,6 @@
 package com.peluditosya.peluditos_ya_server.controller;
 
+import com.peluditosya.peluditos_ya_server.dto.ShelterRequestDto;
 import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.service.ShelterService;
 

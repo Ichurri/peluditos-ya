@@ -34,33 +34,19 @@
 
     <!-- Nombre del Refugio -->
     <div class="form-group">
-      <input type="text" formControlName="shelterName" placeholder="Nombre del refugio" [ngClass]="{
+      <input type="text" formControlName="name" placeholder="Nombre del refugio" [ngClass]="{
           invalid:
-            registerForm.get('shelterName')?.invalid &&
-            registerForm.get('shelterName')?.touched
+            registerForm.get('name')?.invalid &&
+            registerForm.get('name')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('shelterName')?.invalid &&
-          registerForm.get('shelterName')?.touched
+          registerForm.get('name')?.invalid &&
+          registerForm.get('name')?.touched
         " class="error-message">
         El nombre del refugio es requerido
       </div>
     </div>
 
-    <!-- Correo Electrónico -->
-    <div class="form-group">
-      <input type="email" formControlName="email" placeholder="Email" [ngClass]="{
-          invalid:
-            registerForm.get('email')?.invalid &&
-            registerForm.get('email')?.touched
-        }" />
-      <div *ngIf="
-          registerForm.get('email')?.invalid &&
-          registerForm.get('email')?.touched
-        " class="error-message">
-        Email válido es requerido
-      </div>
-    </div>
 
     <!-- Teléfono -->
     <div class="form-group">
@@ -107,18 +93,17 @@
       </div>
     </div>
 
-    <!-- password -->
     <div class="form-group">
-      <input type="password" formControlName="password" placeholder="password" [ngClass]="{
+      <input type="text" formControlName="description" placeholder="Description" [ngClass]="{
           invalid:
-            registerForm.get('password')?.invalid &&
-            registerForm.get('password')?.touched
+            registerForm.get('description')?.invalid &&
+            registerForm.get('description')?.touched
         }" />
       <div *ngIf="
-          registerForm.get('password')?.invalid &&
-          registerForm.get('password')?.touched
+          registerForm.get('description')?.invalid &&
+          registerForm.get('description')?.touched
         " class="error-message">
-        La password debe tener al menos 6 caracteres
+        La dirección del refugio es requerida
       </div>
     </div>
 
@@ -138,8 +123,4 @@
     </button>
   </form>
 
-  <!-- Botón para ir a inicio de sesión -->
-  <button class="login-button" (click)="navigateToLogin()">
-    Ya tengo una cuenta
-  </button>
 </div>
