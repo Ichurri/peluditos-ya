@@ -30,12 +30,17 @@ export class RegisterShelterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const userId = 1;
+      const userId = 19;
       console.log('User ID:', userId); // cambiar esto para poder obtener el user id desde el local storage
   
       const payload = {
         userId,
-        description: this.registerForm.value.description
+        description: this.registerForm.value.description,
+        shelterName: this.registerForm.value.name,
+        shelterAddress: this.registerForm.value.shelterAddress,
+        phone: this.registerForm.value.phone,
+        city: this.registerForm.value.city,
+        documentNumber: this.registerForm.value.documentNumber
       };
 
       console.log('Enviando datos:', payload);

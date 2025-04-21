@@ -18,6 +18,10 @@ export class AuthShelterService {
       { responseType: 'text' }
     );
   }
+
+  getApprovedShelters(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:8080/api/shelter-requests/approved');
+  }
   
 
   register(userData: any): Observable<string> {

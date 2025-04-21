@@ -87,4 +87,9 @@ public class ShelterRequestService {
         mailService.sendStatusEmail(request.getUser().getEmail(), status.name());
         return "Estado de la solicitud actualizado";
     }
+
+    public List<ShelterRequest> getSheltersByStatus(ShelterRequestStatus status) {
+        return shelterRequestRepository.findByStatus(status);
+    }
+
 }

@@ -24,7 +24,7 @@ export class AdminSheltersComponent implements OnInit {
   }
 
   loadShelters(): void {
-    this.AuthShelterService.getShelters().subscribe(
+    this.AuthShelterService.getApprovedShelters().subscribe(
       (data) => {
         this.casasHogar = data;
       },

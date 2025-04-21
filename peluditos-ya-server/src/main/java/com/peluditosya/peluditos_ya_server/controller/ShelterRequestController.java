@@ -35,6 +35,11 @@ public class ShelterRequestController {
         return ResponseEntity.ok(pendingRequests);
     }
 
+    @GetMapping("/approved")
+    public List<ShelterRequest> getApprovedShelters() {
+        return shelterRequestService.getSheltersByStatus(ShelterRequestStatus.APPROVED);
+    }
+
     // Actualizar estado de la solicitud
     @PutMapping("/{id}/status")
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam ShelterRequestStatus status) {
