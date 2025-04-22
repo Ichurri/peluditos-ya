@@ -35,7 +35,7 @@ export class AuthShelterService {
   login(credentials: { email: string; password: string }): Observable<any> {
     console.log('Enviando login:', credentials); // Verifica qué se envía
     return this.http.post<{ message: string; admin: boolean }>(
-      `${this.apiUrl}/login-shelter`,
+      `${this.apiUrl}/login`,
       credentials
     );
   }

@@ -24,7 +24,7 @@ export class AuthAdopterService {
 
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post<{ message: string; role: string; admin: boolean; userId: number }>(
-      `${this.apiUrl}/login-adopter`,
+      `${this.apiUrl}/login`,
       credentials
     ).pipe(
       map(response => {

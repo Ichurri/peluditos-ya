@@ -7,7 +7,6 @@
 <div class="carousel-wrapper">
 
     <div class="carousel">
-
         <img src="https://patitasalrescateorg.netlify.app/img/carousel1.jpg" alt="carousel1" />
         <img src="https://patitasalrescateorg.netlify.app/img/carousel2.jpg" alt="carousel2" />
         <img src="https://patitasalrescateorg.netlify.app/img/carousel3.jpg" alt="carousel3" />
@@ -40,8 +39,8 @@
     </select>
     <select [(ngModel)]="filtroTipo">
         <option value="">Tipo</option>
-        <option value="perro">Perro</option>
-        <option value="gato">Gato</option>
+        <option value="DOG">Perro</option>
+        <option value="CAT">Gato</option>
     </select>
 </div>
 
@@ -55,6 +54,13 @@
             <button>Adoptar</button>
         </div>
     </div>
+</div>
+
+<div *ngIf="usuarioAutenticado" class="register-as">
+    <div class="register-text">
+        <button [routerLink]="'/register-animal'">Registrarse ahora a su PeluditoYa!</button>
+    </div>
+            
 </div>
 
 <app-footer></app-footer>

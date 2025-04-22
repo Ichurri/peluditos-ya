@@ -1,0 +1,25 @@
+<div class="registro-container">
+    <form (ngSubmit)="registrarMascota()" #formMascota="ngForm" enctype="multipart/form-data">
+    <h2>Registrar Mascota en Adopción</h2>
+
+    <input type="text" name="name" [(ngModel)]="nuevaMascota.name" placeholder="Nombre" required />
+
+    <input type="text" name="animal" [(ngModel)]="nuevaMascota.animal" placeholder="Tipo (ej. CAT o DOG)" required />
+
+    <input type="text" name="breed" [(ngModel)]="nuevaMascota.breed" placeholder="Raza" required />
+
+    <input type="number" name="age" [(ngModel)]="nuevaMascota.age" placeholder="Edad" required />
+
+    <input type="text" name="behavior" [(ngModel)]="nuevaMascota.behavior" placeholder="Comportamiento (ej. FRIENDLY)" required />
+
+    <input type="number" name="shelterId" [(ngModel)]="nuevaMascota.shelterId" placeholder="ID del Refugio" required />
+
+    <label>Archivo Médico:</label>
+    <input type="file" (change)="onMedicalFileSelected($event)" />
+
+    <label>Foto:</label>
+    <input type="file" (change)="onPhotoSelected($event)" />
+
+    <button type="submit">Registrar Mascota</button>
+    </form>
+</div>
