@@ -1,28 +1,72 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
+import { RouterModule } from '@angular/router';
+import { AnimalService } from '../../services/auth.animal.service'; // Importamos el servicio
+
+// Interfaz para la mascota que esperamos en el frontend
+interface Mascota {
+  nombre: string;
+  edad: string;
+  sexo: string;
+  tipo: string;
+  descripcion: string;
+  imagen: string;
+}
 
 @Component({
   selector: 'app-adoption',
   standalone: true,
-  imports: [CommonModule, FormsModule, FooterComponent],
+  imports: [CommonModule, FormsModule, FooterComponent, RouterModule],
   templateUrl: './adoption.component.html',
-  styleUrl: './adoption.component.css'
+  styleUrls: ['./adoption.component.css']
 })
-export class AdoptionComponent {
+export class AdoptionComponent implements OnInit {
   searchTerm = '';
   filtroEdad = '';
   filtroSexo = '';
   filtroTipo = '';
 
-  mascotas = [
-    { nombre: 'Luna', edad: 'cachorro', sexo: 'hembra', tipo: 'perro', descripcion: 'Juguetona y cariñosa.', imagen: 'https://estudiantes.ucontinental.edu.pe/wp-content/uploads/2020/03/Datos-que-debes-tener-en-cuenta-si-tienes-una-mascota-en-casa.jpg' },
-    { nombre: 'Simba', edad: 'adulto', sexo: 'macho', tipo: 'gato', descripcion: 'Tranquilo y amoroso.', imagen: 'https://www.purina.es/sites/default/files/2021-12/Getting-A-Cat1080x608.jpg' },
-    { nombre: 'Rocky', edad: 'cachorro', sexo: 'macho', tipo: 'perro', descripcion: 'Lleno de energía.', imagen: 'https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_1280.jpg' },
-    { nombre: 'Mia', edad: 'adulto', sexo: 'hembra', tipo: 'gato', descripcion: 'Independiente y curiosa.', imagen: 'https://www.astrolabio.com.mx/wp-content/uploads/2016/02/como-cuidar-a-tu-gato-cuidados-nombres-mascotas-foto.jpg' }
-  ];
+  // Declarar las mascotas como un arreglo de tipo 'Mascota'
+  mascotas: Mascota[] = [];
+  usuarioAutenticado: boolean = false; // Variable para controlar si el usuario está autenticado
 
+
+  constructor(private animalService: AnimalService) {}
+
+  ngOnInit(): void {
+    this.obtenerMascotas();
+    this.verificarUsuario();  // Verificamos si el usuario está autenticado
+  }
+
+  obtenerMascotas() {
+    this.animalService.obtenerMascotas().subscribe(
+      (response) => {
+        this.mascotas = response.map((mascota: any) => {
+          const edad = mascota.age;
+
+          if (edad < 3) {
+            this.filtroEdad = 'cachorro'; 
+          }
+
+          return {
+            nombre: mascota.name,
+            tipo: mascota.animalType,
+            edad: edad.toString(),
+            descripcion: `Tiene ${mascota.age} años de edad,  ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
+            imagen: mascota.photoPath
+          };
+        });
+      },
+      (error) => {
+        console.error('Error al obtener mascotas:', error);
+      }
+    );
+  }
+
+
+  // Filtrar las mascotas según los criterios de búsqueda
   getMascotasFiltradas() {
     return this.mascotas.filter(mascota =>
       (this.searchTerm === '' || mascota.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
@@ -30,5 +74,22 @@ export class AdoptionComponent {
       (this.filtroSexo === '' || mascota.sexo === this.filtroSexo) &&
       (this.filtroTipo === '' || mascota.tipo === this.filtroTipo)
     );
+  }
+
+  traducirTipo(tipo: string): string {
+    switch(tipo.toLowerCase()) {
+      case 'dog':
+        return 'Perro';
+      case 'cat':
+        return 'Gato';
+      default:
+        return tipo; // Si no es ni perro ni gato, retorna el tipo tal cual
+    }
+  }
+
+  // Verifica si el usuario está autenticado
+  verificarUsuario() {
+    const email = localStorage.getItem('userEmail');
+    this.usuarioAutenticado = email !== null && email !== '';
   }
 }
