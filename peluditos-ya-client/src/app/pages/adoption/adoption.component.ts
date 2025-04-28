@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';  // <-- IMPORTANTE agregar AfterViewInit
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { AnimalService } from '../../services/auth.animal.service'; // Importamos el servicio
+import { AnimalService } from '../../services/auth.animal.service';
 
-// Interfaz para la mascota que esperamos en el frontend
+// Interfaz para las mascotas
 interface Mascota {
   nombre: string;
   edad: string;
@@ -22,22 +22,24 @@ interface Mascota {
   templateUrl: './adoption.component.html',
   styleUrls: ['./adoption.component.css']
 })
-export class AdoptionComponent implements OnInit {
+export class AdoptionComponent implements OnInit, AfterViewInit {  // <-- implementar AfterViewInit
   searchTerm = '';
   filtroEdad = '';
   filtroSexo = '';
   filtroTipo = '';
 
-  // Declarar las mascotas como un arreglo de tipo 'Mascota'
   mascotas: Mascota[] = [];
-  usuarioAutenticado: boolean = false; // Variable para controlar si el usuario está autenticado
-
+  usuarioAutenticado: boolean = false;
 
   constructor(private animalService: AnimalService) {}
 
   ngOnInit(): void {
     this.obtenerMascotas();
-    this.verificarUsuario();  // Verificamos si el usuario está autenticado
+    this.verificarUsuario();
+  }
+
+  ngAfterViewInit(): void {
+    this.iniciarCarrusel();  // <-- Llamar la función para mover el carrusel después de que cargue
   }
 
   obtenerMascotas() {
@@ -45,16 +47,15 @@ export class AdoptionComponent implements OnInit {
       (response) => {
         this.mascotas = response.map((mascota: any) => {
           const edad = mascota.age;
-
           if (edad < 3) {
-            this.filtroEdad = 'cachorro'; 
+            this.filtroEdad = 'cachorro';
           }
-
           return {
             nombre: mascota.name,
             tipo: mascota.animalType,
             edad: edad.toString(),
-            descripcion: `Tiene ${mascota.age} años de edad,  ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
+            sexo: mascota.sex,  // <-- No olvides mapear el sexo también si quieres filtrar bien
+            descripcion: `Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
             imagen: mascota.photoPath
           };
         });
@@ -65,8 +66,6 @@ export class AdoptionComponent implements OnInit {
     );
   }
 
-
-  // Filtrar las mascotas según los criterios de búsqueda
   getMascotasFiltradas() {
     return this.mascotas.filter(mascota =>
       (this.searchTerm === '' || mascota.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
@@ -77,19 +76,41 @@ export class AdoptionComponent implements OnInit {
   }
 
   traducirTipo(tipo: string): string {
-    switch(tipo.toLowerCase()) {
+    switch (tipo.toLowerCase()) {
       case 'dog':
         return 'Perro';
       case 'cat':
         return 'Gato';
       default:
-        return tipo; // Si no es ni perro ni gato, retorna el tipo tal cual
+        return tipo;
     }
   }
 
-  // Verifica si el usuario está autenticado
   verificarUsuario() {
     const email = localStorage.getItem('userEmail');
     this.usuarioAutenticado = email !== null && email !== '';
+  }
+
+  iniciarCarrusel() {
+    const carousel = document.querySelector('.carousel') as HTMLElement;
+    if (!carousel) return;
+
+    let scrollAmount = 0;
+    const scrollStep = 1; // Puedes aumentar para que se mueva más rápido
+    const delay = 15;     // Tiempo en milisegundos entre cada movimiento (más bajo = más rápido)
+
+    function autoScroll() {
+      if (scrollAmount >= (carousel.scrollWidth - carousel.clientWidth)) {
+        scrollAmount = 0;
+      } else {
+        scrollAmount += scrollStep;
+      }
+      carousel.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    setInterval(autoScroll, delay);
   }
 }
