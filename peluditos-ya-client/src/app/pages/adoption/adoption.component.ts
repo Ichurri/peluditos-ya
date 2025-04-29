@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';  // <-- IMPORTANTE agregar AfterViewInit
+import { Component, OnInit, AfterViewInit } from '@angular/core';  
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
@@ -22,7 +22,7 @@ interface Mascota {
   templateUrl: './adoption.component.html',
   styleUrls: ['./adoption.component.css']
 })
-export class AdoptionComponent implements OnInit, AfterViewInit {  // <-- implementar AfterViewInit
+export class AdoptionComponent implements OnInit, AfterViewInit {  // Implementamos AfterViewInit
   searchTerm = '';
   filtroEdad = '';
   filtroSexo = '';
@@ -35,11 +35,11 @@ export class AdoptionComponent implements OnInit, AfterViewInit {  // <-- implem
 
   ngOnInit(): void {
     this.obtenerMascotas();
-    this.verificarUsuario();
+    this.verificarUsuario();  
   }
 
   ngAfterViewInit(): void {
-    this.iniciarCarrusel();  // <-- Llamar la función para mover el carrusel después de que cargue
+    this.iniciarCarrusel();  
   }
 
   obtenerMascotas() {
@@ -47,15 +47,17 @@ export class AdoptionComponent implements OnInit, AfterViewInit {  // <-- implem
       (response) => {
         this.mascotas = response.map((mascota: any) => {
           const edad = mascota.age;
+
           if (edad < 3) {
-            this.filtroEdad = 'cachorro';
+            this.filtroEdad = 'cachorro'; 
           }
+
           return {
             nombre: mascota.name,
             tipo: mascota.animalType,
             edad: edad.toString(),
-            sexo: mascota.sex,  // <-- No olvides mapear el sexo también si quieres filtrar bien
-            descripcion: `Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
+            sexo: mascota.sex,  // Incluimos el sexo para poder filtrar correctamente
+            descripcion: Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed},
             imagen: mascota.photoPath
           };
         });
@@ -66,6 +68,7 @@ export class AdoptionComponent implements OnInit, AfterViewInit {  // <-- implem
     );
   }
 
+  // Filtrar las mascotas según los criterios de búsqueda
   getMascotasFiltradas() {
     return this.mascotas.filter(mascota =>
       (this.searchTerm === '' || mascota.nombre.toLowerCase().includes(this.searchTerm.toLowerCase())) &&
@@ -96,8 +99,8 @@ export class AdoptionComponent implements OnInit, AfterViewInit {  // <-- implem
     if (!carousel) return;
 
     let scrollAmount = 0;
-    const scrollStep = 1; // Puedes aumentar para que se mueva más rápido
-    const delay = 15;     // Tiempo en milisegundos entre cada movimiento (más bajo = más rápido)
+    const scrollStep = 1; 
+    const delay = 15;  
 
     function autoScroll() {
       if (scrollAmount >= (carousel.scrollWidth - carousel.clientWidth)) {
