@@ -37,9 +37,15 @@ export class AuthAdopterService {
       })
     );
   }
-  
 
-  logout() {
-    this.isAdminSubject.next(false); // Restablece isAdmin al cerrar sesión
+  isLoggedIn(): boolean {
+    return localStorage.getItem('userId') !== null;
   }
+  
+  
+  logout() {
+    this.isAdminSubject.next(false);
+    localStorage.clear();
+  }
+  
 }
