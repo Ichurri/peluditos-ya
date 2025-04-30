@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { AuthAdopterService } from '../../services';
 
 @Component({
   selector: 'app-header',
@@ -19,15 +20,32 @@ export class HeaderComponent implements OnInit {
   ];
 
   isAdmin: boolean = false;
+  isLoggedIn: boolean = false; 
+
+  constructor(public authService: AuthAdopterService) {}
 
   ngOnInit() {
     this.checkAdminStatus();
+    this.checkLoginStatus();
 
-    // Escucha cambios en el almacenamiento local
-    window.addEventListener('storage', () => this.checkAdminStatus());
+    // Escuchar cambios en localStorage (si se desloguea desde otra pestaña)
+    window.addEventListener('storage', () => {
+      this.checkAdminStatus();
+      this.checkLoginStatus();
+    });
   }
 
   checkAdminStatus() {
     this.isAdmin = localStorage.getItem('isAdmin') === 'true';
   }
+
+  checkLoginStatus() {
+    this.isLoggedIn = !!localStorage.getItem('userId');
+  }
+
+  logout() {
+    this.authService.logout();
+    window.location.reload(); // Opcional: actualizar la vista
+  }
 }
+
