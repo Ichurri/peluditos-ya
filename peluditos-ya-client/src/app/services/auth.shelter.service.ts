@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthShelterService {
-  private apiUrl = 'http://localhost:8080/api/auth';
-  private apiUrl2 = 'http://localhost:8080/api/shelters';
+  private apiUrl = `${environment.apiBaseUrl}/auth`;
+  private apiUrl2 = `${environment.apiBaseUrl}/shelters`;
+  private shelterRequestUrl = `${environment.apiBaseUrl}/shelter-requests`;
 
   constructor(private http: HttpClient) {}
 
   submitShelterRequest(requestData: any): Observable<string> {
     return this.http.post(
-      'http://localhost:8080/api/shelter-requests',
+      this.shelterRequestUrl,
       requestData,
       { responseType: 'text' }
     );
   }
 
   getApprovedShelters(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:8080/api/shelter-requests/approved');
+    return this.http.get<any[]>(`${this.shelterRequestUrl}/approved`);
   }
-  
 
   register(userData: any): Observable<string> {
     return this.http.post(
@@ -33,7 +34,7 @@ export class AuthShelterService {
   }
 
   login(credentials: { email: string; password: string }): Observable<any> {
-    console.log('Enviando login:', credentials); // Verifica qué se envía
+    console.log('Enviando login:', credentials);
     return this.http.post<{ message: string; admin: boolean }>(
       `${this.apiUrl}/login`,
       credentials
