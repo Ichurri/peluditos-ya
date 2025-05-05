@@ -18,19 +18,18 @@ import java.util.stream.Collectors;
 public class AnimalController {
 
     private final AnimalService animalService;
-    private final AnimalRepository animalRepository; // Inyectar el repositorio aquí
+    private final AnimalRepository animalRepository;
 
-    // Constructor para inyectar AnimalService y AnimalRepository
     public AnimalController(AnimalService animalService, AnimalRepository animalRepository) {
         this.animalService = animalService;
         this.animalRepository = animalRepository;
     }
 
-    // Endpoint para registrar un animal
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> registerAnimal(@ModelAttribute AnimalRegistrationRequest request) {
         try {
-            Animal animal = animalService.registerAnimal(request);
+            Long shelterRequestId = request.getShelterId();
+            Animal animal = animalService.registerAnimal(request, shelterRequestId);
             return ResponseEntity.status(HttpStatus.CREATED).body(animal);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
@@ -39,11 +38,10 @@ public class AnimalController {
         }
     }
 
-    // Endpoint para obtener todas las mascotas
     @GetMapping
     public ResponseEntity<List<AnimalResponse>> obtenerTodasLasMascotas() {
         try {
-            List<Animal> animals = animalRepository.findAll(); // Obtener todos los animales
+            List<Animal> animals = animalRepository.findAll();
             List<AnimalResponse> response = animals.stream()
                     .map(animal -> new AnimalResponse(
                             animal.getId(),
@@ -52,7 +50,7 @@ public class AnimalController {
                             animal.getBreed(),
                             animal.getAge(),
                             animal.getBehavior().name(),
-                            animal.getShelter().getId(),
+                            animal.getShelterRequest().getId(),
                             animal.getMedicalFilePath(),
                             animal.getPhotoPath()))
                     .collect(Collectors.toList());

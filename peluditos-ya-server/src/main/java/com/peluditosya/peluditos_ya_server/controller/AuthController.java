@@ -5,6 +5,8 @@ import com.peluditosya.peluditos_ya_server.dto.LoginRequest;
 import com.peluditosya.peluditos_ya_server.dto.ShelterSignUpRequest;
 import com.peluditosya.peluditos_ya_server.service.AuthService;
 
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import com.peluditosya.peluditos_ya_server.service.MailService;
 import org.springframework.http.ResponseEntity;
@@ -33,13 +35,17 @@ public class AuthController {
     }
 
     @PostMapping(value = "/signup-shelter", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<String> signupShelter(@ModelAttribute ShelterSignUpRequest request) {
-        String responseMessage = authService.signupShelter(request);
-
-        mailService.sendWelcomeEmail(request.getEmail(), request.getShelterName(), "SHELTER");
-
-        return ResponseEntity.ok(responseMessage);
-    }
+        public ResponseEntity<String> signupShelter(@ModelAttribute ShelterSignUpRequest request) {
+        try {
+            String responseMessage = authService.signupShelter(request);
+            mailService.sendWelcomeEmail(request.getEmail(), request.getShelterName(), "SHELTER");
+            return ResponseEntity.ok(responseMessage);
+        } catch (DataIntegrityViolationException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El correo electrónico o nombre del refugio ya está registrado.");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error en el servidor");
+        }
+}
 
     @PostMapping("/login")
     public ResponseEntity<?> loginAdopter(@RequestBody LoginRequest request) {

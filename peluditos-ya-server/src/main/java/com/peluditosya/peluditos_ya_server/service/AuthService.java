@@ -55,7 +55,7 @@ public class AuthService {
 
     public String signupShelter(ShelterSignUpRequest request) {
         validateEmailUniqueness(request.getEmail());
-
+    
         Shelter shelter = new Shelter();
         shelter.setName(request.getName());
         shelter.setEmail(request.getEmail());
@@ -64,13 +64,13 @@ public class AuthService {
         shelter.setPhone(request.getPhone());
         shelter.setShelterName(request.getShelterName());
         shelter.setShelterAddress(request.getShelterAddress());
-
+    
         // Handle PDF upload via FileStorageService
         String documentPath = fileStorageService.storeFile(request.getDocumentFile(), "shelter-documents");
         shelter.setDocumentPath(documentPath);
-
+    
         // El constructor de Shelter ya asigna el rol SHELTER
-
+    
         userRepository.save(shelter);
         logger.info("Nuevo refugio registrado: {}", shelter.getEmail());
         return "Refugio registrado";

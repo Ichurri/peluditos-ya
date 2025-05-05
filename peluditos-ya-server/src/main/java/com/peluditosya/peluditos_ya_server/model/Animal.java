@@ -31,8 +31,8 @@ public class Animal {
     private String photoPath;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "shelter_id", nullable = false)
-    private Shelter shelter;
+    @JoinColumn(name = "shelter_id", nullable = false, referencedColumnName = "id")
+    private ShelterRequest ShelterRequest;
 
     public Long getId() {
         return id;
@@ -98,12 +98,12 @@ public class Animal {
         this.photoPath = photoPath;
     }
 
-    public Shelter getShelter() {
-        return shelter;
+    public ShelterRequest getShelterRequest() {
+        return ShelterRequest;
     }
 
-    public void setShelter(Shelter shelter) {
-        this.shelter = shelter;
+    public void setShelterRequest(ShelterRequest shelterRequest) {
+        this.ShelterRequest = shelterRequest;
     }
 
     // Enums

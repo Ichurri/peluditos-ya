@@ -23,7 +23,7 @@ export class ShelterComponent implements OnInit {
   }
 
   loadShelters(): void {
-    this.AuthShelterService.getShelters().subscribe({
+    this.AuthShelterService.getApprovedShelters().subscribe({
       next: (data) => {
         this.casasHogar = data.map(shelter => ({
           nombre: shelter.shelterName,

@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthShelterService {
   private apiUrl = `${environment.apiBaseUrl}/auth`;
-  private apiUrl2 = `${environment.apiBaseUrl}/shelters`;
+  private apiUrl2 = `${environment.apiBaseUrl}/shelter-requests`;
   private shelterRequestUrl = `${environment.apiBaseUrl}/shelter-requests`;
 
   constructor(private http: HttpClient) {}

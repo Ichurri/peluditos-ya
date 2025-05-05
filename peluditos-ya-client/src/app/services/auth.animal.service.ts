@@ -12,7 +12,7 @@ export class AnimalService {
 
   constructor(private http: HttpClient) {}
 
-  registrarAnimal(formulario: any): Observable<any> {
+  registrarAnimal(formulario: any, shelterRequestId: number): Observable<any> {
     const formData = new FormData();
 
     formData.append('name', formulario.name);
@@ -20,7 +20,7 @@ export class AnimalService {
     formData.append('breed', formulario.breed);
     formData.append('age', formulario.age);
     formData.append('behavior', formulario.behavior); 
-    formData.append('shelterId', formulario.shelterId);
+    formData.append('shelterId', shelterRequestId.toString());
 
     if (formulario.medicalFile) {
       formData.append('medicalFile', formulario.medicalFile);

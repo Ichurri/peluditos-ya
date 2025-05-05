@@ -5,7 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2ab5fb4-de8b-4a75-837f-190a05a23e38" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/components/register-animal/register-animal.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/components/register-animal/register-animal.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/components/register-shelter/register-shelter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/components/register-shelter/register-shelter.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/adoption/adoption.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/adoption/adoption.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/shelter/shelter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/shelter/shelter.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/services/auth.animal.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/services/auth.animal.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/services/auth.shelter.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/services/auth.shelter.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/environments/environment.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/AnimalController.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/AnimalController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/ShelterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/ShelterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/AnimalService.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/AnimalService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/ShelterRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/ShelterRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/uploads/shelter-documents/1745039707512_6.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/uploads/shelter-documents/1745039889742_6.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/uploads/shelter-documents/1746021620898_6.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/uploads/shelter-documents/1746022459777_6.pdf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/uploads/shelter-documents/1746022856875_6.pdf" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,16 +49,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "jhonn__ramirez__unit__tests",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Uni/7mo semestre/Taller de Sistemas de Informacion/peluditos-ya"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Uni/7mo semestre/Taller de Sistemas de Informacion/peluditos-ya&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />

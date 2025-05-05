@@ -57,7 +57,7 @@ export class AdoptionComponent implements OnInit, AfterViewInit {  // Implementa
             tipo: mascota.animalType,
             edad: edad.toString(),
             sexo: mascota.sex,  // Incluimos el sexo para poder filtrar correctamente
-            descripcion: Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed},
+            descripcion: `Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
             imagen: mascota.photoPath
           };
         });

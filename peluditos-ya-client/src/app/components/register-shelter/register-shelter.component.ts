@@ -30,11 +30,17 @@ export class RegisterShelterComponent {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      const userId = 19;
-      console.log('User ID:', userId); // cambiar esto para poder obtener el user id desde el local storage
+      const userId = localStorage.getItem('userId');
+      if (!userId) {
+        console.error('No se encontró el userId en el Local Storage');
+        alert('Error: No se encontró el ID del usuario. Por favor, inicia sesión nuevamente.');
+        return;
+      }
+  
+      console.log('User ID obtenido del Local Storage:', userId);
   
       const payload = {
-        userId,
+        userId: parseInt(userId, 10), // Convertir a número si es necesario
         description: this.registerForm.value.description,
         shelterName: this.registerForm.value.name,
         shelterAddress: this.registerForm.value.shelterAddress,
@@ -42,7 +48,7 @@ export class RegisterShelterComponent {
         city: this.registerForm.value.city,
         documentNumber: this.registerForm.value.documentNumber
       };
-
+  
       console.log('Enviando datos:', payload);
   
       this.authService.submitShelterRequest(payload).subscribe({
