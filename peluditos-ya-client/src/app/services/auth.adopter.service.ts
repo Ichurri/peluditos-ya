@@ -2,15 +2,16 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthAdopterService {
-  private isAdminSubject = new BehaviorSubject<boolean>(false); // Estado inicial: no es admin
-  isAdmin$ = this.isAdminSubject.asObservable(); // Observable para otros componentes
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  isAdmin$ = this.isAdminSubject.asObservable();
 
-  private apiUrl = 'http://localhost:8080/api/auth';
+  private apiUrl = `${environment.apiBaseUrl}/auth`;
 
   constructor(private http: HttpClient) {}
 
@@ -30,9 +31,7 @@ export class AuthAdopterService {
       map(response => {
         this.isAdminSubject.next(response.admin);
         console.log('isAdmin:', response.admin);
-  
         localStorage.setItem('userId', response.userId.toString());
-  
         return response;
       })
     );
@@ -41,7 +40,6 @@ export class AuthAdopterService {
   isLoggedIn(): boolean {
     return localStorage.getItem('userId') !== null;
   }
-  
   
   logout() {
     this.isAdminSubject.next(false);
