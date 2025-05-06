@@ -7,6 +7,8 @@ import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequestStatus;
 import com.peluditosya.peluditos_ya_server.repository.ShelterRequestRepository;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
+
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -90,6 +92,16 @@ public class ShelterRequestService {
 
     public List<ShelterRequest> getSheltersByStatus(ShelterRequestStatus status) {
         return shelterRequestRepository.findByStatus(status);
+    }
+
+        // Ejemplo de implementación en ShelterRequestService
+    public Long getShelterId(Long shelterRequestId) {
+        // Consulta la tabla shelter_requests para obtener el shelterId
+        Optional<ShelterRequest> shelterRequestOpt = shelterRequestRepository.findById(shelterRequestId);
+        if (shelterRequestOpt.isEmpty()) {
+            throw new IllegalArgumentException("Shelter request not found");
+        }
+        return shelterRequestOpt.get().getShelterId();
     }
 
 }

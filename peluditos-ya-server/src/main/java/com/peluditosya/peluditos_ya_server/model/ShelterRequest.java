@@ -29,4 +29,8 @@ public class ShelterRequest {
     private String phone;
     private String shelterAddress;
     private String shelterName;
+
+    public long getShelterId(){
+        return id;
+    }
 }

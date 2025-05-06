@@ -33,7 +33,7 @@ export class RegisterAnimalComponent {
   }
 
   registrarMascota() {
-    this.animalService.registrarAnimal(this.nuevaMascota).subscribe({
+    this.animalService.registrarAnimal(this.nuevaMascota, this.nuevaMascota.shelterId).subscribe({
       next: res => {
         console.log('Animal registrado:', res);
         alert('¡Animal registrado exitosamente!');
