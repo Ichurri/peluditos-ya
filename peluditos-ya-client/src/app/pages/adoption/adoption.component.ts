@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';  
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { RouterModule } from '@angular/router';
-import { AnimalService } from '../../services/auth.animal.service'; // Importamos el servicio
+import { AnimalService } from '../../services/auth.animal.service';
 
-// Interfaz para la mascota que esperamos en el frontend
+// Interfaz para las mascotas
 interface Mascota {
   nombre: string;
   edad: string;
@@ -22,22 +22,24 @@ interface Mascota {
   templateUrl: './adoption.component.html',
   styleUrls: ['./adoption.component.css']
 })
-export class AdoptionComponent implements OnInit {
+export class AdoptionComponent implements OnInit, AfterViewInit {  // Implementamos AfterViewInit
   searchTerm = '';
   filtroEdad = '';
   filtroSexo = '';
   filtroTipo = '';
 
-  // Declarar las mascotas como un arreglo de tipo 'Mascota'
   mascotas: Mascota[] = [];
-  usuarioAutenticado: boolean = false; // Variable para controlar si el usuario está autenticado
-
+  usuarioAutenticado: boolean = false;
 
   constructor(private animalService: AnimalService) {}
 
   ngOnInit(): void {
     this.obtenerMascotas();
-    this.verificarUsuario();  // Verificamos si el usuario está autenticado
+    this.verificarUsuario();  
+  }
+
+  ngAfterViewInit(): void {
+    this.iniciarCarrusel();  
   }
 
   obtenerMascotas() {
@@ -54,7 +56,8 @@ export class AdoptionComponent implements OnInit {
             nombre: mascota.name,
             tipo: mascota.animalType,
             edad: edad.toString(),
-            descripcion: `Tiene ${mascota.age} años de edad,  ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
+            sexo: mascota.sex,  // Incluimos el sexo para poder filtrar correctamente
+            descripcion: Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed},
             imagen: mascota.photoPath
           };
         });
@@ -64,7 +67,6 @@ export class AdoptionComponent implements OnInit {
       }
     );
   }
-
 
   // Filtrar las mascotas según los criterios de búsqueda
   getMascotasFiltradas() {
@@ -77,19 +79,41 @@ export class AdoptionComponent implements OnInit {
   }
 
   traducirTipo(tipo: string): string {
-    switch(tipo.toLowerCase()) {
+    switch (tipo.toLowerCase()) {
       case 'dog':
         return 'Perro';
       case 'cat':
         return 'Gato';
       default:
-        return tipo; // Si no es ni perro ni gato, retorna el tipo tal cual
+        return tipo;
     }
   }
 
-  // Verifica si el usuario está autenticado
   verificarUsuario() {
     const email = localStorage.getItem('userEmail');
     this.usuarioAutenticado = email !== null && email !== '';
+  }
+
+  iniciarCarrusel() {
+    const carousel = document.querySelector('.carousel') as HTMLElement;
+    if (!carousel) return;
+
+    let scrollAmount = 0;
+    const scrollStep = 1; 
+    const delay = 15;  
+
+    function autoScroll() {
+      if (scrollAmount >= (carousel.scrollWidth - carousel.clientWidth)) {
+        scrollAmount = 0;
+      } else {
+        scrollAmount += scrollStep;
+      }
+      carousel.scrollTo({
+        left: scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+
+    setInterval(autoScroll, delay);
   }
 }

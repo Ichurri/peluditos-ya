@@ -8,12 +8,7 @@ import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.List;
 
@@ -23,10 +18,12 @@ public class AnimalService {
     private final AnimalRepository animalRepository;
     private final UserRepository userRepository;
     private final Logger logger = LoggerFactory.getLogger(AnimalService.class);
+    private final FileStorageService fileStorageService;
 
-    public AnimalService(AnimalRepository animalRepository, UserRepository userRepository) {
+    public AnimalService(AnimalRepository animalRepository, UserRepository userRepository, FileStorageService fileStorageService) {
         this.animalRepository = animalRepository;
         this.userRepository = userRepository;
+        this.fileStorageService = fileStorageService;
     }
 
     public Animal registerAnimal(AnimalRegistrationRequest request) {
@@ -40,8 +37,8 @@ public class AnimalService {
         Shelter shelter = shelterOpt.get();
 
         // Handle file uploads
-        String medicalFilePath = saveFile(request.getMedicalFile(), "medical-files");
-        String photoPath = saveFile(request.getPhoto(), "animal-photos");
+        String medicalFilePath = fileStorageService.storeFile(request.getMedicalFile(), "medical-files");
+        String photoPath = fileStorageService.storeFile(request.getPhoto(), "animal-photos");
 
         // Build Animal entity
         Animal animal = new Animal();
@@ -60,21 +57,6 @@ public class AnimalService {
         animalRepository.save(animal);
         logger.info("Nuevo animal registrado: {} en refugio {}", animal.getName(), shelter.getShelterName());
         return animal;
-    }
-
-    private String saveFile(MultipartFile file, String subfolder) {
-        if (file == null || file.isEmpty()) return null;
-        try {
-            String uploadDir = System.getProperty("user.dir") + "/uploads/" + subfolder;
-            Files.createDirectories(Paths.get(uploadDir));
-            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            Path filePath = Paths.get(uploadDir, fileName);
-            file.transferTo(filePath.toFile());
-            return filePath.toString();
-        } catch (IOException e) {
-            logger.error("Error al guardar archivo {}", file.getOriginalFilename(), e);
-            throw new RuntimeException("No se pudo guardar el archivo: " + file.getOriginalFilename());
-        }
     }
 
     public List<Animal> obtenerTodasLasMascotas() {

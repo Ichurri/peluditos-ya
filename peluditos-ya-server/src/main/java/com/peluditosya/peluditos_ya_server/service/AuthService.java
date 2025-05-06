@@ -14,12 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +23,13 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final FileStorageService fileStorageService;
     private final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, FileStorageService fileStorageService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.fileStorageService = fileStorageService;
     }
 
     private void validateEmailUniqueness(String email) {
@@ -68,23 +65,10 @@ public class AuthService {
         shelter.setShelterName(request.getShelterName());
         shelter.setShelterAddress(request.getShelterAddress());
 
-        // Handle PDF upload
-        MultipartFile documentFile = request.getDocumentFile();
-        if (documentFile != null && !documentFile.isEmpty()) {
-            try {
-                String uploadDir = System.getProperty("user.dir") + "/uploads/shelter-documents";
-                Files.createDirectories(Paths.get(uploadDir));
-                String fileName = System.currentTimeMillis() + "_" + documentFile.getOriginalFilename();
-                Path filePath = Paths.get(uploadDir, fileName);
-                documentFile.transferTo(filePath.toFile());
-                shelter.setDocumentPath(filePath.toString());
-            } catch (IOException e) {
-                logger.error("Error al guardar el documento PDF", e);
-                throw new RuntimeException("No se pudo guardar el documento PDF");
-            }
-        } else {
-            shelter.setDocumentPath(null);
-        }
+        // Handle PDF upload via FileStorageService
+        String documentPath = fileStorageService.storeFile(request.getDocumentFile(), "shelter-documents");
+        shelter.setDocumentPath(documentPath);
+
         // El constructor de Shelter ya asigna el rol SHELTER
 
         userRepository.save(shelter);

@@ -45,4 +45,5 @@ export class AuthAdopterService {
     this.isAdminSubject.next(false);
     localStorage.clear();
   }
+  
 }
