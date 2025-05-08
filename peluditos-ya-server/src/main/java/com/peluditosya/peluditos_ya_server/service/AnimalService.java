@@ -2,12 +2,9 @@ package com.peluditosya.peluditos_ya_server.service;
 
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.model.Animal;
-import com.peluditosya.peluditos_ya_server.model.Shelter;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
 import com.peluditosya.peluditos_ya_server.repository.AnimalRepository;
-import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 import com.peluditosya.peluditos_ya_server.repository.ShelterRequestRepository;
-import com.peluditosya.peluditos_ya_server.service.ShelterRequestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
