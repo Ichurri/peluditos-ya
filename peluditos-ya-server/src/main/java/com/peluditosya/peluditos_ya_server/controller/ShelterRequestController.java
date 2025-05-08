@@ -38,10 +38,16 @@ public class ShelterRequestController {
         return shelterRequestService.getSheltersByStatus(ShelterRequestStatus.APPROVED);
     }
 
-    // Actualizar estado de la solicitud
     @PutMapping("/{id}/status")
     public ResponseEntity<String> updateStatus(@PathVariable Long id, @RequestParam ShelterRequestStatus status) {
         shelterRequestService.updateStatus(id, status);
         return ResponseEntity.ok("Estado actualizado con éxito");
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ShelterRequest> getShelterRequestById(@PathVariable Long id) {
+    ShelterRequest shelterRequest = shelterRequestService.getShelterRequestById(id);
+    return ResponseEntity.ok(shelterRequest);
+    }
+    
 }

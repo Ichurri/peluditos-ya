@@ -26,10 +26,12 @@ export class ShelterComponent implements OnInit {
     this.AuthShelterService.getApprovedShelters().subscribe({
       next: (data) => {
         this.casasHogar = data.map(shelter => ({
+          id: shelter.id,
           nombre: shelter.shelterName,
           descripcion: shelter.shelterAddress,
-          imagen: 'https://img.freepik.com/vector-premium/cuidado-animales-hogar-emblema-refugio-animales-adopcion-o-pancarta-diseno-logotipo_125133-2655.jpg' 
+          imagen: shelter.shelterImage || 'https://img.freepik.com/vector-premium/cuidado-animales-hogar-emblema-refugio-animales-adopcion-o-pancarta-diseno-logotipo_125133-2655.jpg'
         }));
+        console.log(this.casasHogar); 
       },
       error: (error) => {
         console.error('Error cargando refugios:', error);

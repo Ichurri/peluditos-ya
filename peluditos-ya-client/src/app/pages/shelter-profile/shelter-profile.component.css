@@ -1,0 +1,207 @@
+.shelter-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa toda la altura de la ventana */
+    background-color: #f9f9f9; /* Fondo claro */
+    padding: 2rem;
+}
+
+.shelter-profile {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+/* Portada estilo Facebook */
+.cover-photo {
+    height: 200px;
+    width: 100%;
+    background: url('https://t3.ftcdn.net/jpg/05/58/45/02/240_F_558450244_JVL848woVRCZmFXWQqD0imauEyfSgKnU.jpg') center/cover no-repeat;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    margin-bottom: 4rem;
+    position: relative;
+}
+
+/* Foto de perfil */
+.profile-picture {
+    position: absolute;
+    top: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid white;
+    background: white;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Información principal */
+.shelter-profile h1 {
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.description {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 1.5rem;
+}
+
+.info-section p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    color: #444;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.badge.approved {
+    background-color: #28a745; /* Verde */
+}
+
+.badge.pending {
+    background-color: #ffc107; /* Amarillo */
+    color: #000;
+}
+
+.badge.rejected {
+    background-color: #dc3545; /* Rojo */
+}
+
+.created-at {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 1rem;
+}
+
+/* Botón de acción */
+.actions {
+    margin-top: 2rem;
+}
+
+.actions button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    background-color: #007bff; /* Azul */
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.actions button:hover {
+    background-color: #0056b3;
+}
+
+/* Galería de mascotas */
+.pets-gallery {
+    margin-top: 2rem;
+    text-align: left;
+}
+
+.pets-gallery h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.pets-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.pet-card {
+    background-color: #fafafa;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 160px;
+    text-align: center;
+    padding: 1rem;
+    transition: transform 0.3s ease;
+}
+
+.pet-card:hover {
+    transform: translateY(-5px);
+}
+
+.pet-card img {
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.pet-card h3 {
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+    color: #007bff;
+}
+
+.pet-card p {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+/* Sistema de calificación con estrellas */
+.rating:not(:checked) > input {
+    position: absolute;
+    appearance: none;
+}
+
+.rating:not(:checked) > label {
+    float: right;
+    cursor: pointer;
+    font-size: 30px;
+  color: #666; /* Color de las estrellas no seleccionadas */
+}
+
+.rating:not(:checked) > label:before {
+    content: '★';
+}
+
+.rating > input:checked + label:hover,
+.rating > input:checked + label:hover ~ label,
+.rating > input:checked ~ label:hover,
+.rating > input:checked ~ label:hover ~ label,
+.rating > label:hover ~ input:checked ~ label {
+  color: #e58e09; /* Color de las estrellas al pasar el mouse */
+}
+
+.rating:not(:checked) > label:hover,
+.rating:not(:checked) > label:hover ~ label {
+  color: #ff9e0b; /* Color de las estrellas al pasar el mouse sin seleccionar */
+}
+
+.rating > input:checked ~ label {
+    color: #ffa723; 
+}

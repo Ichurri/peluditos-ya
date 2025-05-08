@@ -104,4 +104,8 @@ public class ShelterRequestService {
         return shelterRequestOpt.get().getShelterId();
     }
 
+    public ShelterRequest getShelterRequestById(Long id) {
+        return shelterRequestRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró un refugio con el ID proporcionado."));
+    }
 }
