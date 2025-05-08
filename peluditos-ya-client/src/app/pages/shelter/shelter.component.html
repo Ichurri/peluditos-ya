@@ -19,7 +19,7 @@
             <div class="casa-content">
                 <h3>{{ casa.nombre }}</h3>
                 <p class="casa-descripcion">{{ casa.descripcion }}</p>
-                <button class="casa-btn">Ver detalles</button>
+                <button class="casa-btn" [routerLink]="'/shelter-profile/' + casa.id">Ver detalles</button>
             </div>
         </div>
     </div>

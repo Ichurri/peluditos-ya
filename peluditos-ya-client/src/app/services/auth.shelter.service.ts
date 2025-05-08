@@ -48,4 +48,8 @@ export class AuthShelterService {
   deleteShelter(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl2}/${id}`);
   }
+
+  getShelterById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl2}/${id}`);
+  }
 }
