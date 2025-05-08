@@ -36,4 +36,8 @@ export class AnimalService {
   obtenerMascotas(): Observable<any> {
     return this.http.get(`${this.baseUrl}`);
   }
+  
+  getAnimalProfile(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}/profile`);
+}
 }

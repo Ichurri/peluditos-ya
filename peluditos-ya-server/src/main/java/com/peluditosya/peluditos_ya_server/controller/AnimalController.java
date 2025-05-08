@@ -1,5 +1,6 @@
 package com.peluditosya.peluditos_ya_server.controller;
 
+import com.peluditosya.peluditos_ya_server.dto.AnimalDetailDTO;
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.dto.AnimalResponse;
 import com.peluditosya.peluditos_ya_server.model.Animal;
@@ -59,5 +60,11 @@ public class AnimalController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
+    }
+
+    @GetMapping("/{id}/profile")
+    public ResponseEntity<AnimalDetailDTO> getAnimalProfile(@PathVariable Long id) {
+        AnimalDetailDTO animalDetail = animalService.getAnimalDetails(id);
+        return ResponseEntity.ok(animalDetail);
     }
 }
