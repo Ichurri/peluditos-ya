@@ -1,0 +1,36 @@
+<!-- pet-profile.component.html -->
+<div class="pet-profile-container">
+    <div *ngIf="loading">Loading pet information...</div>
+    <div *ngIf="error">Error loading pet information. Please try again.</div>
+    
+    <div *ngIf="!loading && !error" class="pet-profile">
+      <div class="pet-header">
+        <img [src]="animal.photoPath || 'assets/default-pet.jpg'" alt="{{animal.name}}">
+        <h1>{{animal.name}}</h1>
+        <p>{{animal.breed}} • {{animal.age}} years old</p>
+      </div>
+      
+      <div class="pet-section">
+        <h2>Medical History</h2>
+        <p *ngIf="animal.medicalHistory">{{animal.medicalHistory}}</p>
+        <p *ngIf="!animal.medicalHistory" class="not-available">Information not available</p>
+      </div>
+      
+      <div class="pet-section">
+        <h2>Personality</h2>
+        <p *ngIf="animal.personalityTraits">{{animal.personalityTraits}}</p>
+        <p *ngIf="!animal.personalityTraits" class="not-available">Information not available</p>
+      </div>
+      
+      <div class="pet-section">
+        <h2>Habits</h2>
+        <p *ngIf="animal.habits">{{animal.habits}}</p>
+        <p *ngIf="!animal.habits" class="not-available">Information not available</p>
+      </div>
+      
+      <div class="pet-actions">
+        <button class="adoption-btn">Request Adoption</button>
+        <button class="back-btn" (click)="navigateToAdoption()">Back to Pets</button>
+      </div>
+    </div>
+  </div>

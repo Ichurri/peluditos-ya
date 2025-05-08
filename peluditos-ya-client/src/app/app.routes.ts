@@ -56,6 +56,10 @@ export const routes: Routes = [
         title: 'Pagina de perfil de refugio'
     },
     { 
+        path: 'pets/:id', 
+        loadComponent: () => import('./pages/pet-profile/pet-profile.component').then(c => c.PetProfileComponent) 
+    },
+    { 
         path: '**', 
         redirectTo: '' 
     }

@@ -8,7 +8,6 @@ import com.peluditosya.peluditos_ya_server.model.ShelterRequestStatus;
 import com.peluditosya.peluditos_ya_server.repository.ShelterRequestRepository;
 import com.peluditosya.peluditos_ya_server.repository.UserRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
