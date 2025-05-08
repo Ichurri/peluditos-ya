@@ -22,24 +22,30 @@ export class PetProfileComponent implements OnInit {
     private router: Router
   ) {}
 
+  isLoading = true;
+
   ngOnInit(): void {
-    const animalId = this.route.snapshot.paramMap.get('id');
-    if (animalId) {
-      this.animalService.getAnimalProfile(+animalId).subscribe({
-        next: (data) => {
-          this.animal = data;
-          this.loading = false;
-        },
-        error: (err) => {
-          console.error('Error loading animal data', err);
-          this.error = true;
-          this.loading = false;
-        }
-      });
-    }
+    this.route.paramMap.subscribe(params => {
+      const animalId = params.get('id');
+      if (animalId) {
+        this.animalService.getAnimalProfile(+animalId).subscribe({
+          next: (data) => {
+            this.animal = data;
+            this.isLoading = false;
+          },
+          error: (err) => {
+            console.error('Error loading animal data', err);
+            this.error = true;
+            this.loading = false;
+          }
+        });
+      }
+    });
   }
 
   navigateToAdoption(): void{
     this.router.navigate(['/adoption']);
   }
+
+
 }
