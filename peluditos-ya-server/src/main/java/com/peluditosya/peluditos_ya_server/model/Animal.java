@@ -30,6 +30,11 @@ public class Animal {
     private String medicalFilePath;
     private String photoPath;
 
+    // Update Animal.java to include new fields for personality and habits
+    private String medicalHistory;  // Detailed medical history text
+    private String personalityTraits; // Pet's temperament and behavior details
+    private String habits; // Pet's daily routines and preferences
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_id", nullable = false, referencedColumnName = "id")
     private ShelterRequest ShelterRequest;
