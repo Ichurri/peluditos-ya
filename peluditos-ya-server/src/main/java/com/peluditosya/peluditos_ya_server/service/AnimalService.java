@@ -1,5 +1,6 @@
 package com.peluditosya.peluditos_ya_server.service;
 
+import com.peluditosya.peluditos_ya_server.dto.AnimalDetailDTO;
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.model.Animal;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
@@ -71,5 +72,35 @@ public class AnimalService {
 
     public List<Animal> obtenerTodasLasMascotas() {
         return animalRepository.findAll();
+    }
+
+    // Add method to AnimalService.java
+    public AnimalDetailDTO getAnimalDetails(Long animalId) {
+        Animal animal = animalRepository.findById(animalId)
+            .orElseThrow(() -> new RuntimeException("Animal not found with id: " + animalId));
+            
+        // Convert to DTO and return
+        return mapToDetailDTO(animal);
+    }
+    
+    private AnimalDetailDTO mapToDetailDTO(Animal animal) {
+        AnimalDetailDTO dto = new AnimalDetailDTO();
+        dto.setId(animal.getId());
+        dto.setName(animal.getName());
+        dto.setAnimalType(animal.getAnimal().toString());
+        dto.setBreed(animal.getBreed());
+        dto.setAge(animal.getAge());
+        dto.setBehavior(animal.getBehavior().toString());
+        dto.setMedicalFilePath(animal.getMedicalFilePath());
+        dto.setPhotoPath(animal.getPhotoPath());
+        
+        // Set shelter information if available
+        if (animal.getShelterRequest() != null) {
+            dto.setShelterName(animal.getShelterRequest().getShelterName());
+            dto.setShelterAddress(animal.getShelterRequest().getShelterAddress());
+            dto.setShelterPhone(animal.getShelterRequest().getPhone());
+        }
+        
+        return dto;
     }
 }

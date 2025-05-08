@@ -10,8 +10,12 @@ public class AnimalDetailDTO {
     private String behavior;
     private String medicalHistory;
     private String personalityTraits;
+    private String medicalFilePath;
     private String habits;
     private String photoPath;
+    private String shelterName;
+    private String shelterAddress;
+    private String shelterPhone;
     
     // Getters and setters
     public Long getId() {
@@ -69,6 +73,14 @@ public class AnimalDetailDTO {
     public void setMedicalHistory(String medicalHistory) {
         this.medicalHistory = medicalHistory;
     }
+
+    public String getMedicalFilePath() {
+        return medicalFilePath;
+    }
+
+    public void setMedicalFilePath(String medicalFilePath) {
+        this.medicalFilePath = medicalFilePath;
+    }
     
     public String getPersonalityTraits() {
         return personalityTraits;
@@ -92,5 +104,17 @@ public class AnimalDetailDTO {
     
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+    
+    public void setShelterName(String shelterName) {
+        this.shelterName = shelterName;
+    }
+    
+    public void setShelterAddress(String shelterAddress) {
+        this.shelterAddress = shelterAddress;
+    }
+    
+    public void setShelterPhone(String shelterPhone) {
+        this.shelterPhone = shelterPhone;
     }
 }
