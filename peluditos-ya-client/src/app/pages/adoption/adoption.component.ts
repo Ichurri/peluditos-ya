@@ -7,6 +7,7 @@ import { AnimalService } from '../../services/auth.animal.service';
 
 // Interfaz para las mascotas
 interface Mascota {
+id: any|string;
   nombre: string;
   edad: string;
   sexo: string;
