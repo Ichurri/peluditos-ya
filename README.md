@@ -13,16 +13,21 @@ Desarrollada con **Angular 15+** (frontend) y **Spring Boot 3.2+** (backend), us
 - Registro con validación de campos
 - Búsqueda de animales por especie, edad y ubicación
 - Solicitud de adopción con formulario
-- Visualización de historial médico y fotos de animales
+- **Visualización de perfiles completos de mascotas:**
+  - Detalles básicos (nombre, edad, raza)
+  - Historial médico con vacunas y tratamientos previos
+  - Personalidad y temperamento
+  - Hábitos y necesidades especiales
 
 ### Para Refugios
 - Registro con verificación de documentos
-- Gestión de perfiles de animales (subir fotos, historial médico)
+- Gestión de perfiles de animales (subir fotos, historial médico, personalidad y hábitos)
 - Generación de códigos QR para donaciones
 
 ### General
 - Notificaciones por email para cambios de estado
 - Interfaz responsive y accesible
+- Feedback inmediato al usuario ("Información no disponible" cuando faltan datos)
 
 ## 🛠 Tecnologías Utilizadas
 | **Categoría**     | **Tecnologías**                                                                 |

@@ -46,4 +46,3 @@ export class PetProfileComponent implements OnInit {
   navigateToAdoption(): void{
     this.router.navigate(['/adoption']);
   }
-}
