@@ -205,3 +205,15 @@
 .rating > input:checked ~ label {
     color: #ffa723; 
 }
+
+.map-container {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#shelter-map {
+    height: 300px;
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

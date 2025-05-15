@@ -22,6 +22,13 @@ public class ShelterRequest {
     @Enumerated(EnumType.STRING)
     private ShelterRequestStatus status;
 
+    @Column(name = "latitude")
+    private Double latitude;
+
+    @Column(name = "longitude")
+    private Double longitude;
+
+
     private String description;
 
     private LocalDateTime createdAt = LocalDateTime.now();

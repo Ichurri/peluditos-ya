@@ -13,4 +13,6 @@ public class ShelterRequestDto {
     private String phone;
     private String shelterAddress;
     private String shelterName;
+    private Double latitude;
+    private Double longitude;
 }
