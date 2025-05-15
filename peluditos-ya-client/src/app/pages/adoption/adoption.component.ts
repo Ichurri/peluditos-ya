@@ -54,12 +54,13 @@ export class AdoptionComponent implements OnInit, AfterViewInit {  // Implementa
           }
 
           return {
+            id: mascota.id,
             nombre: mascota.name,
             tipo: mascota.animalType,
             edad: edad.toString(),
-            sexo: mascota.sex,  // Incluimos el sexo para poder filtrar correctamente
+            sexo: mascota.sex,
             descripcion: `Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
-            imagen: mascota.photoPath
+            imagen: 'https://img.freepik.com/foto-gratis/perro-pug-aislado-fondo-blanco_2829-11416.jpg?semt=ais_hybrid&w=740'
           };
         });
       },
