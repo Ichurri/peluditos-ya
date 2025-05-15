@@ -1,30 +1,27 @@
-<!-- pet-profile.component.html -->
-<div class="pet-profile-container">
-  <div class="pet-profile">
-    <div class="pet-header">
-      <img src="https://ichef.bbci.co.uk/ace/ws/640/cpsprodpb/15665/production/_107435678_perro1.jpg.webp" alt="Buddy">
-      <h1>Buddy</h1>
-      <p>Golden Retriever • 3 years old</p>
-    </div>
-    
-    <div class="pet-section">
-      <h2>Medical History</h2>
-      <p>Vaccinated, neutered, and dewormed. No known allergies.</p>
-    </div>
-    
-    <div class="pet-section">
-      <h2>Personality</h2>
-      <p>Friendly, playful, and loves being around people.</p>
-    </div>
-    
-    <div class="pet-section">
-      <h2>Habits</h2>
-      <p>Enjoys long walks, playing fetch, and napping in the sun.</p>
-    </div>
-    
-    <div class="pet-actions">
-      <button class="adoption-btn">Request Adoption</button>
-      <button class="back-btn">Back to Pets</button>
+<div class="profile-container" *ngIf="!loading && pet; else loadingTemplate">
+  <div class="profile-card">
+    <img class="pet-photo" [src]="pet.photoPath" alt="Foto de {{ pet.name }}">
+    <div class="profile-details">
+      <h2>{{ pet.name }}</h2>
+      <p><strong>Tipo:</strong> {{ pet.animalType }}</p>
+      <p><strong>Raza:</strong> {{ pet.breed }}</p>
+      <p><strong>Edad:</strong> {{ pet.age }}</p>
+      <p><strong>Comportamiento:</strong> {{ pet.behavior }}</p>
+      <a class="medical-link" [href]="pet.medicalFilePath" target="_blank">Ver archivo médico</a>
     </div>
   </div>
+
+  <div class="shelter-info">
+    <h3>Refugio</h3>
+    <p><strong>Nombre:</strong> {{ pet.shelterName }}</p>
+    <p><strong>Dirección:</strong> {{ pet.shelterAddress }}</p>
+    <p><strong>Teléfono:</strong> {{ pet.shelterPhone }}</p>
+  </div>
 </div>
+
+<ng-template #loadingTemplate>
+  <div class="loading">
+    <p>Cargando perfil...</p>
+  </div>
+</ng-template>
+

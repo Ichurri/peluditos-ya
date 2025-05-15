@@ -51,7 +51,9 @@
             <img [src]="mascota.imagen" alt="{{mascota.nombre}}">
             <h2>{{mascota.nombre}}</h2>
             <p>{{mascota.descripcion}}</p>
-            <button [routerLink]="['/pets', mascota.id]">Ver perfil</button>
+            <button *ngIf="mascota.id" [routerLink]="['/animal-profile', mascota.id]">
+                Ver perfil
+            </button>
             <button>Adoptar</button>
           </div>
     </div>

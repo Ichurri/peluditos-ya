@@ -1,48 +1,42 @@
-import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { AnimalService } from '../../services/auth.animal.service';
+import { ActivatedRoute } from '@angular/router';
+import { AnimalService } from '../../services/auth.animal.service'; 
+import { CommonModule } from '@angular/common';
 
-// pet-profile.component.ts
+
 @Component({
   selector: 'app-pet-profile',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
   templateUrl: './pet-profile.component.html',
-  styleUrls: ['./pet-profile.component.css']
+  styleUrls: ['./pet-profile.component.css'],
+  imports: [CommonModule]
 })
 export class PetProfileComponent implements OnInit {
-  animal: any;
+  petId!: number;
+  pet: any;
   loading = true;
   error = false;
 
   constructor(
     private route: ActivatedRoute,
-    private animalService: AnimalService,
-    private router: Router
+    private animalService: AnimalService
   ) {}
 
-  isLoading = true;
-
   ngOnInit(): void {
-    this.route.paramMap.subscribe(params => {
-      const animalId = params.get('id');
-      if (animalId) {
-        this.animalService.getAnimalProfile(+animalId).subscribe({
-          next: (data) => {
-            this.animal = data;
-            this.isLoading = false;
-          },
-          error: (err) => {
-            console.error('Error loading animal data', err);
-            this.error = true;
-            this.loading = false;
-          }
-        });
+    this.petId = Number(this.route.snapshot.paramMap.get('id'));
+    this.getPetProfile();
+  }
+
+  getPetProfile(): void {
+    this.animalService.getAnimalProfile(this.petId).subscribe({
+      next: (data) => {
+        this.pet = data;
+        this.loading = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar el perfil del animal', err);
+        this.error = true;
+        this.loading = false;
       }
     });
   }
-
-  navigateToAdoption(): void{
-    this.router.navigate(['/adoption']);
-  }
+}

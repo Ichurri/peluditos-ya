@@ -8,6 +8,7 @@ import { AdminSheltersComponent } from './pages/admin-page/admin-page.component'
 import { LoginComponent } from './components/login/login.component';
 import { RegisterAnimalComponent } from './components/register-animal/register-animal.component';
 import { ShelterProfileComponent } from './pages/shelter-profile/shelter-profile.component';
+import { PetProfileComponent } from './pages/pet-profile/pet-profile.component';
 
 export const routes: Routes = [
     {
@@ -56,8 +57,9 @@ export const routes: Routes = [
         title: 'Pagina de perfil de refugio'
     },
     { 
-        path: 'pets/:id', 
-        loadComponent: () => import('./pages/pet-profile/pet-profile.component').then(c => c.PetProfileComponent) 
+        path: 'animal-profile/:id',
+        component: PetProfileComponent,
+        title: 'Pagina de perfil de los animales'
     },
     { 
         path: '**', 
