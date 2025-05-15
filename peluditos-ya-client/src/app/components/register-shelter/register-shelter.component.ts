@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthShelterService } from '../../services';
 import { Router } from '@angular/router';
+import * as L from 'leaflet';
+
 
 @Component({
   selector: 'app-register-shelter',
@@ -17,11 +19,14 @@ export class RegisterShelterComponent {
   constructor(private fb: FormBuilder, private authService: AuthShelterService, private router: Router) {
     this.registerForm = this.fb.group({
       description: ['', [Validators.required, Validators.minLength(10)]],
+      ownername: ['', [Validators.required, Validators.minLength(3)]],
       documentNumber: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
       shelterAddress: ['', Validators.required],
       name: ['', Validators.required], // Coincide con el HTML
       phone: ['', [Validators.required, Validators.pattern('[0-9]{7,15}')]],
-      city: ['', Validators.required], // Agregado para que coincida con tu DB
+      city: ['', Validators.required], 
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
       isAdmin: ['', false],
       acceptTerms: [false, Validators.requiredTrue]
     });
@@ -40,14 +45,17 @@ export class RegisterShelterComponent {
       console.log('User ID obtenido del Local Storage:', userId);
   
       const payload = {
-        userId: parseInt(userId, 10), // Convertir a número si es necesario
+        userId: parseInt(userId, 10),
         description: this.registerForm.value.description,
         shelterName: this.registerForm.value.name,
         shelterAddress: this.registerForm.value.shelterAddress,
         phone: this.registerForm.value.phone,
         city: this.registerForm.value.city,
-        documentNumber: this.registerForm.value.documentNumber
+        documentNumber: this.registerForm.value.documentNumber,
+        latitude: this.registerForm.value.latitude,
+        longitude: this.registerForm.value.longitude
       };
+
   
       console.log('Enviando datos:', payload);
   
@@ -76,5 +84,39 @@ export class RegisterShelterComponent {
 
   navigateToLogin() {
     this.router.navigate(['/login']);
+  }
+
+map!: L.Map;
+marker!: L.Marker;
+
+ngAfterViewInit() {
+  this.initMap();
+}
+
+private initMap(): void {
+  this.map = L.map('map').setView([-16.5, -68.15], 13);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+  }).addTo(this.map);
+
+  this.map.on('dblclick', (e: L.LeafletMouseEvent) => {
+  const { lat, lng } = e.latlng;
+
+  if (!this.marker) {
+    this.marker = L.marker([lat, lng], {
+      draggable: true
+    }).addTo(this.map);
+  } else {
+    this.marker.setLatLng([lat, lng]);
+  }
+
+  this.registerForm.patchValue({
+    latitude: lat,
+    longitude: lng
+  });
+
+  console.log('Lat:', lat, 'Lng:', lng);
+});
   }
 }

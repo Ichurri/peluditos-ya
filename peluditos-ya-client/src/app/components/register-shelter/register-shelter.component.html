@@ -4,7 +4,7 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <!-- Nombre del Propietario -->
     <div class="form-group">
-      <input type="text" formControlName="name" placeholder="Nombre del propietario" [ngClass]="{
+      <input type="text" formControlName="ownername" placeholder="Nombre del propietario" [ngClass]="{
           invalid:
             registerForm.get('name')?.invalid &&
             registerForm.get('name')?.touched
@@ -106,6 +106,18 @@
         La dirección del refugio es requerida
       </div>
     </div>
+
+    <div id="map" style="height: 300px; margin-bottom: 15px;"></div>
+    <!-- Campos ocultos pero necesarios -->
+    <input type="hidden" formControlName="latitude" />
+    <input type="hidden" formControlName="longitude" />
+      
+    <!-- Opcional: mostrar coordenadas al usuario -->
+    <p *ngIf="registerForm.get('latitude')?.value">
+      Lat: {{ registerForm.get('latitude')?.value }},
+      Lng: {{ registerForm.get('longitude')?.value }}
+    </p>
+
 
     <!-- Aceptar términos y condiciones -->
     <div class="terms-section">

@@ -38,6 +38,15 @@
       <label title="1 estrella" for="star1"></label>
     </div>
 
+    <!-- Mapa -->
+    <div *ngIf="shelter?.latitude && shelter?.longitude" class="map-container">
+      <h2>Ubicación en el mapa</h2>
+      <div id="map" style="height: 300px; border-radius: 10px; margin-bottom: 1rem;"></div>
+    </div>
+    <div *ngIf="!shelter?.latitude || !shelter?.longitude" class="text-muted mt-2">
+      Ubicación no disponible.
+    </div>
+
     <!-- Galería de mascotas -->
     <div class="pets-gallery">
       <h2>Mascotas registradas</h2>

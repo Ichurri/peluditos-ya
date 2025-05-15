@@ -42,6 +42,9 @@ public class ShelterRequestService {
         if (requestDto.getShelterName() == null || requestDto.getShelterName().isEmpty()) {
             return "El nombre del refugio es obligatorio";
         }
+        if (requestDto.getLatitude() == null || requestDto.getLongitude() == null) {
+            return "La ubicación del refugio es obligatoria";
+        }
 
         // Crear la solicitud
         ShelterRequest request = new ShelterRequest();
@@ -50,6 +53,8 @@ public class ShelterRequestService {
         request.setPhone(requestDto.getPhone());
         request.setShelterAddress(requestDto.getShelterAddress());
         request.setShelterName(requestDto.getShelterName());
+        request.setLatitude(requestDto.getLatitude());
+        request.setLongitude(requestDto.getLongitude());
         request.setStatus(ShelterRequestStatus.PENDING); // Establecer el estado como PENDING
 
         shelterRequestRepository.save(request);
