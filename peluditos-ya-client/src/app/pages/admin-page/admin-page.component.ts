@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common'; 
 import { FormsModule } from '@angular/forms';   
-import { HttpClient } from '@angular/common/http';
-import { AuthShelterService } from '../../services';
+import { AdminShelterService } from '../../services/admin-shelter.service';
 
 @Component({
   selector: 'app-admin-shelters',
@@ -16,7 +15,7 @@ export class AdminSheltersComponent implements OnInit {
   casasHogar: any[] = [];
   pendingShelters: any[] = [];
 
-  constructor(private AuthShelterService: AuthShelterService, private http: HttpClient) {}
+  constructor(private adminShelterService: AdminShelterService) {}
 
   ngOnInit(): void {
     this.loadShelters();
@@ -24,24 +23,23 @@ export class AdminSheltersComponent implements OnInit {
   }
 
   loadShelters(): void {
-    this.AuthShelterService.getApprovedShelters().subscribe(
+    this.adminShelterService.getApprovedShelters().subscribe(
       (data) => {
         this.casasHogar = data;
       },
       (error) => {
-        console.error('Error al cargar refugios:', error);
+        console.error('Error loading approved shelters:', error);
       }
     );
   }
 
   loadPendingShelters(): void {
-    this.getPendingShelters().subscribe(
+    this.adminShelterService.getPendingShelters().subscribe(
       (data) => {
         this.pendingShelters = data;
-        console.log('Pending shelters:', this.pendingShelters);
       },
       (error) => {
-        console.error('Error al cargar solicitudes pendientes:', error);
+        console.error('Error loading pending shelters:', error);
       }
     );
   }
@@ -54,41 +52,35 @@ export class AdminSheltersComponent implements OnInit {
   }
 
   eliminarCasa(id: number): void {
-    this.AuthShelterService.deleteShelter(id).subscribe(
+    this.adminShelterService.deleteShelter(id).subscribe(
       () => {
         this.casasHogar = this.casasHogar.filter(casa => casa.id !== id);
       },
       (error) => {
-        console.error('Error al eliminar refugio:', error);
+        console.error('Error deleting shelter:', error);
       }
     );
   }
 
-  getPendingShelters() {
-    return this.http.get<any[]>('http://localhost:8080/api/shelter-requests/pending');
-  }
-  
-  
-
   approveShelter(id: number): void {
-    this.http.put(`http://localhost:8080/api/shelter-requests/${id}/status?status=APPROVED`, {}).subscribe(
+    this.adminShelterService.approveShelter(id).subscribe(
       () => {
         this.pendingShelters = this.pendingShelters.filter(s => s.id !== id);
-        this.loadShelters(); // Actualiza lista de aprobados
+        this.loadShelters();
       },
       (error) => {
-        console.error('Error al aprobar solicitud:', error);
+        console.error('Error approving shelter:', error);
       }
     );
   }
 
   rejectShelter(id: number): void {
-    this.http.put(`http://localhost:8080/api/shelter-requests/${id}/status?status=REJECTED`, {}).subscribe(
+    this.adminShelterService.rejectShelter(id).subscribe(
       () => {
         this.pendingShelters = this.pendingShelters.filter(s => s.id !== id);
       },
       (error) => {
-        console.error('Error al rechazar solicitud:', error);
+        console.error('Error rejecting shelter:', error);
       }
     );
   }
