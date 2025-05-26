@@ -10,6 +10,7 @@ import { RegisterAnimalComponent } from './components/register-animal/register-a
 import { ShelterProfileComponent } from './pages/shelter-profile/shelter-profile.component';
 import { PetProfileComponent } from './pages/pet-profile/pet-profile.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
+import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 
 export const routes: Routes = [
     {
@@ -66,6 +67,11 @@ export const routes: Routes = [
         path: 'about-us',
         component: AboutUsComponent,
         title: 'About Us'
+    },
+    {
+        path: 'contacto',
+        component: ContactUsComponent,
+        title: 'Contacto'
     },
     { 
         path: '**', 
