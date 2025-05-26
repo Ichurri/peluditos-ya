@@ -39,5 +39,10 @@ export class AnimalService {
   
   getAnimalProfile(id: number): Observable<any> {
     return this.http.get(`${this.baseUrl}/${id}/profile`);
-}
+  }
+
+  asignarPadrino(animalId: number, userId: number) {
+    return this.http.put<any>(`${this.baseUrl}/${animalId}/asignar-padrino?userId=${userId}`, {});
+  }
+
 }

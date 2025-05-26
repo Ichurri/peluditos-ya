@@ -6,13 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f2ab5fb4-de8b-4a75-837f-190a05a23e38" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/shelter/shelter.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/shelter/shelter.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/shelter/shelter.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/pages/shelter/shelter.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-client/src/app/services/auth.shelter.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-client/src/app/services/auth.shelter.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/config/DatabaseInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/config/DatabaseInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/ShelterRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/ShelterRequestController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/ShelterRequestService.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/ShelterRequestService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalDetailDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalDetailDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/Animal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,16 +34,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;viewShelterProfile&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Uni/7mo semestre/Taller de Sistemas de Informacion/peluditos-ya&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "5.3.Perform__pet__sponsorship",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Uni/7mo semestre/Taller de Sistemas de Informacion/peluditos-ya"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="AZURE_FUNCTION_SUPPORT" factoryName="Run Functions">
       <option name="appName" />

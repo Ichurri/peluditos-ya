@@ -19,9 +19,28 @@
   </div>
 </div>
 
+<!-- Si tiene padrino -->
+<div class="sponsor-info" *ngIf="pet?.sponsor; else qrTemplate">
+  <h3>Padrino</h3>
+  <p><strong>Nombre:</strong> {{ pet.sponsor.name }}</p>
+  <p><strong>Correo:</strong> {{ pet.sponsor.email }}</p>
+</div>
+
+<!-- Si no tiene padrino -->
+<ng-template #qrTemplate>
+  <div class="qr-container">
+    <h3>¡Apadrina a {{ pet.name }}!</h3>
+    <div *ngIf="qrCodeImage">
+      <img [src]="qrCodeImage" alt="Código QR de apadrinamiento" />
+    </div>
+    <button (click)="asignarPadrino()" [disabled]="asignando">
+      {{ asignando ? 'Procesando...' : 'Apadrinar ahora' }}
+    </button>
+  </div>
+</ng-template>
+
 <ng-template #loadingTemplate>
   <div class="loading">
     <p>Cargando perfil...</p>
   </div>
 </ng-template>
-
