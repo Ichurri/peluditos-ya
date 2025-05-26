@@ -1,30 +1,15 @@
-<!-- Texto sobre el carrusel -->
-<div class="carousel-overlay">
-    <h1><span class="yellow-text">Patitas<br></span> <span class="black-text">En Adopción</span></h1>
-</div>
-
-<!-- Contenedor del carrusel con efecto blur -->
-<div class="carousel-wrapper">
-
-    <div class="carousel">
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel1.jpg" alt="carousel1" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel2.jpg" alt="carousel2" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel3.jpg" alt="carousel3" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel4.jpg" alt="carousel4" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel5.jpg" alt="carousel5" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel6.jpg" alt="carousel6" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel7.jpg" alt="carousel7" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel8.jpg" alt="carousel8" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel9.jpg" alt="carousel9" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel10.jpg" alt="carousel10" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel11.jpg" alt="carousel11" />
-        <img src="https://patitasalrescateorg.netlify.app/img/carousel12.jpg" alt="carousel12" />
+<div class="hero-section-tricky">
+    <div class="hero-overlay-text">
+        <h1><span class="yellow-text">Patitas<br></span> <span class="black-text">En Adopción</span></h1>
     </div>
-    <img src="https://patitasalrescateorg.netlify.app/img/ellipse10.png" alt="eclipse" class="eclipseUno" />
-    <img src="https://patitasalrescateorg.netlify.app/img/ellipse10.png" alt="eclipseDos" class="eclipseDos" />
+
+    <div class="tricky-cards-container">
+        <div class="tricky-card" *ngFor="let imageUrl of carouselImageUrls"
+             [style.background-image]="'url(' + imageUrl + ')'">
+        </div>
+    </div>
 </div>
 
-<!-- Barra de búsqueda -->
 <div class="search-container">
     <input type="text" [(ngModel)]="searchTerm" placeholder="Buscar mascota..." />
     <select [(ngModel)]="filtroEdad">
@@ -44,7 +29,6 @@
     </select>
 </div>
 
-<!-- Sección de mascotas en adopción -->
 <div class="adoption-container">
     <div class="mascotas-grid">
         <div *ngFor="let mascota of getMascotasFiltradas()" class="mascota-card">
@@ -61,9 +45,8 @@
 
 <div *ngIf="usuarioAutenticado" class="register-as">
     <div class="register-text">
-        <button [routerLink]="'/register-animal'">Registrarse ahora a su PeluditoYa!</button>
+        <button [routerLink]="'/register-animal'">Registrar un Peludito ¡Ya!</button>
     </div>
-            
 </div>
 
 <app-footer></app-footer>
