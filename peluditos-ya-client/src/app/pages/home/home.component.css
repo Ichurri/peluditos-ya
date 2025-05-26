@@ -113,3 +113,67 @@
   font-size: 4rem;
   color: #FFD803;
 }
+
+/* Estilos para los nuevos botones */
+.btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px; /* Botones más redondeados */
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  text-decoration: none; /* Por si se usa una etiqueta <a> como botón */
+  display: inline-block;
+  margin-top: 20px; /* Espacio arriba del botón */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.btn:hover, .btn:focus {
+  transform: translateY(-2px); /* Ligero efecto al pasar el mouse/foco */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Botón CTA principal en el carrusel */
+.btn-cta-carrusel {
+  background-color: #610dfd; /* Un azul primario, ajústalo a tu paleta */
+  color: white;
+  font-size: 1.1rem;
+  padding: 15px 35px;
+}
+
+.btn-cta-carrusel:hover, .btn-cta-carrusel:focus {
+  background-color: #610dfda2; /* Un azul más oscuro al pasar el mouse */
+}
+
+/* Botones de acción en las secciones de contenido */
+.btn-accion {
+  background-color: #28a745; /* Un verde para acciones, ajústalo */
+  color: white;
+}
+
+.btn-accion:hover, .btn-accion:focus {
+  background-color: #1e7e34; /* Un verde más oscuro */
+}
+
+/* Botón específico para "Ayuda" (si quieres diferenciarlo más) */
+.btn-ayuda {
+  background-color: #ffc107; /* Un amarillo/naranja, ajústalo */
+  color: #212529; /* Texto oscuro para contraste con fondo claro */
+}
+
+.btn-ayuda:hover, .btn-ayuda:focus {
+  background-color: #e0a800;
+}
+
+
+
+
+
+
+

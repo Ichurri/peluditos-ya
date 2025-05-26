@@ -9,6 +9,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterAnimalComponent } from './components/register-animal/register-animal.component';
 import { ShelterProfileComponent } from './pages/shelter-profile/shelter-profile.component';
 import { PetProfileComponent } from './pages/pet-profile/pet-profile.component';
+import { AboutUsComponent } from './pages/about-us/about-us.component';
 
 export const routes: Routes = [
     {
@@ -60,6 +61,11 @@ export const routes: Routes = [
         path: 'animal-profile/:id',
         component: PetProfileComponent,
         title: 'Pagina de perfil de los animales'
+    },
+    {
+        path: 'about-us',
+        component: AboutUsComponent,
+        title: 'About Us'
     },
     { 
         path: '**', 
