@@ -4,22 +4,30 @@
   align-items: center;
   padding: 14px 40px;
   background-color: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   width: 100%;
   box-sizing: border-box;
+  /* Eliminamos 'position: sticky;' y 'top: 0;' */
+  z-index: 1000; /* Mantener el z-index si algún otro elemento pudiera intentar superponerse, aunque es menos probable sin position: sticky */
 }
 
+/* El resto de tu CSS para el logo, navegación, botones, etc., se mantiene igual */
+
+/* LOGO */
 .logo-container {
-  flex: 0 0 15%;
+  flex-shrink: 0;
+  margin-right: 20px;
 }
 
 .logo {
-  height: 50px;
+  height: 55px;
   width: auto;
+  display: block;
 }
 
+/* NAVEGACIÓN */
 .navigation {
-  flex: 0 0 60%;
+  flex-grow: 1;
   display: flex;
   justify-content: center;
 }
@@ -29,55 +37,128 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 30px;
-  justify-content: center;
+  gap: 35px;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #333;
-  font-size: 16px;
-  transition: color 0.3s;
-  padding: 5px 0;
+  color: #555;
+  font-size: 17px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 0;
+  position: relative;
 }
 
 .nav-links a:hover,
 .nav-links a.active {
-  color: #794caf;
-  border-bottom: 2px solid #794caf;
+  color: #6a3abf;
+  border-bottom: 2px solid #6a3abf;
 }
 
+/* BOTONES DE ACCIÓN */
 .action-buttons {
   display: flex;
-  gap: 10px;
-  flex: 0 0 15%;
-  justify-content: flex-end;
-  margin-right: 20px;
+  gap: 15px;
+  flex-shrink: 0;
+  margin-left: 20px;
 }
 
 .btn {
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-size: 14px;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-size: 15px;
   cursor: pointer;
   border: none;
   transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
 .btn-login {
-  background-color: #f0edf5;
-  color: #333;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #e0d8f5;
+  color: #4a4a4a;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn-donate {
-  background-color: #ffd700;
-  color: #333;
+  background-color: #fdd835;
+  color: #4a4a4a;
   font-weight: bold;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Enlace de administración */
+.admin-link {
+  font-weight: bold;
+  color: #d32f2f;
+}
+
+.admin-link:hover {
+  color: #ff0000;
+  border-bottom: 2px solid #ff0000;
+}
+
+/* MEDIA QUERIES para responsividad (mantener para una buena UX) */
+@media (max-width: 992px) {
+  .header-container {
+    padding: 10px 20px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 15px;
+  }
+
+  .action-buttons {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .logo-container {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navigation {
+    flex-basis: 100%;
+    margin-bottom: 10px;
+  }
+
+  .nav-links {
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+    padding: 6px 0;
+  }
+
+  .action-buttons {
+    flex-basis: 100%;
+    justify-content: center;
+    margin-left: 0;
+  }
 }

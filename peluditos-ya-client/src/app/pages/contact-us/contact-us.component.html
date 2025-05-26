@@ -1,0 +1,55 @@
+<main>
+  <h1>Contacto</h1>
+  <p class="intro-text">
+    Queremos escucharte. Si tienes dudas, sugerencias o deseas apoyar nuestra causa,
+    completa el siguiente formulario y nos pondremos en contacto contigo pronto.
+  </p>
+
+  <form #contactForm="ngForm" (ngSubmit)="onSubmit(contactForm)" novalidate class="contact-form">
+    <label for="name">Nombre</label>
+    <input
+      type="text"
+      id="name"
+      name="name"
+      placeholder="Tu nombre"
+      required
+      [(ngModel)]="name"
+      #nameModel="ngModel"
+    />
+    <div class="error" *ngIf="nameModel.invalid && nameModel.touched">
+      El nombre es obligatorio.
+    </div>
+
+    <label for="email">Correo electrónico</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      placeholder="tu@correo.com"
+      required
+      email
+      [(ngModel)]="email"
+      #emailModel="ngModel"
+    />
+    <div class="error" *ngIf="emailModel.invalid && emailModel.touched">
+      <span *ngIf="emailModel.errors?.['required']">El correo es obligatorio.</span>
+      <span *ngIf="emailModel.errors?.['email']">Correo no válido.</span>
+    </div>
+
+    <label for="message">Mensaje</label>
+    <textarea
+      id="message"
+      name="message"
+      rows="5"
+      placeholder="Escribe tu mensaje aquí..."
+      required
+      [(ngModel)]="message"
+      #messageModel="ngModel"
+    ></textarea>
+    <div class="error" *ngIf="messageModel.invalid && messageModel.touched">
+      El mensaje es obligatorio.
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid">Enviar</button>
+  </form>
+</main>
