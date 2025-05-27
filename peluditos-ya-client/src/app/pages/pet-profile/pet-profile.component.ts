@@ -18,6 +18,7 @@ export class PetProfileComponent implements OnInit {
   error = false;
   asignando = false;
   qrCodeImage: string = '';
+  defaultImage = 'https://files.lafm.com.co/assets/public/styles/twitter/public/2023-08/murio_cheems_el_perrito_de_los_meme.jpg.webp?VersionId=dHwATkyc2gQxvSwNeWXyOFUXPzaF3bbQ&itok=MmkIcD6M'; 
 
   constructor(
     private route: ActivatedRoute,

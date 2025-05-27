@@ -1,6 +1,7 @@
 <div class="profile-container" *ngIf="!loading && pet; else loadingTemplate">
   <div class="profile-card">
-    <img class="pet-photo" [src]="pet.photoPath" alt="Foto de {{ pet.name }}">
+    <img class="pet-photo" [src]="defaultImage" alt="Foto de {{ pet.name }}">
+    
     <div class="profile-details">
       <h2>{{ pet.name }}</h2>
       <p><strong>Tipo:</strong> {{ pet.animalType }}</p>
@@ -8,6 +9,16 @@
       <p><strong>Edad:</strong> {{ pet.age }}</p>
       <p><strong>Comportamiento:</strong> {{ pet.behavior }}</p>
       <a class="medical-link" [href]="pet.medicalFilePath" target="_blank">Ver archivo médico</a>
+
+      <div *ngIf="!pet.sponsor" class="qr-box">
+        <h3>¡Apadrina a {{ pet.name }}!</h3>
+        <div *ngIf="qrCodeImage" class="qr-image">
+          <img [src]="qrCodeImage" alt="Código QR de apadrinamiento" />
+        </div>
+        <button class="sponsor-button" (click)="asignarPadrino()" [disabled]="asignando">
+          {{ asignando ? 'Procesando...' : 'Apadrinar ahora' }}
+        </button>
+      </div>
     </div>
   </div>
 
@@ -17,27 +28,13 @@
     <p><strong>Dirección:</strong> {{ pet.shelterAddress }}</p>
     <p><strong>Teléfono:</strong> {{ pet.shelterPhone }}</p>
   </div>
-</div>
 
-<!-- Si tiene padrino -->
-<div class="sponsor-info" *ngIf="pet?.sponsor; else qrTemplate">
-  <h3>Padrino</h3>
-  <p><strong>Nombre:</strong> {{ pet.sponsor.name }}</p>
-  <p><strong>Correo:</strong> {{ pet.sponsor.email }}</p>
-</div>
-
-<!-- Si no tiene padrino -->
-<ng-template #qrTemplate>
-  <div class="qr-container">
-    <h3>¡Apadrina a {{ pet.name }}!</h3>
-    <div *ngIf="qrCodeImage">
-      <img [src]="qrCodeImage" alt="Código QR de apadrinamiento" />
-    </div>
-    <button (click)="asignarPadrino()" [disabled]="asignando">
-      {{ asignando ? 'Procesando...' : 'Apadrinar ahora' }}
-    </button>
+  <div class="sponsor-info" *ngIf="pet?.sponsor">
+    <h3>Padrino</h3>
+    <p><strong>Nombre:</strong> {{ pet.sponsor.name }}</p>
+    <p><strong>Correo:</strong> {{ pet.sponsor.email }}</p>
   </div>
-</ng-template>
+</div>
 
 <ng-template #loadingTemplate>
   <div class="loading">
