@@ -1,13 +1,25 @@
 /* Estilos generales del contenedor */
 .login-container {
   max-width: 500px;
-  margin: 0 auto;
-  margin-top: -70vh;
+  width: 100%;
+  margin: 0;
+  /* Quitar margin-top negativo */
   padding: 30px;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+/* Centrado absoluto del login */
+.login-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f7;
 }
 
 /* Título */
@@ -127,7 +139,7 @@
 /* Estilos responsivos */
 @media (max-width: 600px) {
   .login-container {
-    margin-top: 5vh;
+    max-width: 95vw;
     padding: 20px;
   }
 

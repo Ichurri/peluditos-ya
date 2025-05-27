@@ -44,27 +44,42 @@ public class AnimalController {
         try {
             List<Animal> animals = animalRepository.findAll();
             List<AnimalResponse> response = animals.stream()
-                    .map(animal -> new AnimalResponse(
-                            animal.getId(),
-                            animal.getName(),
-                            animal.getAnimal().name(),
-                            animal.getBreed(),
-                            animal.getAge(),
-                            animal.getBehavior().name(),
-                            animal.getShelterRequest().getId(),
-                            animal.getMedicalFilePath(),
-                            animal.getPhotoPath()))
-                    .collect(Collectors.toList());
+                .map(animal -> new AnimalResponse(
+                        animal.getId(),
+                        animal.getName(),
+                        animal.getAnimal().toString(),
+                        animal.getBreed(),
+                        animal.getAge(),
+                        animal.getBehavior().toString(),
+                        animal.getShelterRequest() != null ? animal.getShelterRequest().getId() : null,
+                        animal.getShelterRequest() != null ? animal.getShelterRequest().getShelterName() : null,
+                        animal.getShelterRequest() != null ? animal.getShelterRequest().getShelterAddress() : null,
+                        animal.getShelterRequest() != null ? animal.getShelterRequest().getPhone() : null,
+                        animal.getMedicalFilePath(),
+                        animal.getPhotoPath(),
+                        animal.getSponsor() != null ? animal.getSponsor().getId() : null,
+                        animal.getSponsor() != null ? animal.getSponsor().getName() : null,
+                        animal.getSponsor() != null ? animal.getSponsor().getEmail() : null
+                ))
+                .collect(Collectors.toList());
 
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-    }
+}
+
 
     @GetMapping("/{id}/profile")
     public ResponseEntity<AnimalDetailDTO> getAnimalProfile(@PathVariable Long id) {
         AnimalDetailDTO animalDetail = animalService.getAnimalDetails(id);
         return ResponseEntity.ok(animalDetail);
     }
+
+    @PutMapping("/{id}/asignar-padrino")
+    public ResponseEntity<AnimalDetailDTO> asignarPadrino(@PathVariable Long id, @RequestParam Long userId) {
+        Animal animalActualizado = animalService.asignarPadrino(id, userId);
+        return ResponseEntity.ok(animalService.getAnimalDetails(animalActualizado.getId()));
+    }
+
 }

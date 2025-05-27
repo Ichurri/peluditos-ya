@@ -1,4 +1,6 @@
 package com.peluditosya.peluditos_ya_server.model;
+import com.peluditosya.peluditos_ya_server.model.AppUser;
+
 
 import jakarta.persistence.*;
 
@@ -38,6 +40,11 @@ public class Animal {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_id", nullable = false, referencedColumnName = "id")
     private ShelterRequest ShelterRequest;
+    
+    @ManyToOne
+    @JoinColumn(name = "sponsor_id")
+    private AppUser sponsor;
+
 
     public Long getId() {
         return id;
@@ -118,5 +125,15 @@ public class Animal {
 
     public enum Behavior {
         FRIENDLY, SHY, AGGRESSIVE, QUIET
+    }
+
+    // Getter
+    public AppUser getSponsor() {
+        return sponsor;
+    }
+
+    // Setter
+    public void setSponsor(AppUser sponsor) {
+        this.sponsor = sponsor;
     }
 }
