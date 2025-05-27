@@ -112,4 +112,12 @@ public class ShelterRequestService {
         return shelterRequestRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("No se encontró un refugio con el ID proporcionado."));
     }
+
+    @Transactional
+    public void deleteShelterRequest(Long id) {
+        if (!shelterRequestRepository.existsById(id)) {
+            throw new IllegalArgumentException("No se encontró una solicitud de refugio con el ID proporcionado.");
+        }
+        shelterRequestRepository.deleteById(id);
+    }
 }

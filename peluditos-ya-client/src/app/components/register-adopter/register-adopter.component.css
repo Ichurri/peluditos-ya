@@ -1,13 +1,30 @@
 /* components/register/register.component.css */
+:host {
+  display: block;
+  background: #f7f7f7;
+}
+
+/* Centrado absoluto del formulario */
+.register-adopter-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f7f7f7;
+}
+
 .register-container {
   max-width: 400px;
-  margin: 0 auto;
-  margin-top: -77vh;
+  width: 100%;
+  margin: 0;
+  /* Quitar margin-top negativo */
   padding: 20px;
   background-color: white;
   border-radius: 15px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   font-family: Arial, sans-serif;
+  overflow-y: auto;
+  max-height: 90vh;
 }
 
 h1 {

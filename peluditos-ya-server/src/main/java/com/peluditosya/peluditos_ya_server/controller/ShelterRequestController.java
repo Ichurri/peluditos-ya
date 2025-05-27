@@ -49,5 +49,10 @@ public class ShelterRequestController {
     ShelterRequest shelterRequest = shelterRequestService.getShelterRequestById(id);
     return ResponseEntity.ok(shelterRequest);
     }
-    
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteShelterRequest(@PathVariable Long id) {
+        shelterRequestService.deleteShelterRequest(id);
+        return ResponseEntity.ok("Solicitud de refugio eliminada con éxito");
+    }
 }
