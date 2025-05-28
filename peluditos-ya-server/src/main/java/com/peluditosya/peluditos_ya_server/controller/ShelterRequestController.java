@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/shelter-requests")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "http://localhost:4200")
 public class ShelterRequestController {
 
     private final ShelterRequestService shelterRequestService;
