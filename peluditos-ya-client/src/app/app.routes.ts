@@ -11,12 +11,18 @@ import { ShelterProfileComponent } from './pages/shelter-profile/shelter-profile
 import { PetProfileComponent } from './pages/pet-profile/pet-profile.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 
 export const routes: Routes = [
     {
-        path: '',
+        path: 'home',
         component: HomeComponent,
         title: 'Home'
+    },
+    {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full'
     },
     {
         path: 'register-adopter',
@@ -75,6 +81,7 @@ export const routes: Routes = [
     },
     { 
         path: '**', 
-        redirectTo: '' 
+        component: NotFoundComponent,
+        title: 'Page Not Found'
     }
 ];
