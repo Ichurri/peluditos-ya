@@ -10,7 +10,6 @@
       <p>
         Tu generosa donación nos ayuda a rescatar, cuidar y encontrar hogares amorosos para los animales que lo necesitan.
       </p>
-      <!-- <button class="donate-now-btn" (click)="completeDonation()">Donar Ahora</button> -->
     </div>
   </div>
 
@@ -46,6 +45,7 @@
         Otro
       </button>
     </div>
+
     <input
       type="number"
       placeholder="Ingresa un monto personalizado"
@@ -86,37 +86,30 @@
       </button>
     </div>
 
-    <!-- Formulario solo si es tarjeta -->
+    <!-- Datos tarjeta -->
     <div class="credit-card-form" *ngIf="selectedPayment === 'Tarjeta'">
-      <input
-        type="text"
-        placeholder="Número de tarjeta"
-        class="input-field"
-        [(ngModel)]="cardNumber"
-      />
+      <input type="text" placeholder="Número de tarjeta" class="input-field" [(ngModel)]="cardNumber" />
       <div class="expiry-cvv-group">
-        <input
-          type="text"
-          placeholder="Fecha de vencimiento"
-          class="input-field half-width"
-          [(ngModel)]="expiry"
-        />
-        <input
-          type="text"
-          placeholder="CVV"
-          class="input-field half-width"
-          [(ngModel)]="cvv"
-        />
+        <input type="text" placeholder="Fecha de vencimiento" class="input-field half-width" [(ngModel)]="expiry" />
+        <input type="text" placeholder="CVV" class="input-field half-width" [(ngModel)]="cvv" />
       </div>
-      <input
-        type="text"
-        placeholder="Nombre en la tarjeta"
-        class="input-field"
-        [(ngModel)]="nameOnCard"
-      />
+      <input type="text" placeholder="Nombre en la tarjeta" class="input-field" [(ngModel)]="nameOnCard" />
     </div>
 
-    <!-- Imagen QR si se selecciona ese método -->
+    <!-- Datos PayPal -->
+    <div class="paypal-form" *ngIf="selectedPayment === 'PayPal'">
+      <input type="email" placeholder="Correo electrónico de PayPal" class="input-field" [(ngModel)]="paypalEmail" />
+    </div>
+
+    <!-- Información transferencia -->
+    <div class="bank-info" *ngIf="selectedPayment === 'Transferencia'">
+      <p><strong>Banco:</strong> Banco Mercantil Santa Cruz</p>
+      <p><strong>Número de Cuenta:</strong> 123456789012</p>
+      <p><strong>Nombre del Titular:</strong> Refugio Animal Esperanza</p>
+      <p><strong>CI/NIT:</strong> 1234567</p>
+    </div>
+
+    <!-- Imagen QR -->
     <div class="qr-display" *ngIf="selectedPayment === 'QR'">
       <p>Escanea el siguiente código para donar:</p>
       <img src="https://far-goteamimportaciones.com.bo/wp-content/uploads/2023/07/Bancos2-Far-go-team-930x1024.jpg" alt="QR Code" />

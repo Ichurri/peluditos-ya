@@ -11,44 +11,46 @@ import { Component } from '@angular/core';
 })
 export class DonationComponent {
   selectedAmount: string = '';
-  customAmount: string = '';
-  selectedPayment: string = 'Tarjeta';
+  selectedPayment: string = '';
+  customAmount: number | null = null;
 
-  // Datos de tarjeta (simulados)
-  cardNumber: string = '';
-  expiry: string = '';
-  cvv: string = '';
-  nameOnCard: string = '';
+  cardNumber = '';
+  expiry = '';
+  cvv = '';
+  nameOnCard = '';
 
-  // Método para seleccionar monto
+  paypalEmail = '';
+
   selectAmount(amount: string) {
     this.selectedAmount = amount;
-    this.customAmount = '';
+    if (amount !== 'Otro') {
+      this.customAmount = null;
+    }
   }
 
-  // Método para seleccionar método de pago
   selectPaymentMethod(method: string) {
     this.selectedPayment = method;
   }
 
-  // Método para completar la donación
   completeDonation() {
-    let amount = this.selectedAmount || this.customAmount;
+    const amount = this.selectedAmount === 'Otro' ? this.customAmount : this.selectedAmount;
+
     if (!amount || !this.selectedPayment) {
-      alert('Por favor, selecciona un monto y método de pago.');
+      alert('Por favor, selecciona un monto y un método de pago.');
       return;
     }
 
-    // Aquí podrías llamar a un servicio real, por ahora mostramos mensaje
-    alert('¡Donación completada con éxito! Gracias por tu apoyo ❤️');
+    alert('🎉 ¡Gracias por tu donación!');
 
     // Reset
     this.selectedAmount = '';
-    this.customAmount = '';
-    this.selectedPayment = 'Tarjeta';
+    this.selectedPayment = '';
+    this.customAmount = null;
     this.cardNumber = '';
     this.expiry = '';
     this.cvv = '';
     this.nameOnCard = '';
+    this.paypalEmail = '';
   }
 }
+
