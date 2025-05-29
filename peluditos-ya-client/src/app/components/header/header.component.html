@@ -1,8 +1,10 @@
 <header class="header-container">
   <div class="logo-container">
-    <img
-      src="https://w7.pngwing.com/pngs/459/678/png-transparent-dog-cartoon-mascot-pet-shop-logo.png"
-      alt="Peluditos Ya Logo" class="logo">
+    <a [routerLink]="'/'">
+      <img
+        src="https://w7.pngwing.com/pngs/459/678/png-transparent-dog-cartoon-mascot-pet-shop-logo.png"
+        alt="Peluditos Ya Logo" class="logo">
+    </a>
   </div>
 
   <nav class="navigation">
@@ -10,7 +12,6 @@
       <li *ngFor="let item of navigationItems">
         <a [routerLink]="item.route" routerLinkActive="active">{{ item.label }}</a>
       </li>
-      <!-- Mostrar el enlace solo si es admin -->
       <li *ngIf="isAdmin">
         <a routerLink="/admin-dashboard" class="admin-link">Panel de Administración</a>
       </li>      
