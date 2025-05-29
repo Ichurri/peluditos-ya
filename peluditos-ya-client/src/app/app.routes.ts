@@ -12,6 +12,7 @@ import { PetProfileComponent } from './pages/pet-profile/pet-profile.component';
 import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { DonationComponent } from './pages/donation/donation.component';
 
 export const routes: Routes = [
     {
@@ -78,6 +79,11 @@ export const routes: Routes = [
         path: 'contacto',
         component: ContactUsComponent,
         title: 'Contacto'
+    },
+    {
+        path: 'donation',
+        component: DonationComponent,
+        title: 'Donation'
     },
     { 
         path: '**', 

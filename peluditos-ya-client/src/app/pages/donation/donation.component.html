@@ -1,0 +1,129 @@
+<div class="donation-container">
+  <div class="hero-section">
+    <img
+      src="https://www.purina.com.bo/sites/default/files/2022-10/purina-perros-y-gatos-pueden-ser-amigos.png"
+      alt="Perro y gato felices"
+      class="hero-image"
+    />
+    <div class="hero-overlay">
+      <h1>Apoya Nuestra Misión</h1>
+      <p>
+        Tu generosa donación nos ayuda a rescatar, cuidar y encontrar hogares amorosos para los animales que lo necesitan.
+      </p>
+      <!-- <button class="donate-now-btn" (click)="completeDonation()">Donar Ahora</button> -->
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>Elige el Monto de tu Donación</h2>
+    <div class="amount-options">
+      <button
+        class="amount-btn"
+        [class.active]="selectedAmount === '25'"
+        (click)="selectAmount('25')"
+      >
+        Bs. 25
+      </button>
+      <button
+        class="amount-btn"
+        [class.active]="selectedAmount === '50'"
+        (click)="selectAmount('50')"
+      >
+        Bs. 50
+      </button>
+      <button
+        class="amount-btn"
+        [class.active]="selectedAmount === '100'"
+        (click)="selectAmount('100')"
+      >
+        Bs. 100
+      </button>
+      <button
+        class="amount-btn other-btn"
+        [class.active]="selectedAmount === 'Otro'"
+        (click)="selectAmount('Otro')"
+      >
+        Otro
+      </button>
+    </div>
+    <input
+      type="number"
+      placeholder="Ingresa un monto personalizado"
+      class="input-field custom-amount-input"
+      [(ngModel)]="customAmount"
+      *ngIf="selectedAmount === 'Otro'"
+    />
+
+    <h2>Método de Pago</h2>
+    <div class="payment-method-options">
+      <button
+        class="payment-method-btn"
+        [class.active]="selectedPayment === 'Tarjeta'"
+        (click)="selectPaymentMethod('Tarjeta')"
+      >
+        Tarjeta
+      </button>
+      <button
+        class="payment-method-btn"
+        [class.active]="selectedPayment === 'PayPal'"
+        (click)="selectPaymentMethod('PayPal')"
+      >
+        PayPal
+      </button>
+      <button
+        class="payment-method-btn"
+        [class.active]="selectedPayment === 'Transferencia'"
+        (click)="selectPaymentMethod('Transferencia')"
+      >
+        Transferencia
+      </button>
+      <button
+        class="payment-method-btn"
+        [class.active]="selectedPayment === 'QR'"
+        (click)="selectPaymentMethod('QR')"
+      >
+        QR
+      </button>
+    </div>
+
+    <!-- Formulario solo si es tarjeta -->
+    <div class="credit-card-form" *ngIf="selectedPayment === 'Tarjeta'">
+      <input
+        type="text"
+        placeholder="Número de tarjeta"
+        class="input-field"
+        [(ngModel)]="cardNumber"
+      />
+      <div class="expiry-cvv-group">
+        <input
+          type="text"
+          placeholder="Fecha de vencimiento"
+          class="input-field half-width"
+          [(ngModel)]="expiry"
+        />
+        <input
+          type="text"
+          placeholder="CVV"
+          class="input-field half-width"
+          [(ngModel)]="cvv"
+        />
+      </div>
+      <input
+        type="text"
+        placeholder="Nombre en la tarjeta"
+        class="input-field"
+        [(ngModel)]="nameOnCard"
+      />
+    </div>
+
+    <!-- Imagen QR si se selecciona ese método -->
+    <div class="qr-display" *ngIf="selectedPayment === 'QR'">
+      <p>Escanea el siguiente código para donar:</p>
+      <img src="https://far-goteamimportaciones.com.bo/wp-content/uploads/2023/07/Bancos2-Far-go-team-930x1024.jpg" alt="QR Code" />
+    </div>
+
+    <button class="complete-donation-btn" (click)="completeDonation()">
+      Completar Donación
+    </button>
+  </div>
+</div>
