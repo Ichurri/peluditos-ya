@@ -24,7 +24,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/favicon.ico",
+              "src/routes.json"
             ],
             "styles": [
               "src/styles.css",
@@ -89,7 +92,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets",
+              "src/favicon.ico",
+              "src/routes.json"
             ],
             "styles": [
               "src/styles.css"
