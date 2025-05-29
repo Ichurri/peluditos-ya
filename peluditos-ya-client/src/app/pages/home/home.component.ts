@@ -29,16 +29,11 @@ export class HomeComponent implements OnInit {
     }, 5000);
   }
 
-  // PASO 3: Implementar los métodos de navegación
   navegarAPeluditos() {
-    // Asumiendo que tu ruta para ver mascotas es '/pets' o similar
-    // Verifica que esta ruta exista en tu configuración de enrutamiento (app.routes.ts o similar)
-    this.router.navigate(['/pets']);
+    this.router.navigate(['/adoption']);
   }
 
   navegarAComoAyudar() {
-    // Reemplaza '/como-ayudar' con la ruta real que tengas para esta sección
-    // Si no tienes una, deberás crearla y añadirla a tu configuración de enrutamiento
     this.router.navigate(['/como-ayudar']);
   }
 }
