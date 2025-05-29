@@ -1,7 +1,7 @@
+/* Responsive Footer Styles */
 footer {
   background: #FFD803;
   color: #000;
-  /* Eliminamos position: fixed y bottom: 0 para que no quede fijo */
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -9,31 +9,76 @@ footer {
   padding: 1rem 2rem;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
   margin-bottom: 0;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-/* El resto de los estilos del footer se mantienen igual */
 .footer-left {
   display: flex;
-  gap: 10px;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .footer-left img {
   width: 30px;
   height: 30px;
   cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.footer-left img:hover {
+  transform: scale(1.1);
 }
 
 .footer-right {
   text-align: right;
-  margin-right: 3%;
+  flex-shrink: 0;
 }
 
 .footer-right h2 {
   margin: 0;
-  font-size: 1.5rem;
+  font-size: clamp(1.2rem, 3vw, 1.5rem);
+  font-weight: 600;
 }
 
 .footer-right p {
   margin: 0;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+  opacity: 0.8;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem 1rem;
+    gap: 1.5rem;
+  }
+  
+  .footer-left {
+    justify-content: center;
+    order: 2;
+  }
+  
+  .footer-right {
+    text-align: center;
+    order: 1;
+  }
+}
+
+@media (max-width: 576px) {
+  footer {
+    padding: 1rem 0.5rem;
+  }
+  
+  .footer-left {
+    gap: 10px;
+  }
+  
+  .footer-left img {
+    width: 25px;
+    height: 25px;
+  }
 }

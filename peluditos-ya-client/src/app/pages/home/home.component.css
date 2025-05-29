@@ -1,20 +1,21 @@
+/* Home Component Responsive Styles */
 :host {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
 }
 
-/* Carrusel */
+/* Carousel Section */
 .carrusel-container {
   position: relative;
-
   height: 90vh;
+  min-height: 500px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
-  padding-left: 5rem;
+  padding: 0 2rem;
   transition: background-image 1s ease-in-out;
 }
 
@@ -31,87 +32,236 @@
   position: relative;
   color: white;
   font-family: 'Playfair Display', serif;
+  max-width: 80%;
+  z-index: 2;
 }
 
 .carrusel-text h1 {
   margin: 0;
-  font-size: 5rem;
+  font-size: clamp(2.5rem, 8vw, 5rem);
   line-height: 1.1;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
 .highlight-carrusel {
-  font-size: 7rem;
+  font-size: clamp(3.5rem, 10vw, 7rem);
   color: white;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
 }
 
 .subtext-carrusel {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 6vw, 3.5rem);
   color: black;
+  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
 }
 
-/* Bloques de contenido (left-block y right-block) */
+/* Content Blocks */
 .container {
   display: flex;
-  height: 50vh;
+  min-height: 60vh;
   flex-shrink: 0;
 }
 
-.left-block {
-  width: 50vw;
-  background-color: #444444;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-}
-
-.left-block img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.left-block h1 {
-  padding-left: 5rem;
-}
-
-.right-block {
-  width: 50vw;
+.left-block, .right-block {
+  width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  padding: 2rem;
+}
+
+.left-block {
+  background-color: #444444;
+  color: white;
+}
+
+.right-block {
   background-color: white;
+  overflow: hidden;
+}
+
+.left-block img, .right-block img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .left-block h1 {
   text-align: left;
   font-family: 'Playfair Display', serif;
+  line-height: 1.2;
 }
 
 .highlight {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
   color: white;
 }
 
 .subtext {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   color: #FFD803;
 }
 
-.right-block img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .black-text {
-  font-size: 3rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   color: black;
 }
 
 .highlight-yellow {
-  font-size: 4rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
   color: #FFD803;
+}
+
+/* Button Styles */
+.btn {
+  padding: 12px 28px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.btn:hover, .btn:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.btn-cta-carrusel {
+  background-color: #610dfd;
+  color: white;
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  padding: 15px 35px;
+}
+
+.btn-cta-carrusel:hover, .btn-cta-carrusel:focus {
+  background-color: #610dfda2;
+}
+
+.btn-accion {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-accion:hover, .btn-accion:focus {
+  background-color: #1e7e34;
+}
+
+.btn-ayuda {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.btn-ayuda:hover, .btn-ayuda:focus {
+  background-color: #e0a800;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .carrusel-container {
+    padding: 0 1.5rem;
+  }
+  
+  .left-block, .right-block {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .carrusel-container {
+    height: 70vh;
+    min-height: 400px;
+  }
+  
+  .container {
+    min-height: 50vh;
+  }
+  
+  .left-block, .right-block {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .carrusel-container {
+    height: 60vh;
+    min-height: 350px;
+    padding: 0 1rem;
+  }
+  
+  .carrusel-text {
+    max-width: 95%;
+  }
+  
+  .container {
+    flex-direction: column;
+    min-height: auto;
+  }
+  
+  .left-block, .right-block {
+    width: 100%;
+    min-height: 40vh;
+    padding: 2rem 1rem;
+  }
+  
+  .left-block h1 {
+    text-align: center;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+  
+  .btn-cta-carrusel {
+    padding: 12px 25px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carrusel-container {
+    height: 50vh;
+    min-height: 300px;
+    padding: 0 0.5rem;
+  }
+  
+  .left-block, .right-block {
+    padding: 1.5rem 0.5rem;
+    min-height: 30vh;
+  }
+  
+  .btn {
+    padding: 8px 16px;
+    font-size: 0.8rem;
+    margin-top: 15px;
+  }
+  
+  .btn-cta-carrusel {
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .carrusel-container {
+    height: 45vh;
+    min-height: 250px;
+  }
+  
+  .left-block, .right-block {
+    padding: 1rem 0.5rem;
+    min-height: 25vh;
+  }
 }
 
 /* Estilos para los nuevos botones */
