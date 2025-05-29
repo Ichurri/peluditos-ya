@@ -54,15 +54,16 @@ export class AdoptionComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.obtenerMascotas();
     this.verificarUsuario();
-
-    // Duplicamos las imágenes del carrusel para simular un scroll "infinito".
-    // Esto crea un bucle visual cuando el usuario llega al final de la primera secuencia.
     this.carouselImageUrls = [...this.carouselImageUrls, ...this.carouselImageUrls];
   }
 
   ngAfterViewInit(): void {
     // Iniciar el auto-scroll del carrusel una vez que la vista se ha inicializado.
     this.iniciarCarrusel();
+  }
+
+  adoptarMascota(nombre:string){
+    localStorage.setItem('selectedPetName', nombre)
   }
 
   obtenerMascotas() {
@@ -122,6 +123,8 @@ export class AdoptionComponent implements OnInit, AfterViewInit {
     this.usuarioAutenticado = email !== null && email !== '';
   }
 
+
+
   // Función para iniciar el auto-scroll del carrusel
   iniciarCarrusel() {
     const carousel = document.querySelector('.tricky-cards-container') as HTMLElement;
@@ -149,37 +152,29 @@ export class AdoptionComponent implements OnInit, AfterViewInit {
       carousel.style.cursor = 'auto'; // Restaurar el cursor por defecto
     });
 
-    // Función principal de auto-scroll, usa requestAnimationFrame para mayor fluidez
     const autoScroll = () => {
       if (isScrollingPaused) {
         requestAnimationFrame(autoScroll); // Si está pausado, seguir pidiendo frames pero sin mover
         return;
       }
 
-      // Lógica para el scroll "infinito"
-      // Si el scroll ha llegado al final de la primera mitad de las imágenes duplicadas,
-      // reiniciamos la posición de scroll para que parezca un bucle continuo.
       const halfWidth = carousel.scrollWidth / 2;
 
       if (carousel.scrollLeft >= halfWidth) {
-        // Restamos la mitad del ancho para volver al inicio de la segunda secuencia de imágenes.
         carousel.scrollLeft -= halfWidth;
         scrollAmount = carousel.scrollLeft; // Sincronizar scrollAmount con la nueva posición
       } else {
         scrollAmount += scrollStep;
       }
 
-      // Aplica el scroll
       carousel.scrollTo({
         left: scrollAmount,
         behavior: 'smooth' // Mantiene el desplazamiento suave
       });
 
-      // Solicita el siguiente frame de animación
       requestAnimationFrame(autoScroll);
     };
 
-    // Iniciar el auto-scroll
     requestAnimationFrame(autoScroll);
   }
 }

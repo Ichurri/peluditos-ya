@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f2ab5fb4-de8b-4a75-837f-190a05a23e38" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/InterviewController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/InterviewRequestDTO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/InterviewService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/ShelterRequestController.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/controller/ShelterRequestController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalDetailDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalDetailDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/dto/AnimalResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/model/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/MailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/main/java/com/peluditosya/peluditos_ya_server/service/MailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/peluditos-ya-server/src/test/java/com/peluditosya/peluditos_ya_server/PeluditosYaServerApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/peluditos-ya-server/src/test/java/com/peluditosya/peluditos_ya_server/PeluditosYaServerApplicationTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +42,7 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "5.3.Perform__pet__sponsorship",
+    "git-widget-placeholder": "Merging main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/Uni/7mo semestre/Taller de Sistemas de Informacion/peluditos-ya"

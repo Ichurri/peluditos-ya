@@ -13,6 +13,7 @@ import { AboutUsComponent } from './pages/about-us/about-us.component';
 import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DonationComponent } from './pages/donation/donation.component';
+import { InterviewFormComponent} from './components/interview-form//interview-form.component';
 
 export const routes: Routes = [
     {
@@ -83,7 +84,12 @@ export const routes: Routes = [
     {
         path: 'donation',
         component: DonationComponent,
-        title: 'Donation'
+        title: 'Donacion'
+    },
+    {
+        path: 'interview-form/:id',
+        component: InterviewFormComponent,
+        title: 'Formulario de Entrevista'
     },
     { 
         path: '**', 

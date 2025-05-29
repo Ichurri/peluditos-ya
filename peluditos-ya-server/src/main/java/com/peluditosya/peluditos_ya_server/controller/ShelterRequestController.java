@@ -17,7 +17,6 @@ public class ShelterRequestController {
 
     private final ShelterRequestService shelterRequestService;
 
-    // Crear solicitud de refugio
     @PostMapping
     public ResponseEntity<String> createRequest(@RequestBody ShelterRequestDto requestDto) {
         // Validar el DTO si es necesario (puedes añadir validación aquí)
@@ -25,7 +24,6 @@ public class ShelterRequestController {
         return ResponseEntity.ok("Solicitud enviada con éxito");
     }
 
-    // Obtener solicitudes pendientes
     @GetMapping("/pending")
     public ResponseEntity<List<ShelterRequest>> getPendingRequests() {
         List<ShelterRequest> pendingRequests = shelterRequestService.getPendingRequests();

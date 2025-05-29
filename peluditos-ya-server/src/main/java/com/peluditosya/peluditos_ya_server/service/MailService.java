@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
 
 @Service
 public class MailService {
@@ -41,6 +42,26 @@ public class MailService {
         } else {
             message = "El estado de tu solicitud ha sido actualizado a: " + status;
         }
+
+        SimpleMailMessage email = new SimpleMailMessage();
+        email.setTo(toEmail);
+        email.setSubject(subject);
+        email.setText(message);
+
+        mailSender.send(email);
+    }
+
+    public void sendInterviewNotificationToShelter(String toEmail, String userName, String petName, LocalDateTime interviewDateTime) {
+        String subject = "Confirmación de entrevista para adopción";
+        String message = String.format(
+            "Hola,\n\n%s ha solicitado una entrevista para conocer a la mascota \"%s\".\n\n" +
+                "Fecha y hora solicitada: %s a las %s.\n\n" +
+                    "Por favor, ponte en contacto con el adoptante si necesitas confirmar o reprogramar la cita.",
+            userName,
+            petName,
+            interviewDateTime.toLocalDate(),
+            interviewDateTime.toLocalTime()
+        );
 
         SimpleMailMessage email = new SimpleMailMessage();
         email.setTo(toEmail);

@@ -38,8 +38,10 @@
             <button *ngIf="mascota.id" [routerLink]="['/animal-profile', mascota.id]">
                 Ver perfil
             </button>
-            <button>Adoptar</button>
-          </div>
+            <button *ngIf="mascota.id" (click)="adoptarMascota(mascota.nombre)" [routerLink]="['/interview-form', mascota.id]">
+                Adoptar
+            </button>
+        </div>
     </div>
 </div>
 
