@@ -83,6 +83,7 @@ public class AnimalService {
         dto.setPhotoPath(animal.getPhotoPath());
 
         if (animal.getShelterRequest() != null) {
+            dto.setShelterId(animal.getShelterRequest().getId());
             dto.setShelterName(animal.getShelterRequest().getShelterName());
             dto.setShelterAddress(animal.getShelterRequest().getShelterAddress());
             dto.setShelterPhone(animal.getShelterRequest().getPhone());

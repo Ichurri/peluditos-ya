@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AnimalService } from '../../services/auth.animal.service';
+import { AuthShelterService } from '../../services/auth.shelter.service';
 import { CommonModule } from '@angular/common';
 import * as QRCode from 'qrcode';
 
@@ -14,6 +15,7 @@ import * as QRCode from 'qrcode';
 export class PetProfileComponent implements OnInit {
   petId!: number;
   pet: any;
+  shelter: any = null;
   loading = true;
   error = false;
   asignando = false;
@@ -22,7 +24,8 @@ export class PetProfileComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private animalService: AnimalService
+    private animalService: AnimalService,
+    private shelterService: AuthShelterService
   ) {}
 
   ngOnInit(): void {
@@ -31,22 +34,33 @@ export class PetProfileComponent implements OnInit {
   }
 
   getPetProfile(): void {
-    this.animalService.getAnimalProfile(this.petId).subscribe({
-      next: (data) => {
-        this.pet = data;
-        this.loading = false;
-        // Solo generar el QR si no tiene padrino
-        if (!this.pet.sponsor) {
-          this.generateQRCode();
-        }
-      },
-      error: (err) => {
-        console.error('Error al cargar el perfil del animal', err);
-        this.error = true;
-        this.loading = false;
+  this.animalService.getAnimalProfile(this.petId).subscribe({
+    next: (data) => {
+      this.pet = data;
+      console.log('Datos de la mascota:', this.pet); 
+      if (this.pet.shelterId) {
+        this.shelterService.getShelterById(this.pet.shelterId).subscribe({
+          next: (shelterData) => {
+            console.log('Datos del shelter:', shelterData); // <-- Aquí imprime los datos
+            this.shelter = shelterData;
+          },
+          error: (err) => {
+            console.error('Error al cargar el refugio', err);
+          }
+        });
       }
-    });
-  }
+      this.loading = false;
+      if (!this.pet.sponsor) {
+        this.generateQRCode();
+      }
+    },
+    error: (err) => {
+      console.error('Error al cargar el perfil del animal', err);
+      this.error = true;
+      this.loading = false;
+    }
+  });
+}
 
   asignarPadrino(): void {
     const userId = localStorage.getItem('userId');

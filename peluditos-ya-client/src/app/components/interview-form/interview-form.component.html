@@ -1,0 +1,22 @@
+<div class="registro-container">
+  <form [formGroup]="interviewForm" (ngSubmit)="submitForm()">
+    <h2>Solicitar entrevista para {{ petName }}</h2>
+
+    <label for="userName">Tu nombre completo</label>
+    <input type="text" id="userName" formControlName="userName" required />
+
+    <label for="userEmail">Tu correo electrónico</label>
+    <input type="email" id="userEmail" formControlName="userEmail" required />
+
+    <label for="shelterEmail">Correo del refugio</label>
+    <input type="email" id="shelterEmail" formControlName="shelterEmail" required />
+
+    <label for="interviewDateTime">Fecha y hora deseada</label>
+    <input type="datetime-local" id="interviewDateTime" formControlName="interviewDateTime" required />
+
+    <label for="description"> Descripcion</label>
+    <textarea id="description" formControlName="description" placeholder="¿Por qué deseas adoptar a esta patita?" rows="5" requiered></textarea>
+
+    <button type="submit" [disabled]="interviewForm.invalid">Enviar solicitud</button>
+  </form>
+</div>
