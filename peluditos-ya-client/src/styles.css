@@ -1,3 +1,4 @@
+/* Global responsive styles for PeluditosYa */
 * {
   margin: 0;
   padding: 0;
@@ -8,14 +9,36 @@ html, body {
   width: 100%;
   height: 100%;
   overflow-x: hidden; /* Evita desplazamiento horizontal */
+  font-size: 16px; /* Base font size for rem calculations */
 }
 
-/* Añade estas nuevas reglas */
+/* Responsive font scaling */
+@media (max-width: 1200px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 13px;
+  }
+}
+
+/* Layout structure */
 body {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* Usamos vh como fallback para navegadores antiguos */
-  min-height: 100dvh; /* Prefiere la altura dinámica del viewport en dispositivos móviles */
+  min-height: 100vh; /* Fallback for older browsers */
+  min-height: 100dvh; /* Dynamic viewport height for mobile devices */
+  line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 app-root {
@@ -26,5 +49,51 @@ app-root {
 
 app-footer {
   margin-top: auto;
-  flex-shrink: 0; /* Evita que el footer se encoja */
+  flex-shrink: 0; /* Prevents footer from shrinking */
+}
+
+/* Responsive container utilities */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+@media (min-width: 576px) {
+  .container {
+    padding: 0 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    padding: 0 2.5rem;
+  }
+}
+
+/* Responsive utilities */
+.text-center {
+  text-align: center;
+}
+
+.d-none {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .d-md-none {
+    display: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .d-md-block {
+    display: block !important;
+  }
 }

@@ -1,21 +1,20 @@
 .donation-container {
   background-color: #ffffff;
-  border-radius: 12px;
+  border-radius: clamp(8px, 2vw, 12px);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   overflow: hidden;
-  max-width: 50vw;
+  max-width: min(95vw, 50vw);
   width: 100%;
-  margin: 0 auto;
-  
+  margin: clamp(1rem, 3vw, 2rem) auto;
 }
 
 .hero-section {
   position: relative;
   width: 100%;
-  height: 320px;
+  height: clamp(200px, 40vw, 320px);
   overflow: hidden;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
+  border-top-left-radius: clamp(8px, 2vw, 12px);
+  border-top-right-radius: clamp(8px, 2vw, 12px);
 }
 
 .hero-image {
@@ -37,20 +36,21 @@
   align-items: center;
   text-align: center;
   color: #ffffff;
-  padding: 20px;
+  padding: clamp(15px, 3vw, 20px);
   box-sizing: border-box;
 }
 
 .hero-overlay h1 {
-  font-size: 2.5em;
-  margin-bottom: 10px;
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  margin-bottom: clamp(8px, 2vw, 10px);
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .hero-overlay p {
-  font-size: 1.1em;
-  max-width: 80%;
-  margin-bottom: 20px;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  max-width: 90%;
+  margin-bottom: clamp(15px, 3vw, 20px);
   line-height: 1.5;
 }
 
@@ -58,12 +58,13 @@
   background-color: #ff6f00;
   color: #ffffff;
   border: none;
-  padding: 12px 30px;
+  padding: clamp(10px, 2vw, 12px) clamp(25px, 5vw, 30px);
   border-radius: 50px;
-  font-size: 1.1em;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
   cursor: pointer;
   transition: background-color 0.3s ease;
   font-weight: 600;
+  min-height: 44px; /* Touch-friendly minimum height */
 }
 
 .donate-now-btn:hover {
@@ -71,34 +72,40 @@
 }
 
 .form-section {
-  padding: 30px;
+  padding: clamp(20px, 4vw, 30px);
 }
 
 .form-section h2 {
-  font-size: 1.4em;
+  font-size: clamp(1.2rem, 3vw, 1.4rem);
   color: #333333;
-  margin-bottom: 20px;
+  margin-bottom: clamp(15px, 3vw, 20px);
   font-weight: 600;
 }
 
 .amount-options {
   display: flex;
-  gap: 10px;
-  margin-bottom: 25px;
+  gap: clamp(8px, 2vw, 10px);
+  margin-bottom: clamp(20px, 4vw, 25px);
+  flex-wrap: wrap;
 }
 
 .amount-btn {
   background-color: #e0e0e0;
   color: #555555;
   border: 1px solid #d0d0d0;
-  padding: 10px 20px;
+  padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
   border-radius: 8px;
-  font-size: 1em;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   cursor: pointer;
   transition: all 0.3s ease;
-  flex-grow: 1;
+  flex: 1;
+  min-width: clamp(80px, 15vw, 120px);
   text-align: center;
   font-weight: 600;
+  min-height: 44px; /* Touch-friendly minimum height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .amount-btn:hover,
@@ -117,14 +124,15 @@
 }
 
 .input-field {
-  width: calc(100% - 20px);
-  padding: 12px 10px;
-  margin-bottom: 15px;
+  width: 100%;
+  padding: clamp(10px, 2vw, 12px);
+  margin-bottom: clamp(12px, 2.5vw, 15px);
   border: 1px solid #cccccc;
   border-radius: 8px;
-  font-size: 1em;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   color: #333333;
   box-sizing: border-box;
+  min-height: 44px; /* Touch-friendly minimum height */
 }
 
 .input-field::placeholder {
@@ -139,22 +147,28 @@
 
 .payment-method-options {
   display: flex;
-  gap: 10px;
-  margin-bottom: 25px;
+  gap: clamp(8px, 2vw, 10px);
+  margin-bottom: clamp(20px, 4vw, 25px);
+  flex-wrap: wrap;
 }
 
 .payment-method-btn {
   background-color: #e0e0e0;
   color: #555555;
   border: 1px solid #d0d0d0;
-  padding: 10px 20px;
+  padding: clamp(8px, 2vw, 10px) clamp(15px, 3vw, 20px);
   border-radius: 8px;
-  font-size: 1em;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   cursor: pointer;
   transition: all 0.3s ease;
-  flex-grow: 1;
+  flex: 1;
+  min-width: clamp(100px, 20vw, 140px);
   text-align: center;
   font-weight: 600;
+  min-height: 44px; /* Touch-friendly minimum height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .payment-method-btn:hover,
@@ -182,14 +196,15 @@
   background-color: #28a745;
   color: #ffffff;
   border: none;
-  padding: 15px 30px;
+  padding: clamp(12px, 3vw, 15px) clamp(25px, 5vw, 30px);
   border-radius: 8px;
-  font-size: 1.15em;
+  font-size: clamp(1rem, 2.5vw, 1.15rem);
   cursor: pointer;
   width: 100%;
-  margin-top: 20px;
+  margin-top: clamp(15px, 3vw, 20px);
   transition: background-color 0.3s ease;
   font-weight: 700;
+  min-height: 44px; /* Touch-friendly minimum height */
 }
 
 .complete-donation-btn:hover {
@@ -201,11 +216,11 @@
     justify-content: center;
     align-items: center;
     background-color: #f5f5f5;
-    padding: 20px;
+    padding: clamp(15px, 3vw, 20px);
 }
 
 .qr-display img {
-    max-width: 40vw;
+    max-width: min(80vw, 40vw);
     max-height: 50vh;
     width: 100%;
     height: auto;
@@ -214,14 +229,30 @@
     object-fit: contain;
 }
 
-/* Responsive */
+/* Enhanced Responsive Design */
+@media (max-width: 1024px) {
+  .donation-container {
+    max-width: 85vw;
+  }
+}
+
 @media (max-width: 768px) {
+  .donation-container {
+    max-width: 95vw;
+    margin: 1rem auto;
+  }
+
+  .hero-section {
+    height: clamp(180px, 35vw, 250px);
+  }
+
   .hero-overlay h1 {
-    font-size: 2em;
+    font-size: 2rem;
   }
 
   .hero-overlay p {
-    font-size: 0.9em;
+    font-size: 0.9rem;
+    max-width: 95%;
   }
 
   .form-section {
@@ -231,11 +262,13 @@
   .amount-options,
   .payment-method-options {
     flex-direction: column;
+    gap: 8px;
   }
 
   .amount-btn,
   .payment-method-btn {
     width: 100%;
+    min-width: auto;
   }
 
   .expiry-cvv-group {
@@ -247,61 +280,113 @@
     width: 100%;
   }
 
+  .qr-display img {
+    max-width: 90vw;
+  }
+
   .amount-btn.active,
-.payment-method-btn.active {
-  background-color: #ffd803;
-  color: #000;
-  border: 2px solid #000;
-}
+  .payment-method-btn.active {
+    background-color: #ffd803;
+    color: #000;
+    border: 2px solid #000;
+  }
 
-.complete-donation-btn {
-  margin-top: 1rem;
-  padding: 0.7rem 1.5rem;
-  background-color: #ffd803;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+  .complete-donation-btn {
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    background-color: #ffd803;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #000;
+  }
 
-.complete-donation-btn:hover {
-  background-color: #e6c200;
-}
-
+  .complete-donation-btn:hover {
+    background-color: #e6c200;
+  }
 }
 
 @media (max-width: 480px) {
+  .donation-container {
+    margin: 0.5rem auto;
+    border-radius: 8px;
+  }
+
   .hero-section {
-    height: 250px;
+    height: clamp(150px, 30vw, 200px);
+    border-radius: 8px 8px 0 0;
   }
 
   .hero-overlay h1 {
-    font-size: 1.8em;
+    font-size: 1.6rem;
   }
 
   .hero-overlay p {
-    font-size: 0.85em;
+    font-size: 0.85rem;
   }
 
   .donate-now-btn {
-    padding: 10px 25px;
-    font-size: 1em;
+    padding: 8px 20px;
+    font-size: 0.9rem;
+  }
+
+  .form-section {
+    padding: 15px;
   }
 
   .form-section h2 {
-    font-size: 1.2em;
+    font-size: 1.1rem;
   }
 
   .input-field,
   .amount-btn,
   .payment-method-btn {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     padding: 10px;
   }
 
   .complete-donation-btn {
-    font-size: 1em;
-    padding: 12px 20px;
+    font-size: 0.95rem;
+    padding: 10px 15px;
+  }
+  
+  .qr-display {
+    padding: 15px;
+  }
+
+  .qr-display img {
+    max-width: 95vw;
+  }
+}
+
+@media (max-width: 320px) {
+  .donation-container {
+    margin: 0.25rem auto;
+  }
+
+  .form-section {
+    padding: 12px;
+  }
+
+  .hero-overlay h1 {
+    font-size: 1.4rem;
+  }
+
+  .hero-overlay p {
+    font-size: 0.8rem;
+  }
+
+  .input-field,
+  .amount-btn,
+  .payment-method-btn,
+  .complete-donation-btn {
+    font-size: 0.85rem;
+  }
+
+  .amount-options,
+  .payment-method-options {
+    gap: 6px;
   }
 }

@@ -1,22 +1,23 @@
 main {
-  max-width: 700px;
-  margin: 6rem auto;
-  padding: 0 2rem;
+  max-width: min(90vw, 700px);
+  margin: clamp(3rem, 8vw, 6rem) auto;
+  padding: 0 clamp(1rem, 3vw, 2rem);
   text-align: center;
   font-family: 'Poppins', sans-serif;
   color: #333;
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: clamp(2rem, 6vw, 3rem);
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: clamp(0.8rem, 2vw, 1rem);
   color: #222;
+  line-height: 1.2;
 }
 
 .intro-text {
-  font-size: 1.25rem;
-  margin-bottom: 3rem;
+  font-size: clamp(1rem, 3vw, 1.25rem);
+  margin-bottom: clamp(2rem, 5vw, 3rem);
   line-height: 1.6;
   color: #444;
 }
@@ -24,28 +25,34 @@ h1 {
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: clamp(1rem, 3vw, 1.5rem);
   text-align: left;
 }
 
 .contact-form label {
   font-weight: 600;
-  margin-bottom: 0.3rem;
+  margin-bottom: clamp(0.2rem, 1vw, 0.3rem);
   display: block;
   color: #555;
+  font-size: clamp(0.9rem, 2vw, 1rem);
 }
 
 .contact-form input,
 .contact-form textarea {
-  padding: 0.8rem 1rem;
-  border-radius: 10px;
+  padding: clamp(0.6rem, 2vw, 0.8rem) clamp(0.8rem, 2vw, 1rem);
+  border-radius: clamp(8px, 2vw, 10px);
   border: 1.5px solid #ccc;
-  font-size: 1rem;
+  font-size: clamp(0.9rem, 2vw, 1rem);
   transition: border-color 0.3s ease;
   width: 100%;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
   resize: vertical;
+  min-height: 44px; /* Touch-friendly minimum height */
+}
+
+.contact-form textarea {
+  min-height: clamp(100px, 20vw, 120px);
 }
 
 .contact-form input:focus,
@@ -58,27 +65,27 @@ h1 {
   background-color: #ffd803;
   color: #222;
   font-weight: 700;
-  font-size: 1.2rem;
-  padding: 0.9rem 1.5rem;
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  padding: clamp(0.7rem, 2vw, 0.9rem) clamp(1.2rem, 3vw, 1.5rem);
   border: none;
-  border-radius: 12px;
+  border-radius: clamp(10px, 2vw, 12px);
   cursor: pointer;
   transition: background-color 0.3s ease;
   align-self: center;
-  width: 150px;
+  width: clamp(120px, 30vw, 150px);
+  min-height: 44px; /* Touch-friendly minimum height */
 }
 
 .contact-form button:hover {
   background-color: #e6c000;
 }
 
-/* Usar los estilos que ya tenías, y agrega para errores */
-
+/* Error styles and responsive enhancements */
 .error {
-  color: #d93025; /* rojo suave */
-  font-size: 0.9rem;
-  margin-top: 0.3rem;
-  margin-bottom: 1rem;
+  color: #d93025;
+  font-size: clamp(0.8rem, 2vw, 0.9rem);
+  margin-top: clamp(0.2rem, 1vw, 0.3rem);
+  margin-bottom: clamp(0.8rem, 2vw, 1rem);
   text-align: left;
 }
 
@@ -86,4 +93,67 @@ button[disabled] {
   background-color: #ccc;
   cursor: not-allowed;
   opacity: 0.7;
+}
+
+/* Media queries for enhanced responsiveness */
+@media (max-width: 768px) {
+  main {
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .contact-form {
+    gap: 1rem;
+  }
+  
+  .contact-form button {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  main {
+    margin: 1.5rem auto;
+  }
+  
+  h1 {
+    font-size: 1.8rem;
+  }
+  
+  .intro-text {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.6rem 0.8rem;
+    font-size: 0.9rem;
+  }
+  
+  .contact-form button {
+    font-size: 1rem;
+    padding: 0.7rem 1.2rem;
+  }
+}
+
+@media (max-width: 320px) {
+  main {
+    padding: 0 0.5rem;
+  }
+  
+  h1 {
+    font-size: 1.6rem;
+  }
+  
+  .contact-form {
+    gap: 0.8rem;
+  }
+  
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
 }

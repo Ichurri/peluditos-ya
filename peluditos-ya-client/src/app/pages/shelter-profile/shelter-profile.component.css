@@ -2,16 +2,16 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh; /* Ocupa toda la altura de la ventana */
-    background-color: #f9f9f9; /* Fondo claro */
-    padding: 2rem;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: clamp(1rem, 3vw, 2rem);
 }
 
 .shelter-profile {
-    max-width: 800px;
+    max-width: min(95vw, 800px);
     width: 100%;
-    background-color: #fff; /* Fondo blanco */
-    border-radius: 12px;
+    background-color: #fff;
+    border-radius: clamp(8px, 2vw, 12px);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     font-family: 'Segoe UI', sans-serif;
     position: relative;
@@ -21,23 +21,23 @@
 
 /* Portada estilo Facebook */
 .cover-photo {
-    height: 200px;
+    height: clamp(120px, 25vw, 200px);
     width: 100%;
     background: url('https://t3.ftcdn.net/jpg/05/58/45/02/240_F_558450244_JVL848woVRCZmFXWQqD0imauEyfSgKnU.jpg') center/cover no-repeat;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    margin-bottom: 4rem;
+    border-top-left-radius: clamp(8px, 2vw, 12px);
+    border-top-right-radius: clamp(8px, 2vw, 12px);
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
     position: relative;
 }
 
 /* Foto de perfil */
 .profile-picture {
     position: absolute;
-    top: 140px;
+    top: clamp(80px, 18vw, 140px);
     left: 50%;
     transform: translateX(-50%);
-    width: 120px;
-    height: 120px;
+    width: clamp(80px, 15vw, 120px);
+    height: clamp(80px, 15vw, 120px);
     border-radius: 50%;
     overflow: hidden;
     border: 4px solid white;
@@ -52,67 +52,80 @@
 
 /* Información principal */
 .shelter-profile h1 {
-    font-size: 2rem;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    margin-top: clamp(2rem, 5vw, 3rem);
+    margin-bottom: clamp(0.8rem, 2vw, 1rem);
     color: #333;
+    line-height: 1.2;
+    padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .description {
     font-style: italic;
     color: #666;
-    margin-bottom: 1.5rem;
+    margin-bottom: clamp(1rem, 3vw, 1.5rem);
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    line-height: 1.4;
+    padding: 0 clamp(1rem, 3vw, 2rem);
+}
+
+.info-section {
+    padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .info-section p {
-    margin: 0.5rem 0;
-    font-size: 1rem;
+    margin: clamp(0.4rem, 1vw, 0.5rem) 0;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     color: #444;
+    line-height: 1.4;
 }
 
 .badge {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: clamp(0.4rem, 1vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
     border-radius: 6px;
     color: white;
     font-weight: bold;
-    font-size: 0.9rem;
-    margin-top: 1rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
+    margin-top: clamp(0.8rem, 2vw, 1rem);
 }
 
 .badge.approved {
-    background-color: #28a745; /* Verde */
+    background-color: #28a745;
 }
 
 .badge.pending {
-    background-color: #ffc107; /* Amarillo */
+    background-color: #ffc107;
     color: #000;
 }
 
 .badge.rejected {
-    background-color: #dc3545; /* Rojo */
+    background-color: #dc3545;
 }
 
 .created-at {
-    font-size: 0.85rem;
+    font-size: clamp(0.8rem, 1.8vw, 0.85rem);
     color: #888;
-    margin-top: 1rem;
+    margin-top: clamp(0.8rem, 2vw, 1rem);
+    padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 /* Botón de acción */
 .actions {
-    margin-top: 2rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
+    padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .actions button {
-    padding: 0.5rem 1rem;
+    padding: clamp(0.4rem, 1vw, 0.5rem) clamp(0.8rem, 2vw, 1rem);
     border: none;
     border-radius: 6px;
-    background-color: #007bff; /* Azul */
+    background-color: #007bff;
     color: white;
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 2vw, 1rem);
     cursor: pointer;
     transition: background-color 0.3s ease;
+    min-height: 44px; /* Touch-friendly minimum height */
 }
 
 .actions button:hover {
@@ -121,30 +134,33 @@
 
 /* Galería de mascotas */
 .pets-gallery {
-    margin-top: 2rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
     text-align: left;
+    padding: 0 clamp(1rem, 3vw, 2rem);
 }
 
 .pets-gallery h2 {
-    font-size: 1.5rem;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     color: #333;
-    margin-bottom: 1rem;
+    margin-bottom: clamp(0.8rem, 2vw, 1rem);
+    text-align: center;
 }
 
 .pets-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(clamp(140px, 20vw, 160px), 1fr));
+    gap: clamp(0.8rem, 2vw, 1rem);
+    justify-items: center;
 }
 
 .pet-card {
     background-color: #fafafa;
-    border-radius: 12px;
+    border-radius: clamp(8px, 2vw, 12px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    width: 160px;
+    width: 100%;
+    max-width: 160px;
     text-align: center;
-    padding: 1rem;
+    padding: clamp(0.8rem, 2vw, 1rem);
     transition: transform 0.3s ease;
 }
 
@@ -154,22 +170,24 @@
 
 .pet-card img {
     width: 100%;
-    height: 120px;
+    height: clamp(80px, 15vw, 120px);
     object-fit: cover;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
+    border-radius: clamp(6px, 1.5vw, 8px);
+    margin-bottom: clamp(0.4rem, 1vw, 0.5rem);
 }
 
 .pet-card h3 {
-    font-size: 1.1rem;
-    margin: 0.5rem 0;
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    margin: clamp(0.4rem, 1vw, 0.5rem) 0;
     color: #007bff;
+    line-height: 1.2;
 }
 
 .pet-card p {
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2vw, 0.9rem);
     color: #555;
-    margin-bottom: 0.5rem;
+    margin-bottom: clamp(0.4rem, 1vw, 0.5rem);
+    line-height: 1.3;
 }
 
 /* Sistema de calificación con estrellas */
@@ -181,8 +199,8 @@
 .rating:not(:checked) > label {
     float: right;
     cursor: pointer;
-    font-size: 30px;
-  color: #666; /* Color de las estrellas no seleccionadas */
+    font-size: clamp(24px, 5vw, 30px);
+    color: #666;
 }
 
 .rating:not(:checked) > label:before {
@@ -194,12 +212,12 @@
 .rating > input:checked ~ label:hover,
 .rating > input:checked ~ label:hover ~ label,
 .rating > label:hover ~ input:checked ~ label {
-  color: #e58e09; /* Color de las estrellas al pasar el mouse */
+  color: #e58e09;
 }
 
 .rating:not(:checked) > label:hover,
 .rating:not(:checked) > label:hover ~ label {
-  color: #ff9e0b; /* Color de las estrellas al pasar el mouse sin seleccionar */
+  color: #ff9e0b;
 }
 
 .rating > input:checked ~ label {
@@ -207,13 +225,124 @@
 }
 
 .map-container {
-    margin-top: 2rem;
+    margin-top: clamp(1.5rem, 3vw, 2rem);
     text-align: center;
+    padding: 0 clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
 }
 
 #shelter-map {
-    height: 300px;
+    height: clamp(200px, 40vw, 300px);
     width: 100%;
-    border-radius: 12px;
+    border-radius: clamp(8px, 2vw, 12px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries for enhanced responsiveness */
+@media (max-width: 768px) {
+    .shelter-profile-container {
+        padding: 1rem;
+    }
+    
+    .cover-photo {
+        height: 150px;
+        margin-bottom: 3rem;
+    }
+    
+    .profile-picture {
+        top: 100px;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .shelter-profile h1 {
+        margin-top: 2.5rem;
+        font-size: 1.6rem;
+    }
+    
+    .pets-list {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .shelter-profile-container {
+        padding: 0.5rem;
+    }
+    
+    .shelter-profile {
+        border-radius: 8px;
+    }
+    
+    .cover-photo {
+        height: 120px;
+        margin-bottom: 2.5rem;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .profile-picture {
+        top: 70px;
+        width: 80px;
+        height: 80px;
+    }
+    
+    .shelter-profile h1 {
+        margin-top: 2rem;
+        font-size: 1.4rem;
+    }
+    
+    .description {
+        font-size: 0.9rem;
+    }
+    
+    .info-section p {
+        font-size: 0.85rem;
+    }
+    
+    .pets-list {
+        grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+        gap: 0.6rem;
+    }
+    
+    .pet-card {
+        padding: 0.6rem;
+    }
+    
+    .pet-card img {
+        height: 70px;
+    }
+    
+    #shelter-map {
+        height: 200px;
+    }
+}
+
+@media (max-width: 320px) {
+    .cover-photo {
+        height: 100px;
+        margin-bottom: 2rem;
+    }
+    
+    .profile-picture {
+        top: 60px;
+        width: 70px;
+        height: 70px;
+    }
+    
+    .shelter-profile h1 {
+        font-size: 1.2rem;
+        margin-top: 1.5rem;
+    }
+    
+    .pets-list {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    }
+    
+    .pet-card h3 {
+        font-size: 0.9rem;
+    }
+    
+    .pet-card p {
+        font-size: 0.75rem;
+    }
 }
