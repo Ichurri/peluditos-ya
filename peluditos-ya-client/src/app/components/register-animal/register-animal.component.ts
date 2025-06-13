@@ -19,17 +19,13 @@ export class RegisterAnimalComponent {
     behavior: '',
     shelterId: '',
     medicalFile: null,
-    photo: null
+    photoUrl: ''  // Usamos solo la URL
   };
 
   constructor(private animalService: AnimalService) {}
 
   onMedicalFileSelected(event: any) {
     this.nuevaMascota.medicalFile = event.target.files[0];
-  }
-
-  onPhotoSelected(event: any) {
-    this.nuevaMascota.photo = event.target.files[0];
   }
 
   registrarMascota() {

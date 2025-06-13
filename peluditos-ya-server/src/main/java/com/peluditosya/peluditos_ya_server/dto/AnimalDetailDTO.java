@@ -18,6 +18,8 @@ public class AnimalDetailDTO {
     private String shelterPhone;
     private Long shelterId;
     private Long sponsorId;
+    private String photoUrl;
+
     
     // Getters and setters
     public Long getId() {
@@ -127,4 +129,12 @@ public class AnimalDetailDTO {
     public Long getShelterId(){return shelterId;}
 
     public void setShelterId(Long shelterid){ this.shelterId = shelterid; }
+
+    public String getPhotoUrl() {
+    return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 }

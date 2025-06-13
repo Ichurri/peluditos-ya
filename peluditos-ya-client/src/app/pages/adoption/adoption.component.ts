@@ -87,7 +87,7 @@ export class AdoptionComponent implements OnInit, AfterViewInit {
             edad: edadTexto, // Usamos 'cachorro' o 'adulto'
             sexo: mascota.sex,
             descripcion: `Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
-            imagen: 'https://img.freepik.com/foto-gratis/perro-pug-aislado-fondo-blanco_2829-11416.jpg?semt=ais_hybrid&w=740' // URL de imagen de ejemplo, considera usar imagen real de la mascota
+            imagen: mascota.photoUrl || 'https://files.lafm.com.co/assets/public/styles/twitter/public/2023-08/murio_cheems_el_perrito_de_los_meme.jpg.webp?VersionId=dHwATkyc2gQxvSwNeWXyOFUXPzaF3bbQ&itok=MmkIcD6M' // Imagen por defecto si no hay URL
           };
         });
       },

@@ -42,7 +42,12 @@ public class AnimalService {
         ShelterRequest shelterRequest = shelterRequestOpt.get();
 
         String medicalFilePath = fileStorageService.storeFile(request.getMedicalFile(), "medical-files");
-        String photoPath = fileStorageService.storeFile(request.getPhoto(), "animal-photos");
+        String photoPath = null;
+        if (request.getPhoto() != null && !request.getPhoto().isEmpty()) {
+            photoPath = fileStorageService.storeFile(request.getPhoto(), "animal-photos");
+        } else if (request.getPhotoUrl() != null && !request.getPhotoUrl().isEmpty()) {
+            photoPath = request.getPhotoUrl();
+        }
 
         Animal animal = new Animal();
         animal.setName(request.getName());

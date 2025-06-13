@@ -11,6 +11,8 @@ public class AnimalRegistrationRequest {
     private MultipartFile medicalFile;
     private MultipartFile photo;
     private Long shelterId;
+    private String photoUrl;
+
 
     // Getters and setters
     public String getName() {
@@ -75,5 +77,13 @@ public class AnimalRegistrationRequest {
 
     public void setShelterId(Long shelterId) {
         this.shelterId = shelterId;
+    }
+
+    public String getPhotoUrl() {
+    return photoUrl;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }
