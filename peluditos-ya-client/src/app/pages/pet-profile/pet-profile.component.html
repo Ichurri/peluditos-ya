@@ -1,16 +1,27 @@
 <div class="profile-container" *ngIf="!loading && pet; else loadingTemplate">
-  <div class="profile-card">
-    <img class="pet-photo" [src]="defaultImage" alt="Foto de {{ pet.name }}">
-    
-    <div class="profile-details">
-      <h2>{{ pet.name }}</h2>
-      <p><strong>Tipo:</strong> {{ pet.animalType }}</p>
-      <p><strong>Raza:</strong> {{ pet.breed }}</p>
-      <p><strong>Edad:</strong> {{ pet.age }}</p>
-      <p><strong>Comportamiento:</strong> {{ pet.behavior }}</p>
-      <a class="medical-link" [href]="pet.medicalFilePath" target="_blank">Ver archivo médico</a>
+  <div class="pet-profile">
+    <!-- Pet Header -->
+    <div class="pet-header">
+      <img [src]="pet.photoPath || defaultImage" alt="Foto de {{ pet.name }}">
+      <div>
+        <h1>{{ pet.name }}</h1>
+        <p><strong>Tipo:</strong> {{ pet.animalType }}</p>
+        <p><strong>Raza:</strong> {{ pet.breed }}</p>
+        <p><strong>Edad:</strong> {{ pet.age }}</p>
+        <p><strong>Comportamiento:</strong> {{ pet.behavior }}</p>
+      </div>
+    </div>
 
-      <div *ngIf="!pet.sponsor" class="qr-box">
+    <!-- Información de la mascota -->
+    <div class="pet-section">
+      <h2>Información médica</h2>
+      <a class="medical-link" [href]="pet.medicalFilePath" target="_blank">Ver archivo médico</a>
+    </div>
+
+    <!-- QR y apadrinamiento -->
+    <div class="pet-section" *ngIf="!pet.sponsor">
+      <h2>Apadrinamiento</h2>
+      <div class="qr-box">
         <h3>¡Apadrina a {{ pet.name }}!</h3>
         <div *ngIf="qrCodeImage" class="qr-image">
           <img [src]="qrCodeImage" alt="Código QR de apadrinamiento" />
@@ -20,19 +31,21 @@
         </button>
       </div>
     </div>
-  </div>
 
-  <div class="shelter-info" *ngIf="shelter">
-    <h3>Refugio</h3>
-    <p><strong>Nombre:</strong> {{ shelter.shelterName }}</p>
-    <p><strong>Dirección:</strong> {{ shelter.shelterAddress }}</p>
-    <p><strong>Teléfono:</strong> {{ shelter.phone }}</p>
-  </div>
+    <!-- Información del refugio -->
+    <div class="pet-section" *ngIf="shelter">
+      <h2>Refugio</h2>
+      <p><strong>Nombre:</strong> {{ shelter.shelterName }}</p>
+      <p><strong>Dirección:</strong> {{ shelter.shelterAddress }}</p>
+      <p><strong>Teléfono:</strong> {{ shelter.phone }}</p>
+    </div>
 
-  <div class="sponsor-info" *ngIf="pet?.sponsor">
-    <h3>Padrino</h3>
-    <p><strong>Nombre:</strong> {{ pet.sponsor.name }}</p>
-    <p><strong>Correo:</strong> {{ pet.sponsor.email }}</p>
+    <!-- Información del padrino -->
+    <div class="pet-section sponsor-info" *ngIf="pet?.sponsor">
+      <h2>Padrino</h2>
+      <p><strong>Nombre:</strong> {{ pet.sponsor.name }}</p>
+      <p><strong>Correo:</strong> {{ pet.sponsor.email }}</p>
+    </div>
   </div>
 </div>
 

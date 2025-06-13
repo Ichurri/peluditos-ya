@@ -18,7 +18,7 @@
     <input type="file" (change)="onMedicalFileSelected($event)" />
 
     <label>Foto:</label>
-    <input type="file" (change)="onPhotoSelected($event)" />
+    <input type="text" name="photoUrl" [(ngModel)]="nuevaMascota.photoUrl" placeholder="URL de la foto" required />
 
     <button type="submit">Registrar Mascota</button>
     </form>

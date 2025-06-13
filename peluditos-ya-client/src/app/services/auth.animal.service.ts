@@ -26,8 +26,12 @@ export class AnimalService {
       formData.append('medicalFile', formulario.medicalFile);
     }
 
-    if (formulario.photo) {
-      formData.append('photo', formulario.photo);
+    if (formulario.photoUrl) {
+    formData.append('photoUrl', formulario.photoUrl);
+    }
+
+    for (const pair of formData.entries()) {
+      console.log(`${pair[0]}: ${pair[1]}`);
     }
 
     return this.http.post(`${this.baseUrl}/register`, formData);
