@@ -52,4 +52,26 @@ export class AuthShelterService {
   getShelterById(id: number): Observable<any> {
     return this.http.get<any>(`${this.apiUrl2}/${id}`);
   }
+
+  updateShelter(shelterId: number, shelterData: any): Observable<any> {
+    const formData = new FormData();
+
+    // Add basic shelter info
+    if (shelterData.name) formData.append('name', shelterData.name);
+    if (shelterData.email) formData.append('email', shelterData.email);
+    if (shelterData.city) formData.append('city', shelterData.city);
+    if (shelterData.phone) formData.append('phone', shelterData.phone);
+    if (shelterData.shelterName) formData.append('shelterName', shelterData.shelterName);
+    if (shelterData.shelterAddress) formData.append('shelterAddress', shelterData.shelterAddress);
+    if (shelterData.description) formData.append('description', shelterData.description);
+
+    // Add location
+    if (shelterData.latitude) formData.append('latitude', shelterData.latitude.toString());
+    if (shelterData.longitude) formData.append('longitude', shelterData.longitude.toString());
+
+    // Add document file if provided
+    if (shelterData.documentFile) formData.append('documentFile', shelterData.documentFile);
+
+    return this.http.put(`${this.apiUrl2}/${shelterId}`, formData);
+  }
 }
