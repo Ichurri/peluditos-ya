@@ -21,7 +21,7 @@
     <div class="created-at">Creado el: {{ shelter.createdAt }}</div>
 
     <!-- Botón de acción -->
-    <div class="actions">
+    <div class="actions" *ngIf="canEdit">
       <button (click)="editShelter()">Editar</button>
     </div>
 

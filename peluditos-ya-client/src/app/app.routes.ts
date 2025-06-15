@@ -14,6 +14,8 @@ import { ContactUsComponent } from './pages/contact-us/contact-us.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { DonationComponent } from './pages/donation/donation.component';
 import { InterviewFormComponent} from './components/interview-form//interview-form.component';
+import { EditAnimalComponent } from './components/edit-animal/edit-animal.component';
+import { EditShelterComponent } from './components/edit-shelter/edit-shelter.component';
 
 export const routes: Routes = [
     {
@@ -90,6 +92,16 @@ export const routes: Routes = [
         path: 'interview-form/:id',
         component: InterviewFormComponent,
         title: 'Formulario de Entrevista'
+    },
+    {
+        path: 'edit-animal/:id',
+        component: EditAnimalComponent,
+        title: 'Editar Animal'
+    },
+    {
+        path: 'edit-shelter/:id',
+        component: EditShelterComponent,
+        title: 'Editar Refugio'
     },
     { 
         path: '**', 

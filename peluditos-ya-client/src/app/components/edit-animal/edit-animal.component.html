@@ -1,0 +1,201 @@
+<div class="edit-animal-container" *ngIf="!loading">
+  <form (ngSubmit)="updateAnimal()" #animalForm="ngForm">
+    <h2>Editar Perfil de Mascota</h2>
+
+    <!-- Error and Success Messages -->
+    <div class="alert alert-error" *ngIf="error">
+      {{ error }}
+    </div>
+    
+    <div class="alert alert-success" *ngIf="success">
+      {{ success }}
+    </div>
+
+    <!-- Basic Information -->
+    <div class="form-section">
+      <h3>Información Básica</h3>
+      
+      <div class="form-group">
+        <label for="name">Nombre *</label>
+        <input 
+          type="text" 
+          id="name"
+          name="name" 
+          [(ngModel)]="animal.name" 
+          placeholder="Nombre de la mascota" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="animalType">Tipo de Animal *</label>
+        <select 
+          id="animalType"
+          name="animalType" 
+          [(ngModel)]="animal.animalType" 
+          required 
+          class="form-control"
+        >
+          <option value="">Seleccionar tipo</option>
+          <option *ngFor="let type of animalTypes" [value]="type">
+            {{ type === 'CAT' ? 'Gato' : 'Perro' }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="breed">Raza *</label>
+        <input 
+          type="text" 
+          id="breed"
+          name="breed" 
+          [(ngModel)]="animal.breed" 
+          placeholder="Raza del animal" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="age">Edad (años) *</label>
+        <input 
+          type="number" 
+          id="age"
+          name="age" 
+          [(ngModel)]="animal.age" 
+          placeholder="Edad en años" 
+          min="1" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="behavior">Comportamiento *</label>
+        <select 
+          id="behavior"
+          name="behavior" 
+          [(ngModel)]="animal.behavior" 
+          required 
+          class="form-control"
+        >
+          <option value="">Seleccionar comportamiento</option>
+          <option *ngFor="let behavior of behaviors" [value]="behavior">
+            {{ behavior === 'FRIENDLY' ? 'Amigable' : 
+               behavior === 'SHY' ? 'Tímido' : 
+               behavior === 'AGGRESSIVE' ? 'Agresivo' : 'Tranquilo' }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Detailed Information -->
+    <div class="form-section">
+      <h3>Información Detallada</h3>
+      
+      <div class="form-group">
+        <label for="medicalHistory">Historial Médico</label>
+        <textarea 
+          id="medicalHistory"
+          name="medicalHistory" 
+          [(ngModel)]="animal.medicalHistory" 
+          placeholder="Describe el historial médico, vacunas, tratamientos..."
+          rows="4"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="personalityTraits">Personalidad</label>
+        <textarea 
+          id="personalityTraits"
+          name="personalityTraits" 
+          [(ngModel)]="animal.personalityTraits" 
+          placeholder="Describe la personalidad y temperamento del animal..."
+          rows="3"
+          class="form-control"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="habits">Hábitos y Necesidades</label>
+        <textarea 
+          id="habits"
+          name="habits" 
+          [(ngModel)]="animal.habits" 
+          placeholder="Describe los hábitos diarios, necesidades especiales..."
+          rows="3"
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Files Section -->
+    <div class="form-section">
+      <h3>Archivos</h3>
+      
+      <div class="form-group">
+        <label for="medicalFile">Archivo Médico (PDF)</label>
+        <input 
+          type="file" 
+          id="medicalFile"
+          name="medicalFile"
+          accept=".pdf"
+          (change)="onMedicalFileSelected($event)" 
+          class="form-control"
+        />
+        <small class="form-text">Archivo actual: {{ animal.medicalFilePath || 'Ninguno' }}</small>
+      </div>
+
+      <div class="form-group">
+        <label for="photo">Foto del Animal</label>
+        <input 
+          type="file" 
+          id="photo"
+          name="photo"
+          accept="image/*"
+          (change)="onPhotoSelected($event)" 
+          class="form-control"
+        />
+        <small class="form-text">Foto actual disponible</small>
+      </div>
+
+      <div class="form-group">
+        <label for="photoUrl">URL de Foto (alternativa)</label>
+        <input 
+          type="url" 
+          id="photoUrl"
+          name="photoUrl" 
+          [(ngModel)]="animal.photoPath" 
+          placeholder="https://ejemplo.com/foto.jpg" 
+          class="form-control"
+        />
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        class="btn btn-secondary" 
+        (click)="cancel()"
+        [disabled]="saving"
+      >
+        Cancelar
+      </button>
+      
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [disabled]="saving || animalForm.invalid"
+      >
+        {{ saving ? 'Guardando...' : 'Guardar Cambios' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="loading" *ngIf="loading">
+  <p>Cargando datos del animal...</p>
+</div>

@@ -1,0 +1,197 @@
+<div class="edit-shelter-container" *ngIf="!loading">
+  <form (ngSubmit)="updateShelter()" #shelterForm="ngForm">
+    <h2>Editar Perfil de Refugio</h2>
+
+    <!-- Error and Success Messages -->
+    <div class="alert alert-error" *ngIf="error">
+      {{ error }}
+    </div>
+    
+    <div class="alert alert-success" *ngIf="success">
+      {{ success }}
+    </div>
+
+    <!-- Contact Information -->
+    <div class="form-section">
+      <h3>Información de Contacto</h3>
+      
+      <div class="form-group">
+        <label for="name">Nombre de Contacto *</label>
+        <input 
+          type="text" 
+          id="name"
+          name="name" 
+          [(ngModel)]="shelter.name" 
+          placeholder="Nombre del responsable" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+          type="email" 
+          id="email"
+          name="email" 
+          [(ngModel)]="shelter.email" 
+          placeholder="correo@ejemplo.com" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Teléfono *</label>
+        <input 
+          type="tel" 
+          id="phone"
+          name="phone" 
+          [(ngModel)]="shelter.phone" 
+          placeholder="1234567890" 
+          required 
+          pattern="[0-9]{7,15}"
+          class="form-control"
+        />
+        <small class="form-text">Entre 7 y 15 dígitos</small>
+      </div>
+    </div>
+
+    <!-- Shelter Information -->
+    <div class="form-section">
+      <h3>Información del Refugio</h3>
+      
+      <div class="form-group">
+        <label for="shelterName">Nombre del Refugio *</label>
+        <input 
+          type="text" 
+          id="shelterName"
+          name="shelterName" 
+          [(ngModel)]="shelter.shelterName" 
+          placeholder="Nombre del refugio" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="shelterAddress">Dirección del Refugio *</label>
+        <input 
+          type="text" 
+          id="shelterAddress"
+          name="shelterAddress" 
+          [(ngModel)]="shelter.shelterAddress" 
+          placeholder="Dirección completa del refugio" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="city">Ciudad *</label>
+        <input 
+          type="text" 
+          id="city"
+          name="city" 
+          [(ngModel)]="shelter.city" 
+          placeholder="Ciudad donde se ubica el refugio" 
+          required 
+          class="form-control"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea 
+          id="description"
+          name="description"
+          [(ngModel)]="shelter.description" 
+          placeholder="Describe las actividades, misión y visión del refugio..."
+          rows="4" 
+          class="form-control"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Location Information -->
+    <div class="form-section">
+      <h3>Ubicación</h3>
+      
+      <div class="location-row">
+        <div class="form-group">
+          <label for="latitude">Latitud</label>
+          <input 
+            type="number" 
+            id="latitude"
+            name="latitude" 
+            [(ngModel)]="shelter.latitude" 
+            placeholder="-34.6037" 
+            step="any"
+            class="form-control"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="longitude">Longitud</label>
+          <input 
+            type="number" 
+            id="longitude"
+            name="longitude" 
+            [(ngModel)]="shelter.longitude" 
+            placeholder="-58.3816" 
+            step="any"
+            class="form-control"
+          />
+        </div>
+      </div>
+      
+      <small class="form-text">
+        Las coordenadas ayudan a los usuarios a encontrar el refugio en el mapa
+      </small>
+    </div>
+
+    <!-- Document Upload -->
+    <div class="form-section">
+      <h3>Documentación</h3>
+      
+      <div class="form-group">
+        <label for="documentFile">Documento Legal (PDF)</label>
+        <input 
+          type="file" 
+          id="documentFile"
+          name="documentFile"
+          accept="application/pdf"
+          (change)="onDocumentFileSelected($event)" 
+          class="form-control"
+        />
+        <small class="form-text">
+          Subir nuevo documento legal si es necesario (opcional)
+        </small>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        class="btn btn-secondary" 
+        (click)="cancel()"
+        [disabled]="saving"
+      >
+        Cancelar
+      </button>
+      
+      <button 
+        type="submit" 
+        class="btn btn-primary" 
+        [disabled]="saving || shelterForm.invalid"
+      >
+        {{ saving ? 'Guardando...' : 'Guardar Cambios' }}
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="loading" *ngIf="loading">
+  <p>Cargando datos del refugio...</p>
+</div>
