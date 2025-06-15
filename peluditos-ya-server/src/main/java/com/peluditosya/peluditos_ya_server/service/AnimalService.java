@@ -3,6 +3,8 @@ package com.peluditosya.peluditos_ya_server.service;
 import com.peluditosya.peluditos_ya_server.dto.AnimalDetailDTO;
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.dto.AnimalUpdateRequest;
+import com.peluditosya.peluditos_ya_server.exception.InvalidDataException;
+import com.peluditosya.peluditos_ya_server.exception.ResourceNotFoundException;
 import com.peluditosya.peluditos_ya_server.model.Animal;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
@@ -118,6 +120,15 @@ public class AnimalService {
 
         Animal animal = animalRepository.findById(animalId)
                 .orElseThrow(() -> new RuntimeException("Animal no encontrado con ID: " + animalId));
+
+        // Validate basic data before updating
+        if (request.getName() != null && request.getName().trim().isEmpty()) {
+            throw new IllegalArgumentException("El nombre del animal no puede estar vacío");
+        }
+        
+        if (request.getAge() != null && request.getAge() <= 0) {
+            throw new IllegalArgumentException("La edad del animal debe ser mayor a 0");
+        }
 
         // Update basic fields
         if (request.getName() != null && !request.getName().trim().isEmpty()) {
