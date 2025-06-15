@@ -3,6 +3,7 @@ package com.peluditosya.peluditos_ya_server.controller;
 import com.peluditosya.peluditos_ya_server.dto.AnimalDetailDTO;
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.dto.AnimalResponse;
+import com.peluditosya.peluditos_ya_server.dto.AnimalUpdateRequest;
 import com.peluditosya.peluditos_ya_server.model.Animal;
 import com.peluditosya.peluditos_ya_server.repository.AnimalRepository;
 import com.peluditosya.peluditos_ya_server.service.AnimalService;
@@ -66,7 +67,7 @@ public class AnimalController {
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
-}
+    }
 
 
     @GetMapping("/{id}/profile")
@@ -81,4 +82,16 @@ public class AnimalController {
         return ResponseEntity.ok(animalService.getAnimalDetails(animalActualizado.getId()));
     }
 
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<AnimalDetailDTO> updateAnimal(@PathVariable Long id, @ModelAttribute AnimalUpdateRequest request) {
+        try {
+            Animal updatedAnimal = animalService.updateAnimal(id, request);
+            AnimalDetailDTO animalDetail = animalService.getAnimalDetails(updatedAnimal.getId());
+            return ResponseEntity.ok(animalDetail);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
 }
