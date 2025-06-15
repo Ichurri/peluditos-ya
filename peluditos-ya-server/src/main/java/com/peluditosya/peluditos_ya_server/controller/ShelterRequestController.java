@@ -1,10 +1,13 @@
 package com.peluditosya.peluditos_ya_server.controller;
 
 import com.peluditosya.peluditos_ya_server.dto.ShelterRequestDto;
+import com.peluditosya.peluditos_ya_server.dto.ShelterUpdateRequest;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequestStatus;
 import com.peluditosya.peluditos_ya_server.service.ShelterRequestService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,8 +46,21 @@ public class ShelterRequestController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ShelterRequest> getShelterRequestById(@PathVariable Long id) {
-    ShelterRequest shelterRequest = shelterRequestService.getShelterRequestById(id);
-    return ResponseEntity.ok(shelterRequest);
+        ShelterRequest shelterRequest = shelterRequestService.getShelterRequestById(id);
+        return ResponseEntity.ok(shelterRequest);
+    }
+
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<ShelterRequest> updateShelterRequest(@PathVariable Long id,
+                                                              @ModelAttribute ShelterUpdateRequest request) {
+        try {
+            ShelterRequest updatedShelter = shelterRequestService.updateShelterRequest(id, request);
+            return ResponseEntity.ok(updatedShelter);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
     }
 
     @DeleteMapping("/{id}")
