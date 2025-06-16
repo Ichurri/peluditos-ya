@@ -3,12 +3,15 @@
     <!-- Pet Header -->
     <div class="pet-header">
       <img [src]="pet.photoPath || defaultImage" alt="Foto de {{ pet.name }}">
-      <div>
+      <div class="pet-info">
         <h1>{{ pet.name }}</h1>
         <p><strong>Tipo:</strong> {{ pet.animalType }}</p>
         <p><strong>Raza:</strong> {{ pet.breed }}</p>
         <p><strong>Edad:</strong> {{ pet.age }}</p>
         <p><strong>Comportamiento:</strong> {{ pet.behavior }}</p>
+        <button class="edit-button" (click)="editAnimal()" *ngIf="canEdit">
+          ✏️ Editar Animal
+        </button>
       </div>
     </div>
 

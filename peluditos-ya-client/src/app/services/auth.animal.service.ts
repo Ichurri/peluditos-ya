@@ -49,4 +49,26 @@ export class AnimalService {
     return this.http.put<any>(`${this.baseUrl}/${animalId}/asignar-padrino?userId=${userId}`, {});
   }
 
+  updateAnimal(animalId: number, animalData: any): Observable<any> {
+    const formData = new FormData();
+
+    // Add basic fields
+    if (animalData.name) formData.append('name', animalData.name);
+    if (animalData.animal) formData.append('animal', animalData.animal);
+    if (animalData.breed) formData.append('breed', animalData.breed);
+    if (animalData.age) formData.append('age', animalData.age.toString());
+    if (animalData.behavior) formData.append('behavior', animalData.behavior);
+
+    // Add detailed fields
+    if (animalData.medicalHistory) formData.append('medicalHistory', animalData.medicalHistory);
+    if (animalData.personalityTraits) formData.append('personalityTraits', animalData.personalityTraits);
+    if (animalData.habits) formData.append('habits', animalData.habits);
+
+    // Add files
+    if (animalData.medicalFile) formData.append('medicalFile', animalData.medicalFile);
+    if (animalData.photo) formData.append('photo', animalData.photo);
+    if (animalData.photoUrl) formData.append('photoUrl', animalData.photoUrl);
+
+    return this.http.put(`${this.baseUrl}/${animalId}`, formData);
+  }
 }

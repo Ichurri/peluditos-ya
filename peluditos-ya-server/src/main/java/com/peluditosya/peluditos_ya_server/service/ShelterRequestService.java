@@ -1,6 +1,7 @@
 package com.peluditosya.peluditos_ya_server.service;
 
 import com.peluditosya.peluditos_ya_server.dto.ShelterRequestDto;
+import com.peluditosya.peluditos_ya_server.dto.ShelterUpdateRequest;
 import com.peluditosya.peluditos_ya_server.model.AppUser;
 import com.peluditosya.peluditos_ya_server.model.Role;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;
@@ -119,5 +120,65 @@ public class ShelterRequestService {
             throw new IllegalArgumentException("No se encontró una solicitud de refugio con el ID proporcionado.");
         }
         shelterRequestRepository.deleteById(id);
+    }
+
+    @Transactional
+    public ShelterRequest updateShelterRequest(Long id, ShelterUpdateRequest request) {
+        ShelterRequest shelterRequest = shelterRequestRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("No se encontró un refugio con el ID proporcionado."));
+
+        updateShelterBasicInfo(shelterRequest, request);
+        updateShelterLocation(shelterRequest, request);
+        updateAssociatedUser(shelterRequest, request);
+
+        return shelterRequestRepository.save(shelterRequest);
+    }
+
+    private void updateShelterBasicInfo(ShelterRequest shelterRequest, ShelterUpdateRequest request) {
+        if (request.getShelterName() != null && !request.getShelterName().trim().isEmpty()) {
+            shelterRequest.setShelterName(request.getShelterName().trim());
+        }
+        
+        if (request.getShelterAddress() != null && !request.getShelterAddress().trim().isEmpty()) {
+            shelterRequest.setShelterAddress(request.getShelterAddress().trim());
+        }
+        
+        if (request.getPhone() != null && !request.getPhone().trim().isEmpty()) {
+            shelterRequest.setPhone(request.getPhone().trim());
+        }
+        
+        if (request.getDescription() != null) {
+            shelterRequest.setDescription(request.getDescription().trim());
+        }
+    }
+
+    private void updateShelterLocation(ShelterRequest shelterRequest, ShelterUpdateRequest request) {
+        if (request.getLatitude() != null) {
+            shelterRequest.setLatitude(request.getLatitude());
+        }
+        
+        if (request.getLongitude() != null) {
+            shelterRequest.setLongitude(request.getLongitude());
+        }
+    }
+
+    private void updateAssociatedUser(ShelterRequest shelterRequest, ShelterUpdateRequest request) {
+        if (shelterRequest.getUser() != null) {
+            AppUser user = shelterRequest.getUser();
+            
+            if (request.getName() != null && !request.getName().trim().isEmpty()) {
+                user.setName(request.getName().trim());
+            }
+            
+            if (request.getEmail() != null && !request.getEmail().trim().isEmpty()) {
+                user.setEmail(request.getEmail().trim());
+            }
+            
+            if (request.getCity() != null && !request.getCity().trim().isEmpty()) {
+                user.setCity(request.getCity().trim());
+            }
+            
+            userRepository.save(user);
+        }
     }
 }

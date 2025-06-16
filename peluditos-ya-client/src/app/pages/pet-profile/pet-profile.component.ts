@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AnimalService } from '../../services/auth.animal.service';
 import { AuthShelterService } from '../../services/auth.shelter.service';
 import { CommonModule } from '@angular/common';
@@ -20,12 +20,14 @@ export class PetProfileComponent implements OnInit {
   error = false;
   asignando = false;
   qrCodeImage: string = '';
+  canEdit = false;
   defaultImage = 'https://files.lafm.com.co/assets/public/styles/twitter/public/2023-08/murio_cheems_el_perrito_de_los_meme.jpg.webp?VersionId=dHwATkyc2gQxvSwNeWXyOFUXPzaF3bbQ&itok=MmkIcD6M'; 
 
   constructor(
-    private route: ActivatedRoute,
-    private animalService: AnimalService,
-    private shelterService: AuthShelterService
+    private readonly route: ActivatedRoute,
+    private readonly router: Router,
+    private readonly animalService: AnimalService,
+    private readonly shelterService: AuthShelterService
   ) {}
 
   ngOnInit(): void {
@@ -38,6 +40,7 @@ export class PetProfileComponent implements OnInit {
     next: (data) => {
       this.pet = data;
       console.log('Datos de la mascota:', this.pet); 
+      this.checkEditPermissions();
       if (this.pet.shelterId) {
         this.shelterService.getShelterById(this.pet.shelterId).subscribe({
           next: (shelterData) => {
@@ -98,5 +101,27 @@ export class PetProfileComponent implements OnInit {
       .catch(err => {
         console.error('Error al generar el código QR', err);
       });
+  }
+
+  editAnimal(): void {
+    this.router.navigate(['/edit-animal', this.petId]);
+  }
+
+  checkEditPermissions(): void {
+    // Implementar lógica básica de autorización
+    // Por ahora, permitir edición si el usuario está logueado
+    // En una implementación real, verificaríamos si el usuario es admin
+    // o si es el refugio propietario del animal
+    const userId = localStorage.getItem('userId');
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    
+    this.canEdit = !!userId && (isAdmin || this.isOwnerShelter());
+  }
+
+  private isOwnerShelter(): boolean {
+    // Verificar si el usuario actual es del refugio propietario
+    // En una implementación real, esto se haría con datos del backend
+    const currentShelterId = localStorage.getItem('shelterId');
+    return !!(currentShelterId && this.pet?.shelterId?.toString() === currentShelterId);
   }
 }

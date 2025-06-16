@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthShelterService } from '../../services/auth.shelter.service';
 import * as L from 'leaflet';
@@ -17,14 +16,14 @@ import * as L from 'leaflet';
 
 export class ShelterProfileComponent implements OnInit {
   shelter: any;
-  canEdit = true; // Cambiar esto según autenticación/rol del usuario actual
+  canEdit = false; // Cambiar esto según autenticación/rol del usuario actual
   selectedRating: number = 3;
 
 
   constructor(
-    private route: ActivatedRoute,
-    private AuthShelterService: AuthShelterService,
-    private router: Router
+    private readonly route: ActivatedRoute,
+    private readonly AuthShelterService: AuthShelterService,
+    private readonly router: Router
   ) {}
 
 mapInitialized = false;
@@ -35,6 +34,7 @@ ngOnInit(): void {
     this.AuthShelterService.getShelterById(+shelterId).subscribe({
       next: (data) => {
         this.shelter = data;
+        this.checkEditPermissions();
 
         // Esperamos a que Angular renderice el div con *ngIf
         setTimeout(() => {
@@ -79,11 +79,29 @@ tryInitMap(): void {
   }
 
   editShelter() {
-    this.router.navigate(['/shelters', this.shelter.id, 'edit']);
+    this.router.navigate(['/edit-shelter', this.shelter.id]);
   }
 
   onRatingChange(): void {
     console.log('Nueva calificación seleccionada:', this.selectedRating);
+  }
+
+  checkEditPermissions(): void {
+    // Implementar lógica básica de autorización
+    // Por ahora, permitir edición si el usuario está logueado
+    // En una implementación real, verificaríamos si el usuario es admin
+    // o si es el refugio propietario
+    const userId = localStorage.getItem('userId');
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    
+    this.canEdit = !!userId && (isAdmin || this.isOwnerShelter());
+  }
+
+  private isOwnerShelter(): boolean {
+    // Verificar si el usuario actual es del refugio
+    // En una implementación real, esto se haría con datos del backend
+    const currentShelterId = localStorage.getItem('shelterId');
+    return !!(currentShelterId && this.shelter?.id?.toString() === currentShelterId);
   }
 
   initMap(): void {
