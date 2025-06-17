@@ -19,6 +19,7 @@ export class PetsManagementComponent implements OnInit {
   filterStatus: string = '';
   loading: boolean = false;
   error: string = '';
+  operationInProgress: boolean = false;
 
   constructor(
     private animalService: AnimalService,
@@ -71,6 +72,10 @@ export class PetsManagementComponent implements OnInit {
     this.filterMascotas();
   }
 
+  refreshData(): void {
+    this.loadMascotas();
+  }
+
   editMascota(id: number): void {
     this.router.navigate(['/edit-animal', id]);
   }
@@ -80,16 +85,71 @@ export class PetsManagementComponent implements OnInit {
   }
 
   deleteMascota(mascota: any): void {
-    if (confirm(`¿Estás seguro de que quieres eliminar a ${mascota.name}?`)) {
-      // TODO: Implementar método de eliminación en el servicio
-      console.log('Eliminar mascota:', mascota.id);
+    if (this.operationInProgress) return;
+    
+    const confirmMessage = `⚠️ ELIMINAR MASCOTA
+    
+Nombre: ${mascota.name}
+Tipo: ${mascota.animal}
+Raza: ${mascota.breed}
+
+¿Estás completamente seguro de que quieres eliminar esta mascota?
+Esta acción NO se puede deshacer y eliminará permanentemente todos los datos asociados.`;
+
+    if (confirm(confirmMessage)) {
+      this.operationInProgress = true;
+      
+      this.animalService.deleteAnimal(mascota.id).subscribe({
+        next: (response) => {
+          console.log('Mascota eliminada exitosamente:', response);
+          // Remover la mascota de la lista local
+          this.mascotas = this.mascotas.filter(m => m.id !== mascota.id);
+          this.filterMascotas();
+          this.showSuccessMessage(`✅ ${mascota.name} ha sido eliminado exitosamente.`);
+          this.operationInProgress = false;
+        },
+        error: (error) => {
+          console.error('Error al eliminar mascota:', error);
+          this.showErrorMessage('❌ Error al eliminar la mascota. Por favor, inténtalo de nuevo.');
+          this.operationInProgress = false;
+        }
+      });
     }
   }
 
   updateStatus(mascota: any, newStatus: string): void {
-    if (confirm(`¿Cambiar el estado de ${mascota.name} a ${newStatus}?`)) {
-      // TODO: Implementar método de actualización de estado en el servicio
-      console.log('Actualizar estado:', mascota.id, newStatus);
+    if (this.operationInProgress) return;
+    
+    const statusText = this.getStatusText(newStatus);
+    const confirmMessage = `🔄 CAMBIAR ESTADO
+    
+Mascota: ${mascota.name}
+Estado actual: ${this.getStatusText(mascota.status || 'disponible')}
+Nuevo estado: ${statusText}
+
+¿Confirmar el cambio de estado?`;
+
+    if (confirm(confirmMessage)) {
+      this.operationInProgress = true;
+      
+      this.animalService.updateAnimalStatus(mascota.id, newStatus).subscribe({
+        next: (response) => {
+          console.log('Estado actualizado exitosamente:', response);
+          // Actualizar el estado en la lista local
+          const index = this.mascotas.findIndex(m => m.id === mascota.id);
+          if (index !== -1) {
+            this.mascotas[index].status = newStatus;
+            this.filterMascotas();
+          }
+          this.showSuccessMessage(`✅ El estado de ${mascota.name} ha sido cambiado a ${statusText}.`);
+          this.operationInProgress = false;
+        },
+        error: (error) => {
+          console.error('Error al actualizar estado:', error);
+          this.showErrorMessage('❌ Error al actualizar el estado. Por favor, inténtalo de nuevo.');
+          this.operationInProgress = false;
+        }
+      });
     }
   }
 
@@ -101,5 +161,13 @@ export class PetsManagementComponent implements OnInit {
       'reservado': 'Reservado'
     };
     return statusMap[status] || 'Disponible';
+  }
+
+  private showSuccessMessage(message: string): void {
+    alert(message);
+  }
+
+  private showErrorMessage(message: string): void {
+    alert(message);
   }
 }
