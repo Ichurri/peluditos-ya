@@ -16,6 +16,7 @@ import { DonationComponent } from './pages/donation/donation.component';
 import { InterviewFormComponent} from './components/interview-form//interview-form.component';
 import { EditAnimalComponent } from './components/edit-animal/edit-animal.component';
 import { EditShelterComponent } from './components/edit-shelter/edit-shelter.component';
+import { PetsManagementComponent } from './pages/pets-management/pets-management.component';
 
 export const routes: Routes = [
     {
@@ -102,6 +103,11 @@ export const routes: Routes = [
         path: 'edit-shelter/:id',
         component: EditShelterComponent,
         title: 'Editar Refugio'
+    },
+    {
+        path: 'pets-management',
+        component: PetsManagementComponent,
+        title: 'Gestión de Mascotas'
     },
     { 
         path: '**', 
