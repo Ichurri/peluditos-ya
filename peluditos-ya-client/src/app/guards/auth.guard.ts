@@ -25,7 +25,7 @@ export class AuthGuard implements CanActivate {
       return false;
     }
 
-    // Para rutas que requieren admin (como pets-management)
+    // Para rutas que requieren admin
     const requiresAdmin = route.data?.['requiresAdmin'] || false;
     
     if (requiresAdmin) {
@@ -39,6 +39,22 @@ export class AuthGuard implements CanActivate {
           return true;
         })
       );
+    }
+
+    // Para rutas que requieren admin O shelter (como pets-management)
+    const requiresAdminOrShelter = route.data?.['requiresAdminOrShelter'] || false;
+    
+    if (requiresAdminOrShelter) {
+      const userRole = localStorage.getItem('userRole');
+      const isAdmin = localStorage.getItem('isAdmin') === 'true';
+      const shelterId = localStorage.getItem('shelterId');
+
+      if (isAdmin || (userRole === 'SHELTER' && shelterId)) {
+        return true;
+      } else {
+        this.router.navigate(['/access-denied']);
+        return false;
+      }
     }
 
     return true;

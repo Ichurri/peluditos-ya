@@ -13,19 +13,20 @@
         <a [routerLink]="item.route" routerLinkActive="active">{{ item.label }}</a>
       </li>
       
-      <!-- Panel de administración para admins -->
+      <!-- Panel de administración solo para admins -->
       <li *ngIf="isAdmin">
         <a routerLink="/admin-dashboard" class="admin-link">Panel de Administración</a>
       </li>
       
-      <!-- Enlaces para encargados de refugio y admins -->
-      <li *ngIf="canAccessShelterFeatures()">
+      <!-- Gestión de mascotas para admins y encargados de refugio -->
+      <li *ngIf="canAccessPetsManagement()">
         <a routerLink="/pets-management" class="shelter-link" routerLinkActive="active">
           <i class="fas fa-paw"></i> Gestión de Mascotas
         </a>
       </li>
       
-      <li *ngIf="canAccessShelterFeatures()">
+      <!-- Registrar mascota solo para encargados de refugio -->
+      <li *ngIf="isShelterUser && !isAdmin">
         <a routerLink="/register-animal" class="shelter-link" routerLinkActive="active">
           <i class="fas fa-plus"></i> Registrar Mascota
         </a>

@@ -24,16 +24,30 @@ export class ShelterGuard implements CanActivate {
       return false;
     }
 
-    // Verificar si es administrador o encargado de refugio
+    // Para rutas que requieren específicamente ser SHELTER (no admin)
+    const requiresShelter = route.data?.['requiresShelter'] || false;
+    
+    if (requiresShelter) {
+      const userRole = localStorage.getItem('userRole');
+      const shelterId = localStorage.getItem('shelterId');
+
+      if (userRole === 'SHELTER' && shelterId) {
+        return true;
+      } else {
+        this.router.navigate(['/access-denied']);
+        return false;
+      }
+    }
+
+    // Por defecto, permitir tanto admin como shelter
     const userRole = localStorage.getItem('userRole');
     const isAdmin = localStorage.getItem('isAdmin') === 'true';
     const shelterId = localStorage.getItem('shelterId');
 
-    if (isAdmin || (userRole === 'shelter' && shelterId)) {
+    if (isAdmin || (userRole === 'SHELTER' && shelterId)) {
       return true;
     }
 
-    // Si no es admin ni encargado de refugio, denegar acceso
     this.router.navigate(['/access-denied']);
     return false;
   }

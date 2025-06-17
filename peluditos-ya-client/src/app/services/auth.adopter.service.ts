@@ -38,10 +38,12 @@ export class AuthAdopterService {
         // Guardar información del usuario en localStorage
         localStorage.setItem('userId', response.userId.toString());
         localStorage.setItem('isAdmin', response.admin.toString());
-        localStorage.setItem('userRole', response.role || 'adopter');
+        localStorage.setItem('userRole', response.role || 'ADOPTER');
         
         if (response.shelterId) {
           localStorage.setItem('shelterId', response.shelterId.toString());
+        } else {
+          localStorage.removeItem('shelterId'); // Limpiar si no es shelter
         }
 
         // Actualizar subjects

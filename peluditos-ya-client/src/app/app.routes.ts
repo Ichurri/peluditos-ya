@@ -68,7 +68,8 @@ export const routes: Routes = [
         path: 'register-animal',
         component: RegisterAnimalComponent,
         title: 'Register Animal',
-        canActivate: [ShelterGuard]
+        canActivate: [ShelterGuard],
+        data: { requiresShelter: true }
     },
     {
         path: 'shelter-profile/:id',
@@ -116,7 +117,8 @@ export const routes: Routes = [
         path: 'pets-management',
         component: PetsManagementComponent,
         title: 'Gestión de Mascotas',
-        canActivate: [ShelterGuard]
+        canActivate: [AuthGuard],
+        data: { requiresAdminOrShelter: true }
     },
     {
         path: 'access-denied',

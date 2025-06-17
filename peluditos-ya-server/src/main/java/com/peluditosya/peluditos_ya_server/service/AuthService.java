@@ -90,7 +90,13 @@ public class AuthService {
         response.put("admin", isAdmin);
         response.put("userId", user.getId());
 
-        logger.info("Login exitoso para: {}", user.getEmail());
+        // Si es un usuario SHELTER, agregar el shelterId
+        if (user.getRole().equals(Role.SHELTER) && user instanceof Shelter) {
+            Shelter shelter = (Shelter) user;
+            response.put("shelterId", shelter.getId());
+        }
+
+        logger.info("Login exitoso para: {} (Role: {})", user.getEmail(), user.getRole());
         return response;
     }
 }

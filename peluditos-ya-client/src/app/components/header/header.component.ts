@@ -49,11 +49,20 @@ export class HeaderComponent implements OnInit {
   checkShelterStatus() {
     const userRole = localStorage.getItem('userRole');
     const shelterId = localStorage.getItem('shelterId');
-    this.isShelterUser = userRole === 'shelter' && !!shelterId;
+    this.isShelterUser = userRole === 'SHELTER' && !!shelterId;
   }
 
   canAccessShelterFeatures(): boolean {
     return this.isAdmin || this.isShelterUser;
+  }
+
+  canAccessPetsManagement(): boolean {
+    return this.isAdmin || this.isShelterUser;
+  }
+
+  canRegisterAnimals(): boolean {
+    // Solo usuarios shelter, NO admins
+    return this.isShelterUser && !this.isAdmin;
   }
 
   logout() {

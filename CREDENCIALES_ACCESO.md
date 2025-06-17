@@ -13,6 +13,7 @@
 - ✅ Editar cualquier mascota
 - ✅ Acceso al panel de administración (`/admin-dashboard`)
 - ✅ Gestión de refugios y usuarios
+- ❌ **NO puede registrar mascotas** (solo supervisar)
 
 ---
 
@@ -28,7 +29,8 @@
 - ⚠️ Solo eliminar mascotas de su refugio
 - ⚠️ Solo actualizar estado de mascotas de su refugio
 - ⚠️ Solo editar mascotas de su refugio
-- ✅ Registrar nuevas mascotas en su refugio
+- ✅ **Registrar nuevas mascotas** en su refugio
+- ✅ Botón "Nueva Mascota" visible en el panel
 - ❌ Sin acceso al panel de administración
 
 ---
@@ -59,13 +61,16 @@
 - Badge rojo: "🔧 Administrador"
 - Ve todas las mascotas del sistema
 - Puede gestionar cualquier mascota
-- Todos los botones habilitados
+- Todos los botones habilitados **excepto "Nueva Mascota"**
+- Solo ve el enlace "Gestión de Mascotas" (no "Registrar Mascota")
 
 #### Encargado de Refugio:
 - Badge azul: "🏠 Encargado de Refugio"
 - Ve solo mascotas de su refugio
 - Botones deshabilitados para mascotas de otros refugios
 - Mensaje: "⚠️ Solo tu refugio" en mascotas no gestionables
+- **Botón "Nueva Mascota" visible** para registrar
+- Ve enlaces "Gestión de Mascotas" y "Registrar Mascota"
 
 ---
 

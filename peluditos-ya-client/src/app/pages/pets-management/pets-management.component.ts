@@ -118,6 +118,10 @@ export class PetsManagementComponent implements OnInit {
     this.loadMascotas();
   }
 
+  goToRegisterAnimal(): void {
+    this.router.navigate(['/register-animal']);
+  }
+
   editMascota(id: number): void {
     this.router.navigate(['/edit-animal', id]);
   }
