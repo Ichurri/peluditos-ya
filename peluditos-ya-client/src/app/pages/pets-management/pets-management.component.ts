@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AnimalService } from '../../services/auth.animal.service';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-pets-management',
@@ -81,7 +82,7 @@ export class PetsManagementComponent implements OnInit {
   }
 
   viewProfile(id: number): void {
-    this.router.navigate(['/pet-profile', id]);
+    this.router.navigate(['/animal-profile', id]);
   }
 
   deleteMascota(mascota: any): void {
@@ -169,5 +170,33 @@ Nuevo estado: ${statusText}
 
   private showErrorMessage(message: string): void {
     alert(message);
+  }
+
+  onImageError(event: any): void {
+    event.target.src = '/assets/images/default-pet.svg';
+  }
+
+  getImageUrl(photoPath: string | null): string {
+    if (!photoPath) {
+      return '/assets/images/default-pet.svg';
+    }
+    
+    // If photoPath is already a full URL (starts with http), return as is
+    if (photoPath.startsWith('http')) {
+      return photoPath;
+    }
+    
+    // If photoPath starts with /api, construct full URL with backend base
+    if (photoPath.startsWith('/api')) {
+      return `${environment.apiBaseUrl.replace('/api', '')}${photoPath}`;
+    }
+    
+    // If it's a legacy absolute path, use default image
+    if (photoPath.startsWith('/') && !photoPath.startsWith('/api')) {
+      return '/assets/images/default-pet.svg';
+    }
+    
+    // Default fallback
+    return '/assets/images/default-pet.svg';
   }
 }

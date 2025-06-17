@@ -77,7 +77,7 @@ export class AnimalService {
   }
 
   updateAnimalStatus(animalId: number, status: string): Observable<any> {
-    return this.http.patch(`${this.baseUrl}/${animalId}/status`, { status });
+    return this.http.put(`${this.baseUrl}/${animalId}/status`, { status });
   }
 
   getMascotasByShelterId(shelterId: number): Observable<any> {

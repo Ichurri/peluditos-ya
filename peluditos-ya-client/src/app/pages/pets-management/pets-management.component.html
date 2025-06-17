@@ -73,9 +73,10 @@
     <div *ngFor="let mascota of mascotasFiltradas" class="table-row">
       <div class="pet-photo">
         <img 
-          [src]="mascota.photoUrl || '/assets/images/default-pet.jpg'" 
+          [src]="getImageUrl(mascota.photoPath)" 
           [alt]="mascota.name"
-          class="pet-image">
+          class="pet-image"
+          (error)="onImageError($event)">
       </div>
       
       <div class="pet-name">{{ mascota.name }}</div>

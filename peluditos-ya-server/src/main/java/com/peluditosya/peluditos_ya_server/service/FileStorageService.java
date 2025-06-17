@@ -30,7 +30,9 @@ public class FileStorageService {
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
             Path targetPath = targetDir.resolve(fileName);
             file.transferTo(targetPath.toFile());
-            return targetPath.toString();
+            
+            // Return URL path instead of absolute file path
+            return "/api/files/" + subfolder + "/" + fileName;
         } catch (IOException e) {
             logger.error("Error storing file {}", file.getOriginalFilename(), e);
             throw new RuntimeException("Could not store file: " + file.getOriginalFilename(), e);
