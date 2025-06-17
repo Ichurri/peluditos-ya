@@ -12,9 +12,24 @@
       <li *ngFor="let item of navigationItems">
         <a [routerLink]="item.route" routerLinkActive="active">{{ item.label }}</a>
       </li>
+      
+      <!-- Panel de administración para admins -->
       <li *ngIf="isAdmin">
         <a routerLink="/admin-dashboard" class="admin-link">Panel de Administración</a>
-      </li>      
+      </li>
+      
+      <!-- Enlaces para encargados de refugio y admins -->
+      <li *ngIf="canAccessShelterFeatures()">
+        <a routerLink="/pets-management" class="shelter-link" routerLinkActive="active">
+          <i class="fas fa-paw"></i> Gestión de Mascotas
+        </a>
+      </li>
+      
+      <li *ngIf="canAccessShelterFeatures()">
+        <a routerLink="/register-animal" class="shelter-link" routerLinkActive="active">
+          <i class="fas fa-plus"></i> Registrar Mascota
+        </a>
+      </li>
     </ul>
   </nav>
 

@@ -22,6 +22,49 @@
   margin-bottom: 1rem;
 }
 
+/* Información del usuario y control de acceso */
+.user-info {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.access-info {
+  display: inline-block;
+  background: #f8f9fa;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #3498db;
+  margin: 0.5rem 0;
+}
+
+.admin-badge {
+  background: #e74c3c;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.shelter-badge {
+  background: #3498db;
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.access-info p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
 .refresh-btn {
   background: #27ae60;
   color: white;
@@ -333,6 +376,42 @@
   padding: 3rem;
   color: #7f8c8d;
   font-size: 1.1rem;
+}
+
+/* Estilos para botones deshabilitados por permisos */
+.disabled-action {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.disabled-action button {
+  cursor: not-allowed;
+  background: #bdc3c7 !important;
+  color: #7f8c8d !important;
+}
+
+.disabled-action:hover button {
+  background: #bdc3c7 !important;
+}
+
+/* Aviso de permisos */
+.permission-notice {
+  margin-top: 0.5rem;
+  text-align: center;
+}
+
+.permission-notice small {
+  background: #f39c12;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  display: inline-block;
+}
+
+/* Dropdown deshabilitado */
+.status-dropdown.disabled-action .dropdown-content {
+  display: none !important;
 }
 
 /* Responsive design */

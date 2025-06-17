@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AnimalService } from '../../services/auth.animal.service';
+import { AuthAdopterService } from '../../services/auth.adopter.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
@@ -22,13 +23,32 @@ export class PetsManagementComponent implements OnInit {
   error: string = '';
   operationInProgress: boolean = false;
 
+  // Control de acceso
+  currentUser: any = null;
+  isAdmin: boolean = false;
+  userShelterId: number | null = null;
+
   constructor(
     private animalService: AnimalService,
+    private authService: AuthAdopterService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
+    this.initializeUserInfo();
     this.loadMascotas();
+  }
+
+  private initializeUserInfo(): void {
+    this.currentUser = this.authService.getCurrentUser();
+    this.isAdmin = this.authService.isAdminUser();
+    this.userShelterId = this.authService.getShelterId();
+    
+    console.log('User info:', {
+      currentUser: this.currentUser,
+      isAdmin: this.isAdmin,
+      userShelterId: this.userShelterId
+    });
   }
 
   loadMascotas(): void {
@@ -37,9 +57,16 @@ export class PetsManagementComponent implements OnInit {
     
     this.animalService.obtenerMascotas().subscribe({
       next: (data) => {
-        this.mascotas = data;
-        this.mascotasFiltradas = data;
+        // Filtrar mascotas por refugio si el usuario no es admin
+        if (!this.isAdmin && this.userShelterId) {
+          this.mascotas = data.filter((mascota: any) => mascota.shelterId === this.userShelterId);
+        } else {
+          this.mascotas = data;
+        }
+        
+        this.mascotasFiltradas = this.mascotas;
         this.loading = false;
+        this.filterMascotas(); // Aplicar filtros después de cargar
       },
       error: (error) => {
         this.error = 'Error al cargar las mascotas';
@@ -99,8 +126,37 @@ export class PetsManagementComponent implements OnInit {
     this.router.navigate(['/animal-profile', id]);
   }
 
+  // Verificar si el usuario puede realizar acciones sobre una mascota específica
+  canManagePet(mascota: any): boolean {
+    // Los administradores pueden gestionar todas las mascotas
+    if (this.isAdmin) {
+      return true;
+    }
+    
+    // Los encargados de refugio solo pueden gestionar mascotas de su refugio
+    if (this.userShelterId && mascota.shelterId === this.userShelterId) {
+      return true;
+    }
+    
+    return false;
+  }
+
+  // Mostrar información de permisos en la interfaz
+  getPermissionMessage(mascota: any): string {
+    if (!this.canManagePet(mascota)) {
+      return 'Solo puedes gestionar mascotas de tu refugio';
+    }
+    return '';
+  }
+
   deleteMascota(mascota: any): void {
     if (this.operationInProgress) return;
+    
+    // Verificar permisos antes de proceder
+    if (!this.canManagePet(mascota)) {
+      alert('❌ No tienes permisos para eliminar esta mascota. Solo puedes gestionar mascotas de tu refugio.');
+      return;
+    }
     
     const confirmMessage = `⚠️ ELIMINAR MASCOTA
     
@@ -134,6 +190,12 @@ Esta acción NO se puede deshacer y eliminará permanentemente todos los datos a
 
   updateStatus(mascota: any, newStatus: string): void {
     if (this.operationInProgress) return;
+    
+    // Verificar permisos antes de proceder
+    if (!this.canManagePet(mascota)) {
+      alert('❌ No tienes permisos para actualizar el estado de esta mascota. Solo puedes gestionar mascotas de tu refugio.');
+      return;
+    }
     
     const statusText = this.getStatusText(newStatus);
     const confirmMessage = `🔄 CAMBIAR ESTADO

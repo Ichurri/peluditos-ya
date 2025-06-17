@@ -20,18 +20,21 @@ export class HeaderComponent implements OnInit {
   ];
 
   isAdmin: boolean = false;
-  isLoggedIn: boolean = false; 
+  isLoggedIn: boolean = false;
+  isShelterUser: boolean = false; 
 
   constructor(public authService: AuthAdopterService) {}
 
   ngOnInit() {
     this.checkAdminStatus();
     this.checkLoginStatus();
+    this.checkShelterStatus();
 
     // Escuchar cambios en localStorage (si se desloguea desde otra pestaña)
     window.addEventListener('storage', () => {
       this.checkAdminStatus();
       this.checkLoginStatus();
+      this.checkShelterStatus();
     });
   }
 
@@ -41,6 +44,16 @@ export class HeaderComponent implements OnInit {
 
   checkLoginStatus() {
     this.isLoggedIn = !!localStorage.getItem('userId');
+  }
+
+  checkShelterStatus() {
+    const userRole = localStorage.getItem('userRole');
+    const shelterId = localStorage.getItem('shelterId');
+    this.isShelterUser = userRole === 'shelter' && !!shelterId;
+  }
+
+  canAccessShelterFeatures(): boolean {
+    return this.isAdmin || this.isShelterUser;
   }
 
   logout() {

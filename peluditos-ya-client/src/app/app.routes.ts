@@ -17,6 +17,9 @@ import { InterviewFormComponent} from './components/interview-form//interview-fo
 import { EditAnimalComponent } from './components/edit-animal/edit-animal.component';
 import { EditShelterComponent } from './components/edit-shelter/edit-shelter.component';
 import { PetsManagementComponent } from './pages/pets-management/pets-management.component';
+import { AccessDeniedComponent } from './pages/access-denied/access-denied.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ShelterGuard } from './guards/shelter.guard';
 
 export const routes: Routes = [
     {
@@ -57,12 +60,15 @@ export const routes: Routes = [
     {
         path: 'admin-dashboard',
         component: AdminSheltersComponent,
-        title: 'View Admin'       
+        title: 'View Admin',
+        canActivate: [AuthGuard],
+        data: { requiresAdmin: true }
     },
     {
         path: 'register-animal',
         component: RegisterAnimalComponent,
-        title: 'Register Animal'       
+        title: 'Register Animal',
+        canActivate: [ShelterGuard]
     },
     {
         path: 'shelter-profile/:id',
@@ -97,17 +103,25 @@ export const routes: Routes = [
     {
         path: 'edit-animal/:id',
         component: EditAnimalComponent,
-        title: 'Editar Animal'
+        title: 'Editar Animal',
+        canActivate: [ShelterGuard]
     },
     {
         path: 'edit-shelter/:id',
         component: EditShelterComponent,
-        title: 'Editar Refugio'
+        title: 'Editar Refugio',
+        canActivate: [ShelterGuard]
     },
     {
         path: 'pets-management',
         component: PetsManagementComponent,
-        title: 'Gestión de Mascotas'
+        title: 'Gestión de Mascotas',
+        canActivate: [ShelterGuard]
+    },
+    {
+        path: 'access-denied',
+        component: AccessDeniedComponent,
+        title: 'Acceso Denegado'
     },
     { 
         path: '**', 

@@ -1,7 +1,19 @@
 <div class="pets-management-container">
   <div class="header">
     <h1>Panel de Gestión de Mascotas</h1>
-    <p>Administra todas las mascotas registradas en tu hogar de adopción</p>
+    
+    <!-- Información del usuario y permisos -->
+    <div class="user-info">
+      <div class="access-info" *ngIf="isAdmin">
+        <span class="admin-badge">🔧 Administrador</span>
+        <p>Tienes acceso completo a todas las mascotas del sistema</p>
+      </div>
+      <div class="access-info" *ngIf="!isAdmin && userShelterId">
+        <span class="shelter-badge">🏠 Encargado de Refugio</span>
+        <p>Gestiona solo las mascotas de tu refugio (ID: {{userShelterId}})</p>
+      </div>
+    </div>
+    
     <button 
       (click)="refreshData()" 
       class="refresh-btn"
@@ -91,6 +103,7 @@
       </div>
       
       <div class="pet-actions">
+        <!-- Siempre permitir ver perfil -->
         <button 
           (click)="viewProfile(mascota.id)" 
           class="action-btn view-btn" 
@@ -99,22 +112,25 @@
           <i class="fas fa-eye"></i>
         </button>
         
+        <!-- Editar solo si tiene permisos -->
         <button 
           (click)="editMascota(mascota.id)" 
           class="action-btn edit-btn" 
-          title="Editar"
-          [disabled]="operationInProgress">
+          [title]="canManagePet(mascota) ? 'Editar' : getPermissionMessage(mascota)"
+          [disabled]="operationInProgress || !canManagePet(mascota)"
+          [class.disabled-action]="!canManagePet(mascota)">
           <i class="fas fa-edit"></i>
         </button>
         
-        <div class="status-dropdown">
+        <!-- Cambiar estado solo si tiene permisos -->
+        <div class="status-dropdown" [class.disabled-action]="!canManagePet(mascota)">
           <button 
             class="action-btn status-btn" 
-            title="Cambiar estado"
-            [disabled]="operationInProgress">
+            [title]="canManagePet(mascota) ? 'Cambiar estado' : getPermissionMessage(mascota)"
+            [disabled]="operationInProgress || !canManagePet(mascota)">
             <i class="fas fa-exchange-alt"></i>
           </button>
-          <div class="dropdown-content">
+          <div class="dropdown-content" *ngIf="canManagePet(mascota)">
             <a (click)="updateStatus(mascota, 'disponible')" 
                [class.disabled]="operationInProgress">Disponible</a>
             <a (click)="updateStatus(mascota, 'adoptado')" 
@@ -126,13 +142,20 @@
           </div>
         </div>
         
+        <!-- Eliminar solo si tiene permisos -->
         <button 
           (click)="deleteMascota(mascota)" 
           class="action-btn delete-btn" 
-          title="Eliminar"
-          [disabled]="operationInProgress">
+          [title]="canManagePet(mascota) ? 'Eliminar' : getPermissionMessage(mascota)"
+          [disabled]="operationInProgress || !canManagePet(mascota)"
+          [class.disabled-action]="!canManagePet(mascota)">
           <i class="fas fa-trash"></i>
         </button>
+        
+        <!-- Mostrar mensaje de permisos si corresponde -->
+        <div *ngIf="!canManagePet(mascota)" class="permission-notice">
+          <small>⚠️ Solo tu refugio</small>
+        </div>
       </div>
     </div>
 
