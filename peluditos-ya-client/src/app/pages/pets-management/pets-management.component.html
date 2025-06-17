@@ -25,11 +25,8 @@
     <div class="filters">
       <select [(ngModel)]="filterType" (ngModelChange)="onFilterChange()" class="filter-select">
         <option value="">Todos los tipos</option>
-        <option value="perro">Perros</option>
-        <option value="gato">Gatos</option>
-        <option value="conejo">Conejos</option>
-        <option value="ave">Aves</option>
-        <option value="otro">Otros</option>
+        <option value="DOG">Perros</option>
+        <option value="CAT">Gatos</option>
       </select>
 
       <select [(ngModel)]="filterStatus" (ngModelChange)="onFilterChange()" class="filter-select">
@@ -81,7 +78,7 @@
       
       <div class="pet-name">{{ mascota.name }}</div>
       
-      <div class="pet-type">{{ mascota.animal | titlecase }}</div>
+      <div class="pet-type">{{ getAnimalTypeText(mascota.animalType) }}</div>
       
       <div class="pet-breed">{{ mascota.breed }}</div>
       

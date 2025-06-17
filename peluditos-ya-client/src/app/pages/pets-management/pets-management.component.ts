@@ -56,7 +56,7 @@ export class PetsManagementComponent implements OnInit {
         mascota.breed.toLowerCase().includes(this.searchTerm.toLowerCase());
       
       const matchesType = this.filterType === '' || 
-        mascota.animal.toLowerCase() === this.filterType.toLowerCase();
+        mascota.animalType === this.filterType;
       
       const matchesStatus = this.filterStatus === '' || 
         mascota.status?.toLowerCase() === this.filterStatus.toLowerCase();
@@ -198,5 +198,18 @@ Nuevo estado: ${statusText}
     
     // Default fallback
     return '/assets/images/default-pet.svg';
+  }
+
+  getAnimalTypeText(animalType: string): string {
+    if (!animalType) {
+      return 'N/A';
+    }
+    
+    const typeMap: { [key: string]: string } = {
+      'CAT': 'Gato',
+      'DOG': 'Perro'
+    };
+    
+    return typeMap[animalType.toUpperCase()] || animalType;
   }
 }
