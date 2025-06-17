@@ -71,4 +71,16 @@ export class AnimalService {
 
     return this.http.put(`${this.baseUrl}/${animalId}`, formData);
   }
+
+  deleteAnimal(animalId: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/${animalId}`);
+  }
+
+  updateAnimalStatus(animalId: number, status: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${animalId}/status`, { status });
+  }
+
+  getMascotasByShelterId(shelterId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/shelter/${shelterId}`);
+  }
 }

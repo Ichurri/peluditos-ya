@@ -61,6 +61,8 @@ public class AnimalService {
         animal.setMedicalFilePath(medicalFilePath);
         animal.setPhotoPath(photoPath);
         animal.setShelterRequest(shelterRequest);
+        // Asegurar que el estado se establezca correctamente
+        animal.setStatus("AVAILABLE");
 
         animalRepository.save(animal);
         logger.info("Nuevo animal registrado: {} en refugio {}", animal.getName(), shelterRequest.getShelterName());
@@ -181,5 +183,49 @@ public class AnimalService {
         logger.info("Animal actualizado exitosamente: {}", updatedAnimal.getName());
         
         return updatedAnimal;
+    }
+
+    public void deleteAnimal(Long animalId) {
+        logger.info("Iniciando eliminación de animal con ID: {}", animalId);
+        
+        Optional<Animal> animalOpt = animalRepository.findById(animalId);
+        if (animalOpt.isEmpty()) {
+            logger.error("No se encontró un animal con ID: {}", animalId);
+            throw new ResourceNotFoundException("No se encontró un animal con el ID proporcionado.");
+        }
+        
+        Animal animal = animalOpt.get();
+        logger.info("Eliminando animal: {}", animal.getName());
+        
+        animalRepository.delete(animal);
+        logger.info("Animal eliminado exitosamente");
+    }
+
+    public Animal updateAnimalStatus(Long animalId, String status) {
+        logger.info("Actualizando estado del animal con ID: {} a estado: {}", animalId, status);
+        
+        Optional<Animal> animalOpt = animalRepository.findById(animalId);
+        if (animalOpt.isEmpty()) {
+            logger.error("No se encontró un animal con ID: {}", animalId);
+            throw new ResourceNotFoundException("No se encontró un animal con el ID proporcionado.");
+        }
+        
+        Animal animal = animalOpt.get();
+        logger.info("Cambiando estado de {} de {} a {}", animal.getName(), animal.getStatus(), status);
+        
+        // Ensure the status is valid
+        if (status == null || status.trim().isEmpty()) {
+            throw new IllegalArgumentException("El estado no puede estar vacío");
+        }
+        
+        try {
+            animal.setStatus(status);
+            Animal updatedAnimal = animalRepository.save(animal);
+            logger.info("Estado del animal actualizado exitosamente");
+            return updatedAnimal;
+        } catch (Exception e) {
+            logger.error("Error al actualizar el estado del animal: ", e);
+            throw e;
+        }
     }
 }

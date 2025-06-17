@@ -95,12 +95,30 @@
 /* Enlace de administración */
 .admin-link {
   font-weight: bold;
-  color: #d32f2f;
+  color: #d32f2f !important;
 }
 
 .admin-link:hover {
-  color: #ff0000;
-  border-bottom: 2px solid #ff0000;
+  color: #b71c1c !important;
+  border-bottom-color: #d32f2f !important;
+}
+
+/* Enlaces de refugio */
+.shelter-link {
+  font-weight: 600;
+  color: #3498db !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.shelter-link:hover {
+  color: #2980b9 !important;
+  border-bottom-color: #3498db !important;
+}
+
+.shelter-link i {
+  font-size: 0.9rem;
 }
 
 /* MEDIA QUERIES para responsividad (mantener para una buena UX) */

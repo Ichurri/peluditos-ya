@@ -1,0 +1,177 @@
+<div class="pets-management-container">
+  <div class="header">
+    <h1>Panel de Gestión de Mascotas</h1>
+    
+    <!-- Información del usuario y permisos -->
+    <div class="user-info">
+      <div class="access-info" *ngIf="isAdmin">
+        <span class="admin-badge">🔧 Administrador</span>
+        <p>Tienes acceso completo a todas las mascotas del sistema</p>
+      </div>
+      <div class="access-info" *ngIf="!isAdmin && userShelterId">
+        <span class="shelter-badge">🏠 Encargado de Refugio</span>
+        <p>Gestiona solo las mascotas de tu refugio (ID: {{userShelterId}})</p>
+      </div>
+    </div>
+    
+    <div class="header-actions">
+      <button 
+        (click)="refreshData()" 
+        class="refresh-btn"
+        [disabled]="loading || operationInProgress"
+        title="Refrescar lista">
+        <i class="fas fa-sync-alt"></i> Refrescar
+      </button>
+      
+      <!-- Botón para registrar nueva mascota - solo para refugios -->
+      <button 
+        *ngIf="!isAdmin && userShelterId"
+        (click)="goToRegisterAnimal()"
+        class="register-btn"
+        title="Registrar nueva mascota">
+        <i class="fas fa-plus"></i> Nueva Mascota
+      </button>
+    </div>
+  </div>
+
+  <!-- Filtros y búsqueda -->
+  <div class="filters-section">
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="searchTerm" 
+        (ngModelChange)="onSearchChange()"
+        placeholder="Buscar por nombre o raza..." 
+        class="search-input">
+    </div>
+    
+    <div class="filters">
+      <select [(ngModel)]="filterType" (ngModelChange)="onFilterChange()" class="filter-select">
+        <option value="">Todos los tipos</option>
+        <option value="DOG">Perros</option>
+        <option value="CAT">Gatos</option>
+      </select>
+
+      <select [(ngModel)]="filterStatus" (ngModelChange)="onFilterChange()" class="filter-select">
+        <option value="">Todos los estados</option>
+        <option value="disponible">Disponible</option>
+        <option value="adoptado">Adoptado</option>
+        <option value="en_proceso">En proceso</option>
+        <option value="reservado">Reservado</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Loading indicator -->
+  <div *ngIf="loading" class="loading">
+    <p>Cargando mascotas...</p>
+  </div>
+
+  <!-- Operation in progress indicator -->
+  <div *ngIf="operationInProgress" class="operation-progress">
+    <p>⏳ Procesando operación...</p>
+  </div>
+
+  <!-- Error message -->
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="loadMascotas()" class="retry-btn">Reintentar</button>
+  </div>
+
+  <!-- Mascotas table -->
+  <div *ngIf="!loading && !error" class="pets-table">
+    <div class="table-header">
+      <span>Foto</span>
+      <span>Nombre</span>
+      <span>Tipo</span>
+      <span>Raza</span>
+      <span>Edad</span>
+      <span>Estado</span>
+      <span>Acciones</span>
+    </div>
+
+    <div *ngFor="let mascota of mascotasFiltradas" class="table-row">
+      <div class="pet-photo">
+        <img 
+          [src]="getImageUrl(mascota.photoPath)" 
+          [alt]="mascota.name"
+          class="pet-image"
+          (error)="onImageError($event)">
+      </div>
+      
+      <div class="pet-name">{{ mascota.name }}</div>
+      
+      <div class="pet-type">{{ getAnimalTypeText(mascota.animalType) }}</div>
+      
+      <div class="pet-breed">{{ mascota.breed }}</div>
+      
+      <div class="pet-age">{{ mascota.age }} años</div>
+      
+      <div class="pet-status">
+        <span [class]="'status-badge status-' + (mascota.status || 'disponible')">
+          {{ getStatusText(mascota.status || 'disponible') }}
+        </span>
+      </div>
+      
+      <div class="pet-actions">
+        <!-- Siempre permitir ver perfil -->
+        <button 
+          (click)="viewProfile(mascota.id)" 
+          class="action-btn view-btn" 
+          title="Ver perfil"
+          [disabled]="operationInProgress">
+          <i class="fas fa-eye"></i>
+        </button>
+        
+        <!-- Editar solo si tiene permisos -->
+        <button 
+          (click)="editMascota(mascota.id)" 
+          class="action-btn edit-btn" 
+          [title]="canManagePet(mascota) ? 'Editar' : getPermissionMessage(mascota)"
+          [disabled]="operationInProgress || !canManagePet(mascota)"
+          [class.disabled-action]="!canManagePet(mascota)">
+          <i class="fas fa-edit"></i>
+        </button>
+        
+        <!-- Cambiar estado solo si tiene permisos -->
+        <div class="status-dropdown" [class.disabled-action]="!canManagePet(mascota)">
+          <button 
+            class="action-btn status-btn" 
+            [title]="canManagePet(mascota) ? 'Cambiar estado' : getPermissionMessage(mascota)"
+            [disabled]="operationInProgress || !canManagePet(mascota)">
+            <i class="fas fa-exchange-alt"></i>
+          </button>
+          <div class="dropdown-content" *ngIf="canManagePet(mascota)">
+            <a (click)="updateStatus(mascota, 'disponible')" 
+               [class.disabled]="operationInProgress">Disponible</a>
+            <a (click)="updateStatus(mascota, 'adoptado')" 
+               [class.disabled]="operationInProgress">Adoptado</a>
+            <a (click)="updateStatus(mascota, 'en_proceso')" 
+               [class.disabled]="operationInProgress">En proceso</a>
+            <a (click)="updateStatus(mascota, 'reservado')" 
+               [class.disabled]="operationInProgress">Reservado</a>
+          </div>
+        </div>
+        
+        <!-- Eliminar solo si tiene permisos -->
+        <button 
+          (click)="deleteMascota(mascota)" 
+          class="action-btn delete-btn" 
+          [title]="canManagePet(mascota) ? 'Eliminar' : getPermissionMessage(mascota)"
+          [disabled]="operationInProgress || !canManagePet(mascota)"
+          [class.disabled-action]="!canManagePet(mascota)">
+          <i class="fas fa-trash"></i>
+        </button>
+        
+        <!-- Mostrar mensaje de permisos si corresponde -->
+        <div *ngIf="!canManagePet(mascota)" class="permission-notice">
+          <small>⚠️ Solo tu refugio</small>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="mascotasFiltradas.length === 0" class="no-results">
+      <p>No se encontraron mascotas que coincidan con los filtros aplicados.</p>
+    </div>
+  </div>
+</div>

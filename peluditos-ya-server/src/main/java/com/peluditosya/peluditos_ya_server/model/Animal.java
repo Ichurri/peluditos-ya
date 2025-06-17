@@ -37,6 +37,10 @@ public class Animal {
     private String personalityTraits; // Pet's temperament and behavior details
     private String habits; // Pet's daily routines and preferences
 
+    // Status field for adoption tracking
+    @Column(nullable = true)
+    private String status = "AVAILABLE"; // AVAILABLE, ADOPTED, IN_PROCESS, RESERVED
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_id", nullable = false, referencedColumnName = "id")
     private ShelterRequest ShelterRequest;
@@ -141,6 +145,14 @@ public class Animal {
 
     public void setHabits(String habits) {
         this.habits = habits;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     // Enums
