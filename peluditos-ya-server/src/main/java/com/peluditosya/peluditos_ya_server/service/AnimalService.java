@@ -182,4 +182,39 @@ public class AnimalService {
         
         return updatedAnimal;
     }
+
+    public void deleteAnimal(Long animalId) {
+        logger.info("Iniciando eliminación de animal con ID: {}", animalId);
+        
+        Optional<Animal> animalOpt = animalRepository.findById(animalId);
+        if (animalOpt.isEmpty()) {
+            logger.error("No se encontró un animal con ID: {}", animalId);
+            throw new ResourceNotFoundException("No se encontró un animal con el ID proporcionado.");
+        }
+        
+        Animal animal = animalOpt.get();
+        logger.info("Eliminando animal: {}", animal.getName());
+        
+        animalRepository.delete(animal);
+        logger.info("Animal eliminado exitosamente");
+    }
+
+    public Animal updateAnimalStatus(Long animalId, String status) {
+        logger.info("Actualizando estado del animal con ID: {} a estado: {}", animalId, status);
+        
+        Optional<Animal> animalOpt = animalRepository.findById(animalId);
+        if (animalOpt.isEmpty()) {
+            logger.error("No se encontró un animal con ID: {}", animalId);
+            throw new ResourceNotFoundException("No se encontró un animal con el ID proporcionado.");
+        }
+        
+        Animal animal = animalOpt.get();
+        logger.info("Cambiando estado de {} de {} a {}", animal.getName(), animal.getStatus(), status);
+        
+        animal.setStatus(status);
+        Animal updatedAnimal = animalRepository.save(animal);
+        
+        logger.info("Estado del animal actualizado exitosamente");
+        return updatedAnimal;
+    }
 }

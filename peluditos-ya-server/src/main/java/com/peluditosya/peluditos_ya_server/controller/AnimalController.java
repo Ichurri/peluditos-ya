@@ -57,6 +57,7 @@ public class AnimalController {
                         animal.getShelterRequest() != null ? animal.getShelterRequest().getPhone() : null,
                         animal.getMedicalFilePath(),
                         animal.getPhotoPath(),
+                        animal.getStatus(),
                         animal.getSponsor() != null ? animal.getSponsor().getId() : null,
                         animal.getSponsor() != null ? animal.getSponsor().getName() : null,
                         animal.getSponsor() != null ? animal.getSponsor().getEmail() : null
@@ -92,6 +93,61 @@ public class AnimalController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAnimal(@PathVariable Long id) {
+        try {
+            animalService.deleteAnimal(id);
+            return ResponseEntity.ok("Animal eliminado exitosamente");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el animal");
+        }
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<AnimalResponse> updateAnimalStatus(@PathVariable Long id, @RequestBody StatusUpdateRequest request) {
+        try {
+            Animal updatedAnimal = animalService.updateAnimalStatus(id, request.getStatus());
+            AnimalResponse response = new AnimalResponse(
+                    updatedAnimal.getId(),
+                    updatedAnimal.getName(),
+                    updatedAnimal.getAnimal().toString(),
+                    updatedAnimal.getBreed(),
+                    updatedAnimal.getAge(),
+                    updatedAnimal.getBehavior().toString(),
+                    updatedAnimal.getShelterRequest() != null ? updatedAnimal.getShelterRequest().getId() : null,
+                    updatedAnimal.getShelterRequest() != null ? updatedAnimal.getShelterRequest().getShelterName() : null,
+                    updatedAnimal.getShelterRequest() != null ? updatedAnimal.getShelterRequest().getShelterAddress() : null,
+                    updatedAnimal.getShelterRequest() != null ? updatedAnimal.getShelterRequest().getPhone() : null,
+                    updatedAnimal.getMedicalFilePath(),
+                    updatedAnimal.getPhotoPath(),
+                    updatedAnimal.getStatus(),
+                    updatedAnimal.getSponsor() != null ? updatedAnimal.getSponsor().getId() : null,
+                    updatedAnimal.getSponsor() != null ? updatedAnimal.getSponsor().getName() : null,
+                    updatedAnimal.getSponsor() != null ? updatedAnimal.getSponsor().getEmail() : null
+            );
+            return ResponseEntity.ok(response);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    // DTO class for status update requests
+    public static class StatusUpdateRequest {
+        private String status;
+
+        public String getStatus() {
+            return status;
+        }
+
+        public void setStatus(String status) {
+            this.status = status;
         }
     }
 }

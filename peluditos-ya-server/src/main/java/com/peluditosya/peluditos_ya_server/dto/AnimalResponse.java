@@ -14,6 +14,7 @@ public class AnimalResponse {
     private String shelterPhone;
     private String medicalFilePath;
     private String photoPath;
+    private String status;
 
     // Datos del padrino (usuario)
     private Long sponsorId;
@@ -26,7 +27,7 @@ public class AnimalResponse {
     // Constructor completo
     public AnimalResponse(Long id, String name, String animalType, String breed, Integer age, String behavior,
                           Long shelterId, String shelterName, String shelterAddress, String shelterPhone,
-                          String medicalFilePath, String photoPath,
+                          String medicalFilePath, String photoPath, String status,
                           Long sponsorId, String sponsorName, String sponsorEmail) {
         this.id = id;
         this.name = name;
@@ -40,6 +41,7 @@ public class AnimalResponse {
         this.shelterPhone = shelterPhone;
         this.medicalFilePath = medicalFilePath;
         this.photoPath = photoPath;
+        this.status = status;
         this.sponsorId = sponsorId;
         this.sponsorName = sponsorName;
         this.sponsorEmail = sponsorEmail;
@@ -141,6 +143,14 @@ public class AnimalResponse {
 
     public void setPhotoPath(String photoPath) {
         this.photoPath = photoPath;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getSponsorId() {
