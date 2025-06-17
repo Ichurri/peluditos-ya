@@ -4,6 +4,8 @@ import com.peluditosya.peluditos_ya_server.dto.AnimalDetailDTO;
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.dto.AnimalResponse;
 import com.peluditosya.peluditos_ya_server.dto.AnimalUpdateRequest;
+import com.peluditosya.peluditos_ya_server.dto.ApiResponse;
+import com.peluditosya.peluditos_ya_server.exception.ResourceNotFoundException;
 import com.peluditosya.peluditos_ya_server.model.Animal;
 import com.peluditosya.peluditos_ya_server.repository.AnimalRepository;
 import com.peluditosya.peluditos_ya_server.service.AnimalService;
@@ -57,7 +59,7 @@ public class AnimalController {
                         animal.getShelterRequest() != null ? animal.getShelterRequest().getPhone() : null,
                         animal.getMedicalFilePath(),
                         animal.getPhotoPath(),
-                        animal.getStatus(),
+                        animal.getStatus() != null ? animal.getStatus() : "AVAILABLE",
                         animal.getSponsor() != null ? animal.getSponsor().getId() : null,
                         animal.getSponsor() != null ? animal.getSponsor().getName() : null,
                         animal.getSponsor() != null ? animal.getSponsor().getEmail() : null
@@ -97,14 +99,20 @@ public class AnimalController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAnimal(@PathVariable Long id) {
+    public ResponseEntity<ApiResponse> deleteAnimal(@PathVariable Long id) {
         try {
             animalService.deleteAnimal(id);
-            return ResponseEntity.ok("Animal eliminado exitosamente");
+            return ResponseEntity.ok(new ApiResponse("Animal eliminado exitosamente", true));
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(new ApiResponse(e.getMessage(), false));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                    .body(new ApiResponse(e.getMessage(), false));
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al eliminar el animal");
+            e.printStackTrace(); // Para debug
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ApiResponse("Error al eliminar el animal", false));
         }
     }
 
@@ -125,15 +133,18 @@ public class AnimalController {
                     updatedAnimal.getShelterRequest() != null ? updatedAnimal.getShelterRequest().getPhone() : null,
                     updatedAnimal.getMedicalFilePath(),
                     updatedAnimal.getPhotoPath(),
-                    updatedAnimal.getStatus(),
+                    updatedAnimal.getStatus() != null ? updatedAnimal.getStatus() : "AVAILABLE",
                     updatedAnimal.getSponsor() != null ? updatedAnimal.getSponsor().getId() : null,
                     updatedAnimal.getSponsor() != null ? updatedAnimal.getSponsor().getName() : null,
                     updatedAnimal.getSponsor() != null ? updatedAnimal.getSponsor().getEmail() : null
             );
             return ResponseEntity.ok(response);
+        } catch (ResourceNotFoundException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         } catch (Exception e) {
+            e.printStackTrace(); // Para debug
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }

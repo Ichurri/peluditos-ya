@@ -61,6 +61,8 @@ public class AnimalService {
         animal.setMedicalFilePath(medicalFilePath);
         animal.setPhotoPath(photoPath);
         animal.setShelterRequest(shelterRequest);
+        // Asegurar que el estado se establezca correctamente
+        animal.setStatus("AVAILABLE");
 
         animalRepository.save(animal);
         logger.info("Nuevo animal registrado: {} en refugio {}", animal.getName(), shelterRequest.getShelterName());
@@ -211,10 +213,19 @@ public class AnimalService {
         Animal animal = animalOpt.get();
         logger.info("Cambiando estado de {} de {} a {}", animal.getName(), animal.getStatus(), status);
         
-        animal.setStatus(status);
-        Animal updatedAnimal = animalRepository.save(animal);
+        // Ensure the status is valid
+        if (status == null || status.trim().isEmpty()) {
+            throw new IllegalArgumentException("El estado no puede estar vacío");
+        }
         
-        logger.info("Estado del animal actualizado exitosamente");
-        return updatedAnimal;
+        try {
+            animal.setStatus(status);
+            Animal updatedAnimal = animalRepository.save(animal);
+            logger.info("Estado del animal actualizado exitosamente");
+            return updatedAnimal;
+        } catch (Exception e) {
+            logger.error("Error al actualizar el estado del animal: ", e);
+            throw e;
+        }
     }
 }

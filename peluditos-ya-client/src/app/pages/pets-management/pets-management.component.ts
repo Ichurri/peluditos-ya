@@ -59,10 +59,24 @@ export class PetsManagementComponent implements OnInit {
         mascota.animalType === this.filterType;
       
       const matchesStatus = this.filterStatus === '' || 
-        mascota.status?.toLowerCase() === this.filterStatus.toLowerCase();
+        this.normalizeStatus(mascota.status) === this.normalizeStatus(this.filterStatus);
 
       return matchesSearch && matchesType && matchesStatus;
     });
+  }
+
+  normalizeStatus(status: string): string {
+    if (!status) return 'disponible';
+    
+    // Mapear estados del backend a estados del frontend para comparación
+    const backendToFrontend: { [key: string]: string } = {
+      'AVAILABLE': 'disponible',
+      'ADOPTED': 'adoptado',
+      'IN_PROCESS': 'en_proceso',
+      'RESERVED': 'reservado'
+    };
+    
+    return backendToFrontend[status.toUpperCase()] || status.toLowerCase();
   }
 
   onSearchChange(): void {
@@ -133,13 +147,16 @@ Nuevo estado: ${statusText}
     if (confirm(confirmMessage)) {
       this.operationInProgress = true;
       
-      this.animalService.updateAnimalStatus(mascota.id, newStatus).subscribe({
+      // Convertir el estado al formato requerido por la base de datos
+      const backendStatus = this.mapStatusToBackend(newStatus);
+      
+      this.animalService.updateAnimalStatus(mascota.id, backendStatus).subscribe({
         next: (response) => {
           console.log('Estado actualizado exitosamente:', response);
-          // Actualizar el estado en la lista local
+          // Actualizar el estado en la lista local con el valor devuelto por el backend
           const index = this.mascotas.findIndex(m => m.id === mascota.id);
           if (index !== -1) {
-            this.mascotas[index].status = newStatus;
+            this.mascotas[index].status = response.status;
             this.filterMascotas();
           }
           this.showSuccessMessage(`✅ El estado de ${mascota.name} ha sido cambiado a ${statusText}.`);
@@ -156,12 +173,28 @@ Nuevo estado: ${statusText}
 
   getStatusText(status: string): string {
     const statusMap: { [key: string]: string } = {
+      // Valores del frontend (español, minúsculas)
       'disponible': 'Disponible',
       'adoptado': 'Adoptado',
       'en_proceso': 'En Proceso',
-      'reservado': 'Reservado'
+      'reservado': 'Reservado',
+      // Valores del backend (inglés, mayúsculas)
+      'AVAILABLE': 'Disponible',
+      'ADOPTED': 'Adoptado',
+      'IN_PROCESS': 'En Proceso',
+      'RESERVED': 'Reservado'
     };
     return statusMap[status] || 'Disponible';
+  }
+
+  mapStatusToBackend(frontendStatus: string): string {
+    const statusMap: { [key: string]: string } = {
+      'disponible': 'AVAILABLE',
+      'adoptado': 'ADOPTED',
+      'en_proceso': 'IN_PROCESS',
+      'reservado': 'RESERVED'
+    };
+    return statusMap[frontendStatus] || 'AVAILABLE';
   }
 
   private showSuccessMessage(message: string): void {

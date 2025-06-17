@@ -38,8 +38,8 @@ public class Animal {
     private String habits; // Pet's daily routines and preferences
 
     // Status field for adoption tracking
-    @Column(nullable = false)
-    private String status = "disponible"; // disponible, adoptado, en_proceso, reservado
+    @Column(nullable = true)
+    private String status = "AVAILABLE"; // AVAILABLE, ADOPTED, IN_PROCESS, RESERVED
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "shelter_id", nullable = false, referencedColumnName = "id")
