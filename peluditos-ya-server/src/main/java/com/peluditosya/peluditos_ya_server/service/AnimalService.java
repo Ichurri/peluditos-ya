@@ -3,7 +3,6 @@ package com.peluditosya.peluditos_ya_server.service;
 import com.peluditosya.peluditos_ya_server.dto.AnimalDetailDTO;
 import com.peluditosya.peluditos_ya_server.dto.AnimalRegistrationRequest;
 import com.peluditosya.peluditos_ya_server.dto.AnimalUpdateRequest;
-import com.peluditosya.peluditos_ya_server.exception.InvalidDataException;
 import com.peluditosya.peluditos_ya_server.exception.ResourceNotFoundException;
 import com.peluditosya.peluditos_ya_server.model.Animal;
 import com.peluditosya.peluditos_ya_server.model.ShelterRequest;

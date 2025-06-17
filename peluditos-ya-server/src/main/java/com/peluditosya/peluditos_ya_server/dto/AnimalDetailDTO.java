@@ -110,14 +110,26 @@ public class AnimalDetailDTO {
         this.photoPath = photoPath;
     }
     
+    public String getShelterName() {
+        return shelterName;
+    }
+
     public void setShelterName(String shelterName) {
         this.shelterName = shelterName;
     }
-    
+
+    public String getShelterAddress() {
+        return shelterAddress;
+    }
+
     public void setShelterAddress(String shelterAddress) {
         this.shelterAddress = shelterAddress;
     }
     
+    private String getShelterPhone() {
+        return shelterPhone;
+    }
+
     public void setShelterPhone(String shelterPhone) {
         this.shelterPhone = shelterPhone;
     }

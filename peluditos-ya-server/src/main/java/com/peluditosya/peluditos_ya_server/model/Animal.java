@@ -1,5 +1,4 @@
 package com.peluditosya.peluditos_ya_server.model;
-import com.peluditosya.peluditos_ya_server.model.AppUser;
 
 
 import jakarta.persistence.*;
