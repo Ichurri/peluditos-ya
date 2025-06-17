@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { AnimalService } from '../../services/auth.animal.service';
+import { environment } from '../../../environments/environment';
 
 // Interfaz para las mascotas
 interface Mascota {
@@ -87,7 +88,7 @@ export class AdoptionComponent implements OnInit, AfterViewInit {
             edad: edadTexto, // Usamos 'cachorro' o 'adulto'
             sexo: mascota.sex,
             descripcion: `Tiene ${mascota.age} años de edad, ${this.traducirTipo(mascota.animalType).toLowerCase()} de raza ${mascota.breed}`,
-            imagen: mascota.photoUrl || 'https://files.lafm.com.co/assets/public/styles/twitter/public/2023-08/murio_cheems_el_perrito_de_los_meme.jpg.webp?VersionId=dHwATkyc2gQxvSwNeWXyOFUXPzaF3bbQ&itok=MmkIcD6M' // Imagen por defecto si no hay URL
+            imagen: this.getImageUrl(mascota.photoPath) // Usar photoPath que es lo que envía el backend
           };
         });
       },
@@ -176,5 +177,29 @@ export class AdoptionComponent implements OnInit, AfterViewInit {
     };
 
     requestAnimationFrame(autoScroll);
+  }
+
+  getImageUrl(photoPath: string | null): string {
+    if (!photoPath) {
+      return 'https://files.lafm.com.co/assets/public/styles/twitter/public/2023-08/murio_cheems_el_perrito_de_los_meme.jpg.webp?VersionId=dHwATkyc2gQxvSwNeWXyOFUXPzaF3bbQ&itok=MmkIcD6M';
+    }
+    
+    // If photoPath is already a full URL (starts with http), return as is
+    if (photoPath.startsWith('http')) {
+      return photoPath;
+    }
+    
+    // If photoPath starts with /api, construct full URL with backend base
+    if (photoPath.startsWith('/api')) {
+      return `${environment.apiBaseUrl.replace('/api', '')}${photoPath}`;
+    }
+    
+    // If it's just a filename, construct the full URL for animal photos
+    if (!photoPath.startsWith('/')) {
+      return `${environment.apiBaseUrl.replace('/api', '')}/api/files/animal-photos/${photoPath}`;
+    }
+    
+    // Default fallback to Cheems image
+    return 'https://files.lafm.com.co/assets/public/styles/twitter/public/2023-08/murio_cheems_el_perrito_de_los_meme.jpg.webp?VersionId=dHwATkyc2gQxvSwNeWXyOFUXPzaF3bbQ&itok=MmkIcD6M';
   }
 }
